@@ -1,0 +1,30 @@
+---
+# tasks file for appdynamics.apm-platform-ha
+
+# create appd user on all remote hosts.
+- name: create appd user task
+  include_tasks: create-appduser.yml
+
+# install appdynamics platform services pre-requisites on all remote hosts.
+- name: setup apm platform
+  include_tasks: setup-apm-platform.yml
+
+# install appdynamics enterprise console on master node.
+- name: install appd enterprise console
+  include_tasks: install-appd-enterprise-console.yml
+  when: "'enterprise_console' in group_names"
+
+# reduce the default sizing for the appdynamics controller medium profile. [optional]
+- name: reduce the default sizing entries in 'controller-medium.groovy'
+  include_tasks: reduce-controller-profile.yml
+  when: "('enterprise_console' in group_names) and (env_vars.appd_controller_reduced_profile)"
+
+# install appdynamics ha controller via the master node.
+- name: install appd ha controller
+  include_tasks: install-appd-controller.yml
+  when: "'enterprise_console' in group_names"
+
+# configure appdynamics ha controller via the master node.
+- name: config appd ha controller
+  include_tasks: config-appd-controller.yml
+  when: "'controller' in group_names"

@@ -1,0 +1,31 @@
+---
+# reduce the default sizing entries in 'controller-medium.groovy'. ---------------------------------
+- name: find controller version path
+  find:
+    paths: "{{ env_vars.appd_home }}/{{ env_vars.appd_platform_home }}/platform-admin/archives/controller"
+    patterns: "^[0-9][0-9]*"
+    use_regex: yes
+    file_type: directory
+  register: controller_version
+
+- name: print controller version path
+  debug:
+    var: controller_version.files[0].path
+    verbosity: 0
+
+- name: replace the default sizing entries in 'controller-medium.groovy'
+  lineinfile:
+    path: "{{ controller_version.files[0].path }}/playbooks/controller-medium.groovy"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    mode: "0644"
+    state: present
+    backup: yes
+  become: yes
+  become_user: "{{ env_vars.appd_platform_user_name }}"
+  loop:
+    - { regexp: '^controller_min_ram_in_mb', line: '{{ env_vars.appd_controller_min_ram_in_mb }}' }
+    - { regexp: '^controller_min_cpus', line: '{{ env_vars.appd_controller_min_cpus }}' }
+    - { regexp: '^controller_data_min_disk_space_in_mb', line: '{{ env_vars.appd_controller_data_min_disk_space_in_mb }}' }
+    - { regexp: '^aurora_controller_min_ram_in_mb', line: '{{ env_vars.appd_controller_aurora_min_ram_in_mb }}' }
+    - { regexp: '^aurora_controller_min_cpus', line: '{{ env_vars.appd_controller_aurora_min_cpus }}' }

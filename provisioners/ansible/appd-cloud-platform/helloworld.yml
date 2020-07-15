@@ -1,0 +1,8 @@
+---
+- name: helloworld
+  hosts: all
+  tasks:
+    - name: print hello world
+      debug:
+        msg: Hello, Ansible world!
+...

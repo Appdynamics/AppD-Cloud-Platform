@@ -1,0 +1,55 @@
+---
+# install appdynamics platform services pre-requisites by appdynamics.
+- name: install network and ui tools
+  yum:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+    - net-tools
+    - libaio
+    - numactl
+    - tzdata
+    - ncurses-libs
+  when: ansible_os_family == 'RedHat'
+
+# install ncurses compatibility library because version 5 is NOT the default on amazon linux 2.
+- name: install ncurses-libs version 5 on amazon linux 2
+  yum:
+    name: ncurses-compat-libs
+    state: present
+  when: ansible_distribution == 'Amazon' and ansible_distribution_version == '2'
+
+# set the maximum number of memory map areas a process may have for events service nodes.
+- name: set the maximum number of memory map areas a process may have
+  sysctl:
+    name: vm.max_map_count
+    value: "{{ env_vars.appd_platform_max_map_count }}"
+    sysctl_set: yes
+    state: present
+    reload: yes
+  when: "'events_service' in group_names"
+
+- name: configure file and process limits for user 'root' and appd platform user (if defined)
+  template:
+    src: templates/appdynamics.j2
+    dest: /etc/security/limits.d/appdynamics.conf
+    force: yes
+    backup: yes
+
+- name: add user limits to the pluggable authentication modules (pam)
+  lineinfile:
+    path: /etc/pam.d/common-session
+    line: 'session required pam_limits.so'
+    create: yes
+    mode: '0644'
+    state: present
+    backup: yes
+
+- name: create appd home directory '{{ env_vars.appd_home }}'
+  file:
+    path: "{{ env_vars.appd_home }}"
+    state: directory
+    mode: '0755'
+    owner: "{{ env_vars.appd_platform_user_name }}"
+    group: "{{ env_vars.appd_platform_user_group }}"

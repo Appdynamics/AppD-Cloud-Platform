@@ -1,0 +1,11 @@
+# Configure file and process limits for AppDynamics Platform Services.
+root hard nofile {{ env_vars.appd_platform_num_file_descriptors }}
+root soft nofile {{ env_vars.appd_platform_num_file_descriptors }}
+root hard nproc {{ env_vars.appd_platform_num_processes }}
+root soft nproc {{ env_vars.appd_platform_num_processes }}
+{% if env_vars.appd_platform_user_name != 'root' %}
+{{ env_vars.appd_platform_user_name }} hard nofile {{ env_vars.appd_platform_num_file_descriptors }}
+{{ env_vars.appd_platform_user_name }} soft nofile {{ env_vars.appd_platform_num_file_descriptors }}
+{{ env_vars.appd_platform_user_name }} hard nproc {{ env_vars.appd_platform_num_processes }}
+{{ env_vars.appd_platform_user_name }} soft nproc {{ env_vars.appd_platform_num_processes }}
+{% endif %}

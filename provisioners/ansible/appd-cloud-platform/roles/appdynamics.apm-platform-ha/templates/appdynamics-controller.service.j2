@@ -1,0 +1,27 @@
+[Unit]
+{% if ansible_facts['hostname'] == env_vars.appd_controller_primary_host %}
+Description=The AppDynamics Primary Controller.
+{% else %}
+Description=The AppDynamics Secondary Controller.
+{% endif %}
+After=network.target remote-fs.target nss-lookup.target
+
+[Service]
+Type=forking
+RemainAfterExit=true
+TimeoutStartSec=600
+TimeoutStopSec=120
+{% if env_vars.appd_platform_user_name != 'root' %}
+User={{ env_vars.appd_platform_user_name }}
+Group={{ env_vars.appd_platform_user_group }}
+{% endif %}
+{% if ansible_facts['hostname'] == env_vars.appd_controller_primary_host %}
+ExecStart={{ env_vars.appd_home }}/{{ env_vars.appd_platform_home }}/{{ env_vars.appd_platform_product_home }}/controller/bin/startController.sh
+ExecStop={{ env_vars.appd_home }}/{{ env_vars.appd_platform_home }}/{{ env_vars.appd_platform_product_home }}/controller/bin/stopController.sh
+{% else %}
+ExecStart={{ env_vars.appd_home }}/{{ env_vars.appd_platform_home }}/{{ env_vars.appd_platform_product_home }}/controller/bin/controller.sh start-db
+ExecStop={{ env_vars.appd_home }}/{{ env_vars.appd_platform_home }}/{{ env_vars.appd_platform_product_home }}/controller/bin/controller.sh stop-db
+{% endif %}
+
+[Install]
+WantedBy=multi-user.target

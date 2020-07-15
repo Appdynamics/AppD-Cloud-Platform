@@ -1,0 +1,37 @@
+---
+# install appdynamics enterprise console by appdynamics.
+- name: install enterprise console
+  shell:
+    chdir: "{{ env_vars.kickstart_home }}/provisioners/scripts/centos"
+    cmd: "./install_centos7_appdynamics_enterprise_console.sh"
+    creates: "appd-enterprise-console-installed.loc"
+  environment: "{{ env_vars }}"
+  register: enterprise_console_install
+
+- name: touch the 'appd-enterprise-console-installed.loc' file
+  file:
+    path: "{{ env_vars.kickstart_home }}/provisioners/scripts/centos/appd-enterprise-console-installed.loc"
+    state: touch
+    mode: "0644"
+
+- name: print enterprise console install results
+  debug:
+    var: enterprise_console_install.stdout_lines
+
+- name: start the 'appdynamics-enterprise-console' service
+  systemd:
+    state: started
+    name: appdynamics-enterprise-console
+
+- name: verify installation
+  shell:
+    chdir: "{{ env_vars.appd_home }}/{{ env_vars.appd_platform_home }}/platform-admin/bin"
+    cmd: "./platform-admin.sh show-platform-admin-version"
+  environment: "{{ env_vars }}"
+  register: show_platform_admin_version
+  become: yes
+  become_user: "{{ env_vars.appd_platform_user_name }}"
+
+- name: print show platform admin version results
+  debug:
+    var: show_platform_admin_version.stdout_lines

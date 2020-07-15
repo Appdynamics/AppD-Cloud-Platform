@@ -1,0 +1,130 @@
+---
+# create appd user on all remote hosts.
+- name: create group '{{ env_vars.appd_platform_user_group }}'
+  group:
+    name: "{{ env_vars.appd_platform_user_group }}"
+    state: present
+
+- name: create user '{{ env_vars.appd_platform_user_name }}'
+  shell:
+    chdir: "{{ env_vars.kickstart_home }}/provisioners/scripts/centos"
+    cmd: "./create_centos7_user.sh"
+    creates: "user-{{ env_vars.appd_platform_user_name }}-created.loc"
+  environment: "{{ env_vars }}"
+
+- name: touch the '{{ env_vars.appd_platform_user_name }}-created.loc' file
+  file:
+    path: "{{ env_vars.kickstart_home }}/provisioners/scripts/centos/user-{{ env_vars.appd_platform_user_name }}-created.loc"
+    state: touch
+    mode: '0644'
+
+- name: create '.ssh' directory for user '{{ env_vars.appd_platform_user_name }}'
+  file:
+    path: ~/.ssh
+    state: directory
+    mode: '0700'
+    owner: "{{ env_vars.appd_platform_user_name }}"
+    group: "{{ env_vars.appd_platform_user_group }}"
+  become: yes
+  become_user: "{{ env_vars.appd_platform_user_name }}"
+
+- name: create openssh key pair for user '{{ env_vars.appd_platform_user_name }}'
+  openssh_keypair:
+    path: ~/.ssh/id_rsa
+    type: rsa
+    size: 2048
+    comment: "{{ env_vars.appd_platform_user_name }}@{{ ansible_facts.fqdn }}"
+    owner: "{{ env_vars.appd_platform_user_name }}"
+    group: "{{ env_vars.appd_platform_user_group }}"
+    state: present
+  become: yes
+  become_user: "{{ env_vars.appd_platform_user_name }}"
+
+- name: get public key for '{{ env_vars.appd_platform_credential_name }}.pub'
+  get_url:
+    url: https://github.com/Appdynamics/AppD-Cloud-Platform/raw/master/shared/keys/{{ env_vars.appd_platform_credential_name }}.pub
+    dest: ~/.ssh/{{ env_vars.appd_platform_credential_name }}.pub
+    mode: '0644'
+    owner: "{{ env_vars.appd_platform_user_name }}"
+    group: "{{ env_vars.appd_platform_user_group }}"
+  become: yes
+  become_user: "{{ env_vars.appd_platform_user_name }}"
+
+- name: copy private key for '{{ env_vars.appd_platform_credential_name }}.pem'
+  copy:
+    src: ~/.ssh/{{ env_vars.appd_platform_credential_name }}.pem
+    dest: ~/.ssh/{{ env_vars.appd_platform_credential_name }}.pem
+    mode: '0400'
+    owner: "{{ env_vars.appd_platform_user_name }}"
+    group: "{{ env_vars.appd_platform_user_group }}"
+  become: yes
+  become_user: "{{ env_vars.appd_platform_user_name }}"
+
+- name: fetch remote public key for '{{ env_vars.appd_platform_credential_name }}.pub'
+  fetch:
+    src: ~/.ssh/{{ env_vars.appd_platform_credential_name }}.pub
+    dest: "public-keys-{{ ansible_date_time.date }}/{{ env_vars.appd_platform_credential_name }}.pub"
+    flat: yes
+  become: yes
+  become_user: "{{ env_vars.appd_platform_user_name }}"
+
+- name: fetch remote public keys for user '{{ env_vars.appd_platform_user_name }}'
+  fetch:
+    src: ~/.ssh/id_rsa.pub
+    dest: "public-keys-{{ ansible_date_time.date }}/{{ inventory_hostname }}-id_rsa.pub"
+    flat: yes
+  become: yes
+  become_user: "{{ env_vars.appd_platform_user_name }}"
+
+- name: delete the 'authorized_keys' file for user '{{ env_vars.appd_platform_user_name }}'
+  file:
+    path: "~/.ssh/authorized_keys"
+    state: absent
+  become: yes
+  become_user: "{{ env_vars.appd_platform_user_name }}"
+
+- name: create 'authorized_keys' file for user '{{ env_vars.appd_platform_user_name }}'
+  authorized_key:
+    key: "{{ lookup('file', item) }}"
+    state: present
+    user: "{{ env_vars.appd_platform_user_name }}"
+  become: yes
+  become_user: "{{ env_vars.appd_platform_user_name }}"
+  with_fileglob: "public-keys-{{ ansible_date_time.date }}/*.pub"
+
+- name: update /etc/hosts file dynamically
+  template:
+    src: templates/hosts.j2
+    dest: /etc/hosts
+    force: yes
+    backup: yes
+
+- name: delete the 'known_hosts' file for user '{{ env_vars.appd_platform_user_name }}'
+  file:
+    path: "~/.ssh/known_hosts"
+    state: absent
+  become: yes
+  become_user: "{{ env_vars.appd_platform_user_name }}"
+
+- name: create 'known_hosts' file for user '{{ env_vars.appd_platform_user_name }}'
+  shell:
+    chdir: "~/.ssh"
+    cmd: "ssh-keyscan -t rsa {{ hostvars[item]['ansible_facts']['fqdn'] }} {{ hostvars[item]['ansible_facts']['hostname'] }} {{ hostvars[item]['ansible_facts']['default_ipv4']['address'] }} >> known_hosts"
+  with_items: "{{ groups['all'] }}"
+  environment: "{{ env_vars }}"
+  become: yes
+  become_user: "{{ env_vars.appd_platform_user_name }}"
+
+- name: test ssh password-less access to all hosts for user '{{ env_vars.appd_platform_user_name }}'
+  shell:
+    chdir: "~"
+    cmd: "ssh -oNumberOfPasswordPrompts=0 {{ hostvars[item]['ansible_facts']['fqdn'] }} 'echo success'"
+  with_items: "{{ groups['all'] }}"
+  environment: "{{ env_vars }}"
+  register: ssh_ping
+  become: yes
+  become_user: "{{ env_vars.appd_platform_user_name }}"
+
+- name: print ssh ping results
+  debug:
+    var: ssh_ping | json_query('results[*].stdout')

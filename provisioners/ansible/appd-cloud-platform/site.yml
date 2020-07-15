@@ -1,0 +1,13 @@
+---
+- name: install appdynamics cloud platform
+  hosts: all
+  gather_facts: yes
+  environment:
+    appd_username: "{{ lookup('env', 'appd_username') }}"
+    appd_password: "{{ lookup('env', 'appd_password') }}"
+    appd_platform_user_name: "{{ lookup('env', 'appd_platform_user_name') | default('appduser', true) }}"
+    appd_platform_user_group: "{{ lookup('env', 'appd_platform_user_group') | default('appduser', true) }}"
+
+  roles:
+    - role: appdynamics.apm-platform-ha
+      when: (ansible_env.appd_username|length > 0) and (ansible_env.appd_password|length > 0)

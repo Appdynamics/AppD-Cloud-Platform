@@ -1,0 +1,40 @@
+---
+# defaults file for appdynamics.apm-platform-ha
+
+env_vars:
+  # appd platform install parameters.
+  appd_home: "{{ ansible_env.appd_home | default('/opt/appdynamics', true) }}"
+  appd_platform_home: "{{ ansible_env.appd_platform_home | default('platform', true) }}"
+  appd_platform_name: "{{ ansible_env.appd_platform_name | default('AppDynamics Cloud Platform', true) }}"
+  appd_platform_description: "{{ ansible_env.appd_platform_description | default('This is an HA configuration for the AppDynamics Cloud Platform.', true) }}"
+  appd_platform_product_home: "{{ ansible_env.appd_platform_product_home | default('product', true) }}"
+  appd_platform_user_name: "{{ ansible_env.appd_platform_user_name | default('appduser', true) }}"
+  appd_platform_user_group: "{{ ansible_env.appd_platform_user_group | default('appduser', true) }}"
+  appd_platform_credential_name: "{{ ansible_env.appd_platform_credential_name | default('AppD-Cloud-Platform', true) }}"
+  appd_platform_num_file_descriptors: "{{ ansible_env.appd_platform_num_file_descriptors | default('65535', true) }}"
+  appd_platform_num_processes: "{{ ansible_env.appd_platform_num_processes | default('8192', true) }}"
+  appd_platform_max_map_count: "{{ ansible_env.appd_platform_max_map_count | default('262144', true) }}"
+
+  # create appd user environment variables.
+  group_name: "{{ ansible_env.appd_platform_user_group | default('appduser', true) }}"
+  user_name: "{{ ansible_env.appd_platform_user_name | default('appduser', true) }}"
+  user_group: "{{ ansible_env.appd_platform_user_group | default('appduser', true) }}"
+  user_comment: "{{ ansible_env.user_comment | default('AppD User', true) }}"
+  user_supplementary_groups: "{{ ansible_env.user_supplementary_groups | default('docker', true) }}"
+  user_sudo_privileges: "{{ ansible_env.user_sudo_privileges | default('true', true) }}"
+  user_install_env: "{{ ansible_env.user_install_env | default('true', true) }}"
+  user_docker_profile: "{{ ansible_env.user_docker_profile | default('true', true) }}"
+  user_prompt_color: "{{ ansible_env.user_prompt_color | default('yellow', true) }}"
+
+  # appd controller install parameters.
+  appd_controller_primary_host: "{{ ansible_env.appd_controller_primary_host | default('controller-node-01', true) }}"
+  appd_controller_secondary_host: "{{ ansible_env.appd_controller_secondary_host | default('controller-node-02', true) }}"
+
+  appd_controller_reduced_profile: "{{ ansible_env.appd_controller_reduced_profile | default(true, true) }}"
+  appd_controller_min_ram_in_mb: "controller_min_ram_in_mb = 12 * 1024"
+  appd_controller_min_cpus: "controller_min_cpus = 2"
+  appd_controller_data_min_disk_space_in_mb: "controller_data_min_disk_space_in_mb = 64 * 1024"
+  appd_controller_aurora_min_ram_in_mb: "aurora_controller_min_ram_in_mb = 10 * 1024"
+  appd_controller_aurora_min_cpus: "aurora_controller_min_cpus = 2"
+
+  kickstart_home: "{{ ansible_env.kickstart_home | default('/opt/appd-cloud-kickstart', true) }}"

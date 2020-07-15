@@ -1,0 +1,15 @@
+galaxy_info:
+  author: Ed Barberis and James Schneider
+  description: Automate deployment of AppDynamics Platform Services
+  company: AppDynamics LLC
+  license: Apache-2.0
+  min_ansible_version: 2.9
+
+  platforms:
+    - name: EL
+      versions:
+        - 7
+
+  galaxy_tags:
+    - cloud
+    - monitoring
