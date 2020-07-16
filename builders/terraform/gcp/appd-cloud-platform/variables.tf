@@ -29,14 +29,14 @@ variable "gcp_network" {
 variable "gcp_source_image_family" {
   description = "The source image family."
   type        = string
-  default     = "apm-platform-ha-centos78-images"
+  default     = "appd-cloud-platform-ha-centos78-images"
 # default     = "centos-7"
 }
 
 variable "gcp_source_image" {
   description = "The source disk image."
   type        = string
-  default     = "apm-platform-2063-ha-centos78-2020-06-29"
+  default     = "appd-cloud-platform-2066-ha-centos78-2020-07-16"
 # default     = "centos-7-v20200603"
 }
 

@@ -31,7 +31,7 @@ See the [simple](https://github.com/terraform-google-modules/terraform-google-vm
 | subnetwork\_project | The project that subnetwork belongs to | string | `""` | no |
 | zone | Zone where the instances should be created. | string | `""` | no |
 | owner | Name of the owner of the deployment. | string | `"terraform-builder"` | no |
-| event | Name of the event for which this deployment was created. | string | `"apm-platform-ha-deployment"` | no |
+| event | Name of the event for which this deployment was created. | string | `"appd-cloud-platform-ha-deployment"` | no |
 
 ## Outputs
 

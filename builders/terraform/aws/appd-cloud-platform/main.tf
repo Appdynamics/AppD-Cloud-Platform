@@ -89,7 +89,7 @@ data "aws_subnet_ids" "all" {
   vpc_id = data.aws_vpc.default.id
 }
 
-data "aws_ami" "apm_platform_ha_centos78" {
+data "aws_ami" "appd_cloud_platform_ha_centos78" {
   most_recent = true
 
   owners = ["self"]
@@ -98,7 +98,7 @@ data "aws_ami" "apm_platform_ha_centos78" {
     name = "name"
 
     values = [
-      "APM-Platform-2065-HA-CentOS78-AMI-*",
+      "AppD-Cloud-Platform-2066-HA-CentOS78-AMI-*",
     ]
   }
 }
@@ -251,7 +251,7 @@ module "enterprise_console" {
   use_num_suffix = false
 
   name                 = "EC-${var.lab_user_prefix}-${local.current_date}"
-  ami                  = data.aws_ami.apm_platform_ha_centos78.id
+  ami                  = data.aws_ami.appd_cloud_platform_ha_centos78.id
   instance_type        = var.aws_ec2_instance_type
   iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile.id
   key_name             = "AppD-Cloud-Platform"
@@ -266,7 +266,7 @@ module "enterprise_console" {
   tags = {
     "Owner"   = "Ed Barberis"
     "Project" = "AppDynamics Cloud Platform"
-    "Event"   = "APM Platform HA Deployment"
+    "Event"   = "AppD Cloud Platform HA Deployment"
   }
 }
 
@@ -278,7 +278,7 @@ module "controller" {
   use_num_suffix = true
 
   name                 = "Controller-${var.lab_user_prefix}-${local.current_date}"
-  ami                  = data.aws_ami.apm_platform_ha_centos78.id
+  ami                  = data.aws_ami.appd_cloud_platform_ha_centos78.id
   instance_type        = var.aws_ec2_instance_type
   iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile.id
   key_name             = "AppD-Cloud-Platform"
@@ -293,7 +293,7 @@ module "controller" {
   tags = {
     "Owner"   = "Ed Barberis"
     "Project" = "AppDynamics Cloud Platform"
-    "Event"   = "APM Platform HA Deployment"
+    "Event"   = "AppD Cloud Platform HA Deployment"
   }
 }
 
@@ -301,11 +301,11 @@ module "events_service" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = ">= 2.15"
 
-  instance_count = 1
+  instance_count = 3
   use_num_suffix = true
 
   name                 = "Events-Service-${var.lab_user_prefix}-${local.current_date}"
-  ami                  = data.aws_ami.apm_platform_ha_centos78.id
+  ami                  = data.aws_ami.appd_cloud_platform_ha_centos78.id
   instance_type        = var.aws_ec2_instance_type
   iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile.id
   key_name             = "AppD-Cloud-Platform"
@@ -320,7 +320,7 @@ module "events_service" {
   tags = {
     "Owner"   = "Ed Barberis"
     "Project" = "AppDynamics Cloud Platform"
-    "Event"   = "APM Platform HA Deployment"
+    "Event"   = "AppD Cloud Platform HA Deployment"
   }
 }
 
@@ -332,7 +332,7 @@ module "eum_server" {
   use_num_suffix = true
 
   name                 = "EUM-Server-${var.lab_user_prefix}-${local.current_date}"
-  ami                  = data.aws_ami.apm_platform_ha_centos78.id
+  ami                  = data.aws_ami.appd_cloud_platform_ha_centos78.id
   instance_type        = var.aws_ec2_instance_type
   iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile.id
   key_name             = "AppD-Cloud-Platform"
@@ -347,7 +347,7 @@ module "eum_server" {
   tags = {
     "Owner"   = "Ed Barberis"
     "Project" = "AppDynamics Cloud Platform"
-    "Event"   = "APM Platform HA Deployment"
+    "Event"   = "AppD Cloud Platform HA Deployment"
   }
 }
 

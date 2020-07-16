@@ -85,5 +85,5 @@ variable "owner" {
 variable "event" {
   description = "Name of the event for which this deployment was created."
   type        = string
-  default     = "apm-platform-ha-deployment"
+  default     = "appd-cloud-platform-ha-deployment"
 }
