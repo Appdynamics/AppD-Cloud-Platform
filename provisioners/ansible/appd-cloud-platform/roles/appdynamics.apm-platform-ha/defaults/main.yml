@@ -37,4 +37,5 @@ env_vars:
   appd_controller_aurora_min_ram_in_mb: "aurora_controller_min_ram_in_mb = 10 * 1024"
   appd_controller_aurora_min_cpus: "aurora_controller_min_cpus = 2"
 
+  # appd cloud kickstart home folder.
   kickstart_home: "{{ ansible_env.kickstart_home | default('/opt/appd-cloud-kickstart', true) }}"

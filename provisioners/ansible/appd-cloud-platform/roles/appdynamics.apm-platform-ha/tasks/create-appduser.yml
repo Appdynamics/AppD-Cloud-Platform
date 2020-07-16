@@ -42,7 +42,7 @@
 
 - name: get public key for '{{ env_vars.appd_platform_credential_name }}.pub'
   get_url:
-    url: https://github.com/Appdynamics/AppD-Cloud-Platform/raw/master/shared/keys/{{ env_vars.appd_platform_credential_name }}.pub
+    url: https://github.com/Appdynamics/AppD-Cloud-Kickstart/raw/master/shared/keys/{{ env_vars.appd_platform_credential_name }}.pub
     dest: ~/.ssh/{{ env_vars.appd_platform_credential_name }}.pub
     mode: '0644'
     owner: "{{ env_vars.appd_platform_user_name }}"
@@ -125,6 +125,6 @@
   become: yes
   become_user: "{{ env_vars.appd_platform_user_name }}"
 
-- name: print ssh ping results
+- name: print ssh password-less access results
   debug:
     var: ssh_ping | json_query('results[*].stdout')

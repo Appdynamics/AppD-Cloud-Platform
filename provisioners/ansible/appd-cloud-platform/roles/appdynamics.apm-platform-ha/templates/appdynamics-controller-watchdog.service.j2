@@ -1,0 +1,14 @@
+[Unit]
+Description=The AppDynamics Controller Watchdog.
+After=network.target remote-fs.target nss-lookup.target appdynamics-enterprise-console.service
+
+[Service]
+Type=simple
+RemainAfterExit=yes
+User=appduser
+Group=appduser
+ExecStart={{ env_vars.appd_home }}/{{ env_vars.appd_platform_home }}/platform-admin/bin/platform-admin.sh submit-job --job start-controller-watchdog --service controller
+ExecStop={{ env_vars.appd_home }}/{{ env_vars.appd_platform_home }}/platform-admin/bin/platform-admin.sh submit-job --job stop-controller-watchdog --service controller
+
+[Install]
+WantedBy=multi-user.target

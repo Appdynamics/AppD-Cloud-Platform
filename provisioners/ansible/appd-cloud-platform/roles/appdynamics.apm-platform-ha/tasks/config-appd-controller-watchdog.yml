@@ -1,0 +1,14 @@
+---
+# configure appdynamics controller watchdog by appdynamics.
+- name: create appd controller watchdog systemd service file
+  template:
+    src: templates/appdynamics-controller-watchdog.service.j2
+    dest: /etc/systemd/system/appdynamics-controller-watchdog.service
+    force: yes
+    backup: yes
+
+- name: reload systemd manager configuration and enable the controller watchdog service
+  systemd:
+    daemon_reload: yes
+    enabled: yes
+    name: appdynamics-controller-watchdog.service
