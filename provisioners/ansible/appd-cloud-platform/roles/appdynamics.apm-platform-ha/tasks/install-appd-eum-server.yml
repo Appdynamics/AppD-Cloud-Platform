@@ -1,0 +1,25 @@
+---
+# install appdynamics eum server service by appdynamics. -------------------------------
+- name: upload appd license file to eum server node
+  copy:
+    src: ../../../shared/license/appd-controller-license.lic
+    dest: "/tmp/license.lic"
+    mode: '0644'
+
+- name: install appd eum server
+  shell:
+    chdir: "{{ env_vars.kickstart_home }}/provisioners/scripts/centos"
+    cmd: "./install_centos7_appdynamics_eum_server.sh"
+    creates: "appd-eum-server.installed"
+  environment: "{{ env_vars }}"
+  register: eum_server_install
+
+- name: touch the 'appd-eum-server.installed' file
+  file:
+    path: "{{ env_vars.kickstart_home }}/provisioners/scripts/centos/appd-eum-server.installed"
+    state: touch
+    mode: "0644"
+
+- name: print eum server install results
+  debug:
+    var: eum_server_install.stdout_lines

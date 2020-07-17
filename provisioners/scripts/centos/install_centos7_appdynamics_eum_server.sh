@@ -21,22 +21,13 @@ local_hostname="$(uname -n)"                                    # initialize hos
 # [MANDATORY-PRESET] appdynamics account parameters.
 set +x  # temporarily turn command display OFF.
 
-# !!! TODO: TAKE OUT DEFAULTS !!!!
 appd_username="${appd_username:-}"
 appd_password="${appd_password:-}"
 set -x  # turn command display back ON.
 
-# !!! TODO: TAKE OUT DEFAULTS !!!!
-appd_controller_url="${appd_controller_url:-}"
+appd_controller_url="${appd_controller_url:-http://controller-node-01.localdomain:8090}"
 appd_eum_public_host="${appd_eum_public_host:-}"
 appd_eum_private_host="${appd_eum_private_host:-}"
-
-# [MANDATORY-RETRIEVED] appdynamics account parameters.
-appd_events_service_scheme="${appd_events_service_scheme:-}"
-appd_events_service_host="${appd_events_service_host:-}"
-appd_events_service_port="${appd_events_service_port:-}"
-appd_events_service_api_key="${appd_events_service_api_key:-}"
-
 
 # [OPTIONAL] appdynamics platform install parameters [w/ defaults].
 # appd platform install parameters.
@@ -78,12 +69,6 @@ Usage:
     [root]# export appd_username="name@example.com"                     # user name for downloading binaries.
     [root]# export appd_password="password"                             # user password.
     [root]# export appd_controller_url="http://10.20.10.20:8090"        # controller url.
-
-  [MANDATORY-RETRIEVED] appdynamics account parameters.
-    [root]# export appd_events_service_scheme="http"                    # events service protocol.
-    [root]# export appd_events_service_host="10.20.10.20"               # events service host.
-    [root]# export appd_events_service_port="8090"                      # events service port.
-    [root]# export appd_events_service_api_key="c50005a1-3f93-42ab-a7a2-5b1099464a99"    # events service api key.
 
   [OPTIONAL] appdynamics platform install parameters [w/ defaults].
     [root]# export appd_home="/opt/appdynamics"                         # [optional] appd home (defaults to '/opt/appdynamics').

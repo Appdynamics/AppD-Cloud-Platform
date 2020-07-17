@@ -42,5 +42,11 @@ env_vars:
   appd_events_service_min_cpus: "eventsServiceMinCpus = 2"
   appd_events_service_min_data_space_in_mb: "eventsServiceMinDataSpaceInMb = 65536"
 
+  # eum server install parameters
+  appd_eum_public_host: "{{ inventory_hostname }}"
+  appd_eum_private_host: "eum-server-node.localdomain"
+
   # appd cloud kickstart home folder.
   kickstart_home: "{{ ansible_env.kickstart_home | default('/opt/appd-cloud-kickstart', true) }}"
+
+
