@@ -48,3 +48,8 @@
 - name: import config appd events service cluster tasks
   include_tasks: config-appd-events-service.yml
   when: "'events_service' in group_names"
+
+# install appdynamics eum server on the eum server node. --------------------------------------
+- name: import install appd eum server tasks
+  include_tasks: install-appd-eum-server.yml
+  when: "'eum_server' in group_names"
