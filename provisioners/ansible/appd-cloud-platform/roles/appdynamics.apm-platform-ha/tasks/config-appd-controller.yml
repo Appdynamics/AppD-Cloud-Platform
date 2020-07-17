@@ -1,5 +1,5 @@
 ---
-# configure appdynamics ha controller platform service by appdynamics.
+# configure appdynamics ha controller platform service by appdynamics. -----------------------------
 - name: upload appd license file to controller nodes
   copy:
     src: ../../../shared/license/appd-controller-license.lic

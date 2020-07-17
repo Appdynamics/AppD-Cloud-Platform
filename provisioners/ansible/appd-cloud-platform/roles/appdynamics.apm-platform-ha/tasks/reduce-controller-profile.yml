@@ -1,5 +1,5 @@
 ---
-# reduce the default sizing entries in 'controller-medium.groovy'. ---------------------------------
+# reduce the default sizing for the appdynamics controller medium profile. -------------------------
 - name: find controller version path
   find:
     paths: "{{ env_vars.appd_home }}/{{ env_vars.appd_platform_home }}/platform-admin/archives/controller"

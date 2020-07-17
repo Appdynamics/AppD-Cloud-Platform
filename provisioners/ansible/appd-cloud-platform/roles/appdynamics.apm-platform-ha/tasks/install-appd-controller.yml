@@ -1,24 +1,21 @@
 ---
-# install appdynamics ha controller platform service by appdynamics.
+# install appdynamics ha controller platform service by appdynamics. -------------------------------
 - name: install appd ha controller
   shell:
     chdir: "{{ env_vars.kickstart_home }}/provisioners/scripts/centos"
     cmd: "./install_centos7_appdynamics_controller.sh"
-    creates: "appd-controller-installed.loc"
+    creates: "appd-controller.installed"
   environment: "{{ env_vars }}"
   register: controller_install
   become: yes
   become_user: "{{ env_vars.appd_platform_user_name }}"
-  when: "'enterprise_console' in group_names"
 
-- name: touch the 'appd-controller-installed.loc' file
+- name: touch the 'appd-controller.installed' file
   file:
-    path: "{{ env_vars.kickstart_home }}/provisioners/scripts/centos/appd-controller-installed.loc"
+    path: "{{ env_vars.kickstart_home }}/provisioners/scripts/centos/appd-controller.installed"
     state: touch
     mode: "0644"
-  when: "'enterprise_console' in group_names"
 
 - name: print controller install results
   debug:
     var: controller_install.stdout_lines
-  when: "'enterprise_console' in group_names"

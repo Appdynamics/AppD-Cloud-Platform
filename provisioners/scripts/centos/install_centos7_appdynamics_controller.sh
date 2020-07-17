@@ -12,7 +12,7 @@
 # NOTE: All inputs are defined by external environment variables.
 #       Optional variables have reasonable defaults, but you may override as needed.
 #       See 'usage()' function below for environment variable descriptions.
-#       Script should be run as the 'appduser'.
+#       Script should be run with installed user privilege ('root' OR non-root user).
 #
 # TODO: Add logic to remove secondary host if not present.
 #---------------------------------------------------------------------------------------------------
@@ -53,7 +53,7 @@ Usage:
 
   NOTE: All inputs are defined by external environment variables.
         Optional variables have reasonable defaults, but you may override as needed.
-        Script should be run as the 'appduser'.
+        Script should be run with installed user privilege ('root' OR non-root user).
 
   -------------------------------------
   Description of Environment Variables:

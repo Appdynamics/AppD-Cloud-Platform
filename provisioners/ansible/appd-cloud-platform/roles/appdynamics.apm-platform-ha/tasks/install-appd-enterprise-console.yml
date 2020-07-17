@@ -1,16 +1,16 @@
 ---
-# install appdynamics enterprise console by appdynamics.
+# install appdynamics enterprise console by appdynamics. -------------------------------------------
 - name: install enterprise console
   shell:
     chdir: "{{ env_vars.kickstart_home }}/provisioners/scripts/centos"
     cmd: "./install_centos7_appdynamics_enterprise_console.sh"
-    creates: "appd-enterprise-console-installed.loc"
+    creates: "appd-enterprise-console.installed"
   environment: "{{ env_vars }}"
   register: enterprise_console_install
 
-- name: touch the 'appd-enterprise-console-installed.loc' file
+- name: touch the 'appd-enterprise-console.installed' file
   file:
-    path: "{{ env_vars.kickstart_home }}/provisioners/scripts/centos/appd-enterprise-console-installed.loc"
+    path: "{{ env_vars.kickstart_home }}/provisioners/scripts/centos/appd-enterprise-console.installed"
     state: touch
     mode: "0644"
 

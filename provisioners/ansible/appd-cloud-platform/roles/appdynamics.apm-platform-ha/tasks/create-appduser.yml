@@ -1,5 +1,5 @@
 ---
-# create appd user on all remote hosts.
+# create and configure appd user on all remote hosts. ----------------------------------------------
 - name: create group '{{ env_vars.appd_platform_user_group }}'
   group:
     name: "{{ env_vars.appd_platform_user_group }}"
@@ -9,12 +9,12 @@
   shell:
     chdir: "{{ env_vars.kickstart_home }}/provisioners/scripts/centos"
     cmd: "./create_centos7_user.sh"
-    creates: "user-{{ env_vars.appd_platform_user_name }}-created.loc"
+    creates: "user-{{ env_vars.appd_platform_user_name }}.created"
   environment: "{{ env_vars }}"
 
-- name: touch the '{{ env_vars.appd_platform_user_name }}-created.loc' file
+- name: touch the '{{ env_vars.appd_platform_user_name }}.created' file
   file:
-    path: "{{ env_vars.kickstart_home }}/provisioners/scripts/centos/user-{{ env_vars.appd_platform_user_name }}-created.loc"
+    path: "{{ env_vars.kickstart_home }}/provisioners/scripts/centos/user-{{ env_vars.appd_platform_user_name }}.created"
     state: touch
     mode: '0644'
 
