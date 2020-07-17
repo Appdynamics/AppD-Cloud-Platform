@@ -1,0 +1,20 @@
+[Unit]
+Description=The AppDynamics Events Service.
+After=network.target remote-fs.target nss-lookup.target
+  
+[Service]
+Type=forking
+RemainAfterExit=true
+TimeoutStartSec=300
+{% if env_vars.appd_platform_user_name != 'root' %}
+User={{ env_vars.appd_platform_user_name }}
+Group={{ env_vars.appd_platform_user_group }}
+{% endif %}
+ExecStart={{ env_vars.appd_home }}/{{ env_vars.appd_platform_home }}/{{ env_vars.appd_platform_product_home }}/events-service/processor/bin/events-service.sh start -p {{ env_vars.appd_home }}/{{ env_vars.appd_platform_home }}/{{ env_vars.appd_platform_product_home }}/events-service/processor/conf/events-service-api-store.properties
+ExecStop={{ env_vars.appd_home }}/{{ env_vars.appd_platform_home }}/{{ env_vars.appd_platform_product_home }}/events-service/processor/bin/events-service.sh stop
+
+[Install]
+WantedBy=multi-user.target
+
+
+

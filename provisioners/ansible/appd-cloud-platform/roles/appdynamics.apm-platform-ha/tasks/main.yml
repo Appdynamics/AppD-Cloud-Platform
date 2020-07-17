@@ -1,35 +1,50 @@
 ---
 # tasks file for appdynamics.apm-platform-ha
 
-# create appd user on all remote hosts.
-- name: import create appd user task
+# create and configure appd user on all remote hosts. ----------------------------------------------
+- name: import create and configure appd user tasks
   include_tasks: create-appduser.yml
 
-# install appdynamics platform services pre-requisites on all remote hosts.
-- name: import setup apm platform task
+# install appdynamics platform services pre-requisites on all remote hosts. ------------------------
+- name: import setup apm platform tasks
   include_tasks: setup-apm-platform.yml
 
-# install appdynamics enterprise console on master node.
-- name: import install appd enterprise console task
+# install appdynamics enterprise console on ec node. -----------------------------------------------
+- name: import install appd enterprise console tasks
   include_tasks: install-appd-enterprise-console.yml
   when: "'enterprise_console' in group_names"
 
 # reduce the default sizing for the appdynamics controller medium profile. [optional]
-- name: import reduce default sizing entries task
+- name: import reduce controller default sizing tasks
   include_tasks: reduce-controller-profile.yml
   when: "('enterprise_console' in group_names) and (env_vars.appd_controller_reduced_profile)"
 
-# install appdynamics ha controller via the master node.
-- name: import install appd ha controller task
+# reduce the default sizing for the appdynamics events service production profile. [optional]
+- name: import reduce events service default sizing tasks
+  include_tasks: reduce-events-service-profile.yml
+  when: "('enterprise_console' in group_names) and (env_vars.appd_events_service_reduced_profile)"
+
+# install appdynamics ha controller via the ec node. -----------------------------------------------
+- name: import install appd ha controller tasks
   include_tasks: install-appd-controller.yml
   when: "'enterprise_console' in group_names"
 
-# configure appdynamics ha controller via the master node.
-- name: import config appd ha controller task
+# configure appdynamics ha controller on the controller nodes.
+- name: import config appd ha controller tasks
   include_tasks: config-appd-controller.yml
   when: "'controller' in group_names"
 
-# configure appdynamics controller watchdog service via the master node.
-- name: import config appd controller watchdog task
+# configure appdynamics controller watchdog service via the ec node.
+- name: import config appd controller watchdog tasks
   include_tasks: config-appd-controller-watchdog.yml
   when: "'enterprise_console' in group_names"
+
+# install appdynamics events service cluster via the ec node. --------------------------------------
+- name: import install appd events service cluster tasks
+  include_tasks: install-appd-events-service.yml
+  when: "'enterprise_console' in group_names"
+
+# configure appdynamics events service cluster on the events service nodes.
+- name: import config appd events service cluster tasks
+  include_tasks: config-appd-events-service.yml
+  when: "'events_service' in group_names"

@@ -37,5 +37,10 @@ env_vars:
   appd_controller_aurora_min_ram_in_mb: "aurora_controller_min_ram_in_mb = 10 * 1024"
   appd_controller_aurora_min_cpus: "aurora_controller_min_cpus = 2"
 
+  # appd events service install parameters.
+  appd_events_service_reduced_profile: "{{ ansible_env.appd_events_service_reduced_profile | default(true, true) }}"
+  appd_events_service_min_cpus: "eventsServiceMinCpus = 2"
+  appd_events_service_min_data_space_in_mb: "eventsServiceMinDataSpaceInMb = 65536"
+
   # appd cloud kickstart home folder.
   kickstart_home: "{{ ansible_env.kickstart_home | default('/opt/appd-cloud-kickstart', true) }}"

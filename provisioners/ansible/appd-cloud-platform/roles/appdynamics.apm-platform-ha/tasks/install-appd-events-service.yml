@@ -1,0 +1,21 @@
+---
+# install appdynamics events service cluster by appdynamics. ---------------------------------------
+- name: install appd events service
+  shell:
+    chdir: "{{ env_vars.kickstart_home }}/provisioners/scripts/centos"
+    cmd: "./install_centos7_appdynamics_events_service.sh"
+    creates: "appd-events-service.installed"
+  environment: "{{ env_vars }}"
+  register: events_service_install
+  become: yes
+  become_user: "{{ env_vars.appd_platform_user_name }}"
+
+- name: touch the 'appd-events-service.installed' file
+  file:
+    path: "{{ env_vars.kickstart_home }}/provisioners/scripts/centos/appd-events-service.installed"
+    state: touch
+    mode: "0644"
+
+- name: print events service install results
+  debug:
+    var: events_service_install.stdout_lines

@@ -1,0 +1,28 @@
+---
+# reduce the default sizing for the appdynamics events service production profile. -----------------
+- name: find events service version path
+  find:
+    paths: "{{ env_vars.appd_home }}/{{ env_vars.appd_platform_home }}/platform-admin/archives/events-service"
+    patterns: "^[0-9][0-9]*"
+    use_regex: yes
+    file_type: directory
+  register: events_service_version
+
+- name: print events service version path
+  debug:
+    var: events_service_version.files[0].path
+    verbosity: 0
+
+- name: replace the default sizing entries in 'prod-host-requirements.groovy'
+  lineinfile:
+    path: "{{ events_service_version.files[0].path }}/playbooks/host_requirements/prod-host-requirements.groovy"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    mode: "0644"
+    state: present
+    backup: yes
+  become: yes
+  become_user: "{{ env_vars.appd_platform_user_name }}"
+  loop:
+    - { regexp: '^eventsServiceMinCpus', line: '{{ env_vars.appd_events_service_min_cpus }}' }
+    - { regexp: '^eventsServiceMinDataSpaceInMb', line: '{{ env_vars.appd_events_service_min_data_space_in_mb }}' }
