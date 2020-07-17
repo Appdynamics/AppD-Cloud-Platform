@@ -5,8 +5,10 @@ After=network.target remote-fs.target nss-lookup.target appdynamics-enterprise-c
 [Service]
 Type=simple
 RemainAfterExit=yes
-User=appduser
-Group=appduser
+{% if env_vars.appd_platform_user_name != 'root' %}
+User={{ env_vars.appd_platform_user_name }}
+Group={{ env_vars.appd_platform_user_group }}
+{% endif %}
 ExecStart={{ env_vars.appd_home }}/{{ env_vars.appd_platform_home }}/platform-admin/bin/platform-admin.sh submit-job --job start-controller-watchdog --service controller
 ExecStop={{ env_vars.appd_home }}/{{ env_vars.appd_platform_home }}/platform-admin/bin/platform-admin.sh submit-job --job stop-controller-watchdog --service controller
 
