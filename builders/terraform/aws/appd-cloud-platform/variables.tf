@@ -22,6 +22,12 @@ variable "aws_ec2_es_hostname_prefix" {
   default     = "es-node"
 }
 
+variable "aws_ec2_eum_hostname_prefix" {
+  description = "AWS EC2 EUM Server hostname prefix."
+  type        = string
+  default     = "eum-server-node"
+}
+
 variable "aws_ec2_domain" {
   description = "AWS EC2 domain name."
   type        = string

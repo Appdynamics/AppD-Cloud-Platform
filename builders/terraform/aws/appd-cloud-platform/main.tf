@@ -77,6 +77,25 @@ export use_aws_ec2_num_suffix
 
 ./initialize_al2_terraform_cloud_init.sh
 EOF
+
+  eum_user_data = <<EOF
+#!/bin/sh
+cd /opt/appd-cloud-kickstart/provisioners/scripts/aws
+chmod 755 ./initialize_al2_terraform_cloud_init.sh
+
+user_name="${var.aws_ec2_user_name}"
+export user_name
+aws_ec2_hostname="${var.aws_ec2_eum_hostname_prefix}"
+export aws_ec2_hostname
+aws_ec2_domain="${var.aws_ec2_domain}"
+export aws_ec2_domain
+aws_cli_default_region_name="${var.aws_region}"
+export aws_cli_default_region_name
+use_aws_ec2_num_suffix="false"
+export use_aws_ec2_num_suffix
+
+./initialize_al2_terraform_cloud_init.sh
+EOF
 }
 
 # Data Sources -------------------------------------------------------------------------------------
@@ -329,7 +348,7 @@ module "eum_server" {
   version = ">= 2.15"
 
   instance_count = 1
-  use_num_suffix = true
+  use_num_suffix = false
 
   name                 = "EUM-Server-${var.lab_user_prefix}-${local.current_date}"
   ami                  = data.aws_ami.appd_cloud_platform_ha_centos78.id
@@ -342,7 +361,7 @@ module "eum_server" {
   vpc_security_group_ids      = [module.security_group.this_security_group_id]
   associate_public_ip_address = true
 
-  user_data_base64 = base64encode(local.es_user_data)
+  user_data_base64 = base64encode(local.eum_user_data)
 
   tags = {
     "Owner"   = "Ed Barberis"
