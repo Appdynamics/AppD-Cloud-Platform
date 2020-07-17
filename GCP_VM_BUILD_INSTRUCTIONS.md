@@ -12,29 +12,29 @@ Before building the AppD Cloud Platform VM images for AWS, it is recommended tha
 
 Here is a list of the recommended open source software to be installed on the host macOS machine:
 
--	Amazon AWS CLI 2.0.31 (command-line interface)
+-	Amazon AWS CLI 2.0.32 (command-line interface)
 
 Perform the following steps to install the needed software:
 
-1.	Install [AWS CLI 2.0.31](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-mac.html).  
+1.	Install [AWS CLI 2.0.32](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-mac.html).  
     `$ brew install awscli@2`  
 
 2.	Validate installed command-line tools:
 
     ```
     $ aws --version
-    aws-cli/2.0.31 Python/3.8.4 Darwin/19.5.0 botocore/2.0.0dev35
+    aws-cli/2.0.32 Python/3.8.4 Darwin/19.5.0 botocore/2.0.0dev36
     ```
 
 ## AWS-Specific Installation Instructions - Windows 64-Bit
 
 Here is a list of the recommended open source software to be installed on the host Windows machine:
 
--	Amazon AWS CLI 2.0.31 (command-line interface)
+-	Amazon AWS CLI 2.0.32 (command-line interface)
 
 Perform the following steps to install the needed software:
 
-1.	Install [AWS CLI 2.0.31](https://awscli.amazonaws.com/AWSCLIV2.msi) for Windows 64-bit.  
+1.	Install [AWS CLI 2.0.32](https://awscli.amazonaws.com/AWSCLIV2.msi) for Windows 64-bit.  
     Run the downloaded MSI installer and follow the on-screen instructions.  
 
     **NOTE:** For Windows users, the MSI installation package offers a familiar and convenient way to install the AWS CLI without installing any other prerequisites. However, when updates are released, you must repeat the installation process to get the latest version of the AWS CLI. If you prefer more frequent updates, consider using `pip` as described in the AWS CLI [install guide](https://docs.aws.amazon.com/cli/latest/userguide/install-windows.html).
@@ -43,7 +43,7 @@ Perform the following steps to install the needed software:
 
     ```
     $ aws --version
-    aws-cli/2.0.31 Python/3.7.7 Windows/10 botocore/2.0.0dev35
+    aws-cli/2.0.32 Python/3.7.7 Windows/10 botocore/2.0.0dev36
     ```
 
 ## Prepare for the Build
@@ -141,12 +141,12 @@ To prepare for the build, perform the following steps:
 
 __AppD-Cloud-Platform VM__ - The following utilities and application performance management applications are pre-installed:
 
--	Amazon AWS CLI 2.0.31 (command-line interface)
+-	Amazon AWS CLI 2.0.32 (command-line interface)
 -	Amazon AWS EC2 Instance Metadata Query Tool (command-line interface)
 -	Ansible 2.9.9
 -	AppDynamics Enterprise Console 20.6.6 Build 22658
 	-	AppDynamics Controller 20.6.6 Build 2352
-	-	AppDynamics Events Service 4.5.2.0 Build 20602
+	-	AppDynamics Events Service 4.5.2.0 Build 20628
 -	Docker 19.03.12 CE
 	-	Docker Bash Completion
 	-	Docker Compose 1.26.2
@@ -162,7 +162,7 @@ __AppD-Cloud-Platform VM__ - The following utilities and application performance
 
 __CWOM-Platform VM__ - The following utilities and workload optimization management applications are pre-installed:
 
--	Amazon AWS CLI 2.0.31 (command-line interface)
+-	Amazon AWS CLI 2.0.32 (command-line interface)
 -	Amazon AWS EC2 Instance Metadata Query Tool (command-line interface)
 -	Ansible 2.9.9
 -	Cisco Workload Optimization Manager (CWOM) 2.3.18
@@ -181,7 +181,7 @@ __CWOM-Platform VM__ - The following utilities and workload optimization managem
 
 __LPAD VM__ - The following AWS CLI command-line tools and utilities are pre-installed:
 
--	Amazon AWS CLI 2.0.31 (command-line interface)
+-	Amazon AWS CLI 2.0.32 (command-line interface)
 -	Amazon AWS EC2 Instance Metadata Query Tool (command-line interface)
 -	Amazon AWS EKS CLI [eksctl] 0.23.0 (command-line interface)
 -	Amazon AWS IAM Authenticator 1.17.7 for AWS EKS CLI and kubectl.
