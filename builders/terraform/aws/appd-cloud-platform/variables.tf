@@ -7,7 +7,7 @@ variable "aws_region" {
 variable "aws_ec2_ec_hostname_prefix" {
   description = "AWS EC2 Enterprise Console hostname prefix."
   type        = string
-  default     = "ec-master"
+  default     = "ec-node"
 }
 
 variable "aws_ec2_controller_hostname_prefix" {

@@ -57,7 +57,7 @@ module "enterprise_console" {
   zone              = var.gcp_zone
   network           = var.gcp_network
 # subnetwork        = var.gcp_subnetwork
-  hostname          = "ec-master"
+  hostname          = "ec-node"
   instance_template = module.instance_template.self_link
 
   access_config = [
