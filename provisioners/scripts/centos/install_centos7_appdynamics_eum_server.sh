@@ -533,12 +533,6 @@ if [ -d "$systemd_dir" ]; then
   echo "WantedBy=multi-user.target" >> "${service_filepath}"
 fi
 
-# change ownership to platform user name and group. ------------------------------------------------
-if [ "$appd_platform_user_name" != "root" ]; then
-  cd ${appd_home}
-  chown -R ${appd_platform_user_name}:${appd_platform_user_group} .
-fi
-
 # reload systemd manager configuration.
 systemctl daemon-reload
 
@@ -548,7 +542,7 @@ systemctl is-enabled "${appd_eum_db_service}"
 
 # stop eum mysql db
 ${appd_platform_folder}/orcha/orcha-master/bin/orcha-master -d mysql.groovy -p ${appd_platform_folder}/orcha/playbooks/mysql-orcha/stop-mysql.orcha -o ${appd_platform_folder}/orcha/orcha-master/conf/orcha.properties -c local
-sleep 5s
+
 
 # configure the appdynamics EUM Server as a service. ---------------------------------------
 systemd_dir="/etc/systemd/system"
