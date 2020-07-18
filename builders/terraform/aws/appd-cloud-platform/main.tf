@@ -117,7 +117,7 @@ data "aws_ami" "appd_cloud_platform_ha_centos78" {
     name = "name"
 
     values = [
-      "AppD-Cloud-Platform-2066-HA-CentOS78-AMI-*",
+      "AppD-Cloud-Platform-2070-HA-CentOS78-AMI-*",
     ]
   }
 }
@@ -233,7 +233,7 @@ module "security_group" {
   vpc_id      = data.aws_vpc.default.id
 
   ingress_cidr_blocks = ["0.0.0.0/0"]
-  ingress_rules       = ["http-80-tcp", "http-8080-tcp", "mysql-tcp", "ssh-tcp"]
+  ingress_rules       = ["http-80-tcp", "http-8080-tcp", "https-443-tcp", "mysql-tcp", "ssh-tcp"]
   egress_rules        = ["all-all"]
   ingress_with_self   = [{rule = "all-all"}]
   computed_ingress_with_cidr_blocks = [
@@ -252,14 +252,28 @@ module "security_group" {
       cidr_blocks = "0.0.0.0/0"
     },
     {
-      from_port   = 9080
-      to_port     = 9080
+      from_port   = 8181
+      to_port     = 8181
       protocol    = "tcp"
-      description = "AppDynamics Events Service HTTP port"
+      description = "AppDynamics Controller HTTPS port"
+      cidr_blocks = "0.0.0.0/0"
+    },
+    {
+      from_port   = 9080
+      to_port     = 9081
+      protocol    = "tcp"
+      description = "AppDynamics Events Service HTTP ports"
+      cidr_blocks = "0.0.0.0/0"
+    },
+    {
+      from_port   = 7001
+      to_port     = 7002
+      protocol    = "tcp"
+      description = "AppDynamics EUM Server HTTP/HTTPS ports"
       cidr_blocks = "0.0.0.0/0"
     }
   ]
-  number_of_computed_ingress_with_cidr_blocks = 3
+  number_of_computed_ingress_with_cidr_blocks = 5
 }
 
 module "enterprise_console" {
