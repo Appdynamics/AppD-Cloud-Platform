@@ -144,8 +144,8 @@ __AppD-Cloud-Platform VM__ - The following utilities and application performance
 -	Amazon AWS CLI 2.0.32 (command-line interface)
 -	Amazon AWS EC2 Instance Metadata Query Tool (command-line interface)
 -	Ansible 2.9.9
--	AppDynamics Enterprise Console 20.6.6 Build 22658
-	-	AppDynamics Controller 20.6.6 Build 2352
+-	AppDynamics Enterprise Console 20.7.0 Build 22903
+	-	AppDynamics Controller 20.7.0 Build 2893
 	-	AppDynamics Events Service 4.5.2.0 Build 20628
 -	Docker 19.03.12 CE
 	-	Docker Bash Completion
@@ -183,7 +183,7 @@ __LPAD VM__ - The following AWS CLI command-line tools and utilities are pre-ins
 
 -	Amazon AWS CLI 2.0.32 (command-line interface)
 -	Amazon AWS EC2 Instance Metadata Query Tool (command-line interface)
--	Amazon AWS EKS CLI [eksctl] 0.23.0 (command-line interface)
+-	Amazon AWS EKS CLI [eksctl] 0.24.0 (command-line interface)
 -	Amazon AWS IAM Authenticator 1.17.7 for AWS EKS CLI and kubectl.
 -	Amazon AWS Kubernetes Control CLI [kubectl] 1.17.7 (command-line interface)
 -	Ansible 2.9.9
