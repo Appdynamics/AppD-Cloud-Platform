@@ -541,7 +541,8 @@ systemctl enable "${appd_eum_db_service}"
 systemctl is-enabled "${appd_eum_db_service}"
 
 # stop eum mysql db
-${appd_platform_folder}/orcha/orcha-master/bin/orcha-master -d mysql.groovy -p ${appd_platform_folder}/orcha/playbooks/mysql-orcha/stop-mysql.orcha -o ${appd_platform_folder}/orcha/orcha-master/conf/orcha.properties -c local
+#${appd_platform_folder}/orcha/orcha-master/bin/orcha-master -d mysql.groovy -p ${appd_platform_folder}/orcha/playbooks/mysql-orcha/stop-mysql.orcha -o ${appd_platform_folder}/orcha/orcha-master/conf/orcha.properties -c local
+pkill -f mysql
 
 
 # configure the appdynamics EUM Server as a service. ---------------------------------------
