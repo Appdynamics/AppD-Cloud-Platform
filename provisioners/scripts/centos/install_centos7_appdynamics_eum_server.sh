@@ -606,12 +606,12 @@ systemctl start "${appd_eum_server_service}"
 # check current status.
 systemctl status "${appd_eum_server_service}"
 
-sleep 8s
+#sleep 8s
 
 # verify installation.
-ping_success=$(curl "http://${appd_eum_public_host}:7001/eumaggregator/ping")
-if [ "ping" = "${ping_success}" ]; then 
-   echo "EUM Server is running ..."
-else
-   echo "EUM Server is not responding ..."
-fi
+#ping_success=$(curl "http://${appd_eum_public_host}:7001/eumaggregator/ping")
+#if [ "ping" = "${ping_success}" ]; then 
+#   echo "EUM Server is running ..."
+#else
+#   echo "EUM Server is not responding ..."
+#fi
