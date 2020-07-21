@@ -1,38 +1,59 @@
-Role Name
-=========
+# Ansible AppDynamics APM-Platform-HA Role 
 
-A brief description of the role goes here.
+The Ansible AppDynamics role installs and configures an APM Platform HA configuration.
+The role installs version `20.7.0.xxxxx` of the APM Platform by default.
 
-Requirements
-------------
+## Setup
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+### Requirements
 
-Role Variables
---------------
+- Requires Ansible v2.9+.
+- Supports CentOS 7.x distributions.
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+### Installation
 
-Dependencies
-------------
+Install the [APM Platform HA role][1] from Ansible Galaxy on your Ansible server:
+
+```shell
+ansible-galaxy install appdynamics.apm-platform-ha
+```
+
+To deploy the AppDynamics APM Platform HA on VM hosts, set your AppDynamics account
+login credentials as environment variables (referenced in the 'environment' section and
+add the APM Platform HA role:
+
+```text
+- name: install appdynamics apm platform ha
+  hosts: all
+  gather_facts: yes
+  environment:
+    appd_username: "{{ lookup('env', 'appd_username') }}"
+    appd_password: "{{ lookup('env', 'appd_password') }}"
+
+  roles:
+    - role: appdynamics.apm-platform-ha
+      when: (ansible_env.appd_username|length > 0) and (ansible_env.appd_password|length > 0)
+```
+
+#### Role variables
+
+| Variable                                   | Description                                                                                                                                                                                                                                                                                               |
+|--------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `appd_home`                                | AppD home directory (defaults to '/opt/appdynamics').
+| `appd_username`                            | AppD account user name for downloading binaries.
+| `appd_password`                            | AppD account user password.
+| `appd_platform_user_name`                  | Platform installation user name (defaults to 'appduser').
+| `appd_platform_user_group`                 | Platform installation group (defaults to 'appduser').
+
+
+#### Dependencies
 
 A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
 
-Example Playbook
-----------------
+#### License
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+Apache 2.0
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+#### Author Information
 
-License
--------
-
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+[1]: https://galaxy.ansible.com/appdynamics/apm-platform-ha
