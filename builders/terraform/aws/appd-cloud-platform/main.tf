@@ -117,7 +117,7 @@ data "aws_ami" "appd_cloud_platform_ha_centos78" {
     name = "name"
 
     values = [
-      "AppD-Cloud-Platform-2070-HA-CentOS78-AMI-*",
+      "AppD-Cloud-Platform-2071-HA-CentOS78-AMI-*",
     ]
   }
 }
@@ -226,7 +226,7 @@ resource "local_file" "public_dns_file" {
 # Modules ------------------------------------------------------------------------------------------
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = ">= 3.12"
+  version = ">= 3.13"
 
   name        = "${var.lab_user_prefix}-SG-${local.current_date}"
   description = "Security group for example usage with EC2 instance"
@@ -411,6 +411,6 @@ EOD
 
   provisioner "local-exec" {
     working_dir = "../../../../provisioners/ansible/appd-cloud-platform"
-    command = "aws ec2 wait instance-status-ok --instance-ids ${join(" ", toset(module.enterprise_console.id), toset(module.controller.id), toset(module.events_service.id), toset(module.eum_server.id))} && ansible-playbook -i aws_hosts.inventory helloworld.yml"
+    command = "aws --region ${var.aws_region} ec2 wait instance-status-ok --instance-ids ${join(" ", toset(module.enterprise_console.id), toset(module.controller.id), toset(module.events_service.id), toset(module.eum_server.id))} && ansible-playbook -i aws_hosts.inventory helloworld.yml"
   }
 }
