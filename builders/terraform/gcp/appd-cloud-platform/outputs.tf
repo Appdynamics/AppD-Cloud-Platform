@@ -1,5 +1,5 @@
 output "gcp_ec_instances_self_links" {
-  description = "List of self-links for Enterprise Console compute instances"
+  description = "List of self-links for Enterprise Console compute instance"
   value       = module.enterprise_console.instances_self_links
 }
 
@@ -11,6 +11,11 @@ output "gcp_controller_instances_self_links" {
 output "gcp_es_instances_self_links" {
   description = "List of self-links for Events Service compute instances"
   value       = module.events_service.instances_self_links
+}
+
+output "gcp_eum_server_instances_self_links" {
+  description = "List of self-links for EUM Server compute instance"
+  value       = module.eum_server.instances_self_links
 }
 
 output "gcp_ec_available_zones" {
@@ -45,6 +50,11 @@ output "gcp_es_id" {
   value       = module.events_service.id
 }
 
+output "gcp_eum_server_id" {
+  description = "An identifier for the EUM Server resource."
+  value       = module.eum_server.id
+}
+
 output "gcp_ec_instance_id" {
   description = "The server-assigned unique identifier of this Enterprise Console instance."
   value       = module.enterprise_console.instance_id
@@ -58,6 +68,11 @@ output "gcp_controller_instance_id" {
 output "gcp_es_instance_id" {
   description = "The server-assigned unique identifier of this Events Service instance."
   value       = module.events_service.instance_id
+}
+
+output "gcp_eum_server_instance_id" {
+  description = "The server-assigned unique identifier of this EUM Server instance."
+  value       = module.eum_server.instance_id
 }
 
 output "gcp_ec_network_ip" {
@@ -75,6 +90,11 @@ output "gcp_es_network_ip" {
   value       = module.events_service.network_ip
 }
 
+output "gcp_eum_server_network_ip" {
+  description = "The private IP address assigned to the EUM Server instance."
+  value       = module.eum_server.network_ip
+}
+
 output "gcp_ec_nat_ip" {
   description = "The external IP address assigned to the Enterprise Console instance."
   value       = module.enterprise_console.nat_ip
@@ -88,4 +108,9 @@ output "gcp_controller_nat_ip" {
 output "gcp_es_nat_ip" {
   description = "The external IP address assigned to the Events Service instance."
   value       = module.events_service.nat_ip
+}
+
+output "gcp_eum_server_nat_ip" {
+  description = "The external IP address assigned to the EUM Server instance."
+  value       = module.eum_server.nat_ip
 }

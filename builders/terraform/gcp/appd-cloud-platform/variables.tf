@@ -36,8 +36,8 @@ variable "gcp_source_image_family" {
 variable "gcp_source_image" {
   description = "The source disk image."
   type        = string
-  default     = "appd-cloud-platform-2066-ha-centos78-2020-07-16"
-# default     = "centos-7-v20200603"
+  default     = "appd-cloud-platform-2071-ha-centos78-2020-07-22"
+# default     = "centos-7-v20200700"
 }
 
 variable "gcp_use_num_suffix" {
@@ -65,6 +65,11 @@ variable "gcp_controller_nat_ip" {
 
 variable "gcp_es_nat_ip" {
   description = "Public ip address for Events Service instance."
+  default     = null
+}
+
+variable "gcp_eum_server_nat_ip" {
+  description = "Public ip address for EUM Server instance."
   default     = null
 }
 
