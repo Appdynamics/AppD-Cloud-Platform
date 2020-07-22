@@ -24,6 +24,7 @@ tags
 /builders/**/.terraform
 /builders/**/*.tfstate*
 /builders/**/*.tfplan
+/builders/**/terraform.tfvars
 
 # ignore ansible configuration and temporary runtime files.
 ansible.cfg
