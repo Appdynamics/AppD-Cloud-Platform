@@ -4,10 +4,10 @@ variable "aws_region" {
   default     = "us-east-2"
 }
 
-variable "aws_ec2_ec_hostname_prefix" {
+variable "aws_ec2_enterprise_console_hostname_prefix" {
   description = "AWS EC2 Enterprise Console hostname prefix."
   type        = string
-  default     = "ec-node"
+  default     = "enterprise-console-node"
 }
 
 variable "aws_ec2_controller_hostname_prefix" {
@@ -16,13 +16,13 @@ variable "aws_ec2_controller_hostname_prefix" {
   default     = "controller-node"
 }
 
-variable "aws_ec2_es_hostname_prefix" {
+variable "aws_ec2_events_service_hostname_prefix" {
   description = "AWS EC2 Events Service hostname prefix."
   type        = string
-  default     = "es-node"
+  default     = "events-service-node"
 }
 
-variable "aws_ec2_eum_hostname_prefix" {
+variable "aws_ec2_eum_server_hostname_prefix" {
   description = "AWS EC2 EUM Server hostname prefix."
   type        = string
   default     = "eum-server-node"
@@ -40,10 +40,10 @@ variable "aws_ec2_user_name" {
   default     = "centos"
 }
 
-variable "aws_ec2_instance_count" {
-  description = "Number of AWS EC2 instances to create."
-  type        = number
-  default     = 1
+variable "aws_ec2_source_ami_filter" {
+  description = "AWS EC2 source AMI disk image filter."
+  type        = string
+  default     = "AppD-Cloud-Platform-2072-HA-CentOS78-AMI-*"
 }
 
 variable "aws_ec2_instance_type" {
@@ -53,18 +53,18 @@ variable "aws_ec2_instance_type" {
 # default     = "t2.nano"
 }
 
-variable "lab_user_prefix" {
-  description = "Lab user name prefix."
+variable "resource_name_prefix" {
+  description = "Resource name prefix."
   type        = string
   default     = "HA-Terraform"
 }
 
-#variable "aws_access_key" {
-#  description = "AWS access key ID."
-#  type        = string
-#}
-
-#variable "aws_secret_key" {
-#  description = "AWS secret access key."
-#  type        = string
-#}
+variable "resource_tags" {
+  description = "Tag names for AWS resources."
+  type = map
+  default = {
+    "Owner"   = "AppDynamics Cloud Channel Sales Team"
+    "Project" = "AppDynamics Cloud Platform"
+    "Event"   = "AppD Cloud Platform HA Deployment"
+  }
+}

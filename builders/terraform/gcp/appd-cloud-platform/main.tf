@@ -1,11 +1,11 @@
 # Terraform ----------------------------------------------------------------------------------------
 terraform {
-  required_version = ">= 0.12.28"
+  required_version = ">= 0.12.29"
 }
 
 # Providers ----------------------------------------------------------------------------------------
 provider "google" {
-  version = ">= 3.31"
+  version = ">= 3.32"
 
   project = var.gcp_project_id
   region  = var.gcp_region
@@ -57,7 +57,7 @@ module "enterprise_console" {
   zone              = var.gcp_zone
   network           = var.gcp_network
 # subnetwork        = var.gcp_subnetwork
-  hostname          = "ec-node"
+  hostname          = var.gcp_enterprise_console_hostname_prefix
   instance_template = module.instance_template.self_link
 
   access_config = [
@@ -78,7 +78,7 @@ module "controller" {
   zone              = var.gcp_zone
   network           = var.gcp_network
 # subnetwork        = var.gcp_subnetwork
-  hostname          = "controller-node"
+  hostname          = var.gcp_controller_hostname_prefix
   instance_template = module.instance_template.self_link
 
   access_config = [
@@ -99,7 +99,7 @@ module "events_service" {
   zone              = var.gcp_zone
   network           = var.gcp_network
 # subnetwork        = var.gcp_subnetwork
-  hostname          = "es-node"
+  hostname          = var.gcp_events_service_hostname_prefix
   instance_template = module.instance_template.self_link
 
   access_config = [
@@ -120,7 +120,7 @@ module "eum_server" {
   zone              = var.gcp_zone
   network           = var.gcp_network
 # subnetwork        = var.gcp_subnetwork
-  hostname          = "eum-server-node"
+  hostname          = var.gcp_eum_server_hostname_prefix
   instance_template = module.instance_template.self_link
 
   access_config = [
@@ -132,11 +132,13 @@ module "eum_server" {
 }
 
 resource "null_resource" "ansible_trigger" {
-  # Changes to any instance of the cluster requires re-provisioning
+  # fire the ansible trigger when any vm instance requires re-provisioning.
   triggers = {
     gcp_instance_ids = join(",", concat(module.enterprise_console.instance_id, module.controller.instance_id, module.events_service.instance_id, module.eum_server.instance_id))
   }
 
+  # execute the following 'local-exec' provisioners each time the trigger is invoked.
+  # generate the ansible gcp hosts inventory.
   provisioner "local-exec" {
     working_dir = "../../../../provisioners/ansible/appd-cloud-platform"
     command = <<EOD
@@ -154,5 +156,11 @@ ${join("\n", toset(module.events_service.nat_ip))}
 ${join("\n", toset(module.eum_server.nat_ip))}
 EOF
 EOD
+  }
+
+  # delete the ansible public keys folder.
+  provisioner "local-exec" {
+    working_dir = "../../../../provisioners/ansible/appd-cloud-platform"
+    command = "rm -Rf public-keys*"
   }
 }
