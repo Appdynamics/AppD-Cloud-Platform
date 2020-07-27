@@ -2,11 +2,11 @@
 
 Follow these instructions to build the AWS CentOS 7.8 AMI images:
 
--	__AppD-Cloud-Platform VM__: An APM Platform stand-alone VM with an AppDynamics Controller.
+-	__APM-Platform VM__: An APM Platform stand-alone VM with an AppDynamics Controller.
 -	__CWOM-Platform VM__: A Cisco Workload Optimization Manager (CWOM) stand-alone VM with a CWOM Platform server.
 -	__LPAD VM__: An AWS EC2 'Launchpad' VM needed for Kubernetes and Serverless CLI Operations and running the sample apps.
 
-Before building the AppD Cloud Platform VM images for AWS, it is recommended that you install the AWS CLI v2. This will allow you to cleanup and delete any resources created by the Packer builds when you are finished. It will also provide the ability to easily purge old AMI images while keeping the latest. Note that in AWS CLI version 2, the required Python 3 libraries are now embedded in the installer and no longer need to be installed separately.
+Before building the AppD Cloud Kickstart VM images for AWS, it is recommended that you install the AWS CLI v2. This will allow you to cleanup and delete any resources created by the Packer builds when you are finished. It will also provide the ability to easily purge old AMI images while keeping the latest. Note that in AWS CLI version 2, the required Python 3 libraries are now embedded in the installer and no longer need to be installed separately.
 
 ## AWS-Specific Installation Instructions - macOS
 
@@ -56,12 +56,12 @@ The build will __fail__ if they are not set.
 
 To prepare for the build, perform the following steps:
 
-1.	Customize your AppD Cloud Platform project environment:
+1.	Customize your AppD Cloud Kickstart project environment:
 
     Copy the template file and edit `set_appd_cloud_kickstart_env.sh` located in `./bin` to customize the environment variables for your environment.
 
     ```
-    $ cd /<drive>/projects/AppD-Cloud-Platform/bin
+    $ cd /<drive>/projects/AppD-Cloud-Kickstart/bin
     $ cp -p set_appd_cloud_kickstart_env.sh.template set_appd_cloud_kickstart_env.sh
     $ vi set_appd_cloud_kickstart_env.sh
     ```
@@ -104,12 +104,12 @@ To prepare for the build, perform the following steps:
 
 ## Build the Amazon Machine Images (AMIs) with Packer
 
-1.	Build the __AppD-Cloud-Platform VM__ CentOS 7.8 AMI image:
+1.	Build the __APM-Platform VM__ CentOS 7.8 AMI image:
 
     This will take several minutes to run.
 
     ```
-    $ cd /<drive>/projects/AppD-Cloud-Platform/builders/packer/aws
+    $ cd /<drive>/projects/AppD-Cloud-Kickstart/builders/packer/aws
     $ packer build apm-platform-centos78.json
     ```
 
@@ -120,7 +120,7 @@ To prepare for the build, perform the following steps:
     This will take several minutes to run.
 
     ```
-    $ cd /<drive>/projects/AppD-Cloud-Platform/builders/packer/aws
+    $ cd /<drive>/projects/AppD-Cloud-Kickstart/builders/packer/aws
     $ packer build cwom-platform-centos78.json
     ```
 
@@ -139,7 +139,7 @@ To prepare for the build, perform the following steps:
 
 ## AWS CentOS 7.8 Bill-of-Materials
 
-__AppD-Cloud-Platform VM__ - The following utilities and application performance management applications are pre-installed:
+__APM-Platform VM__ - The following utilities and application performance management applications are pre-installed:
 
 -	Amazon AWS CLI 2.0.34 (command-line interface)
 -	Amazon AWS EC2 Instance Metadata Query Tool (command-line interface)
