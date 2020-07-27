@@ -24,6 +24,11 @@
   include_tasks: reduce-events-service-profile.yml
   when: "('enterprise_console' in group_names) and (env_vars.appd_events_service_reduced_profile)"
 
+# create appdynamics platform and add user credentials. --------------------------------------------
+- name: import create appd platform tasks
+  include_tasks: create-appd-platform.yml
+  when: "'enterprise_console' in group_names"
+
 # install appdynamics ha controller via the ec node. -----------------------------------------------
 - name: import install appd ha controller tasks
   include_tasks: install-appd-controller.yml

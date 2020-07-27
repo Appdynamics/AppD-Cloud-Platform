@@ -21,6 +21,7 @@ tags
 # ignore terraform configuration and temporary runtime files.
 /builders/**/private-ip-file.txt
 /builders/**/public-dns-file.txt
+/builders/**/public-ip-file.txt
 /builders/**/.terraform
 /builders/**/*.tfstate*
 /builders/**/*.tfplan

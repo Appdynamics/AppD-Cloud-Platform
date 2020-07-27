@@ -50,7 +50,7 @@
   become: yes
   become_user: "{{ env_vars.appd_platform_user_name }}"
 
-- name: copy private key for '{{ env_vars.appd_platform_credential_name }}.pem'
+- name: upload private key for '{{ env_vars.appd_platform_credential_name }}.pem'
   copy:
     src: ~/.ssh/{{ env_vars.appd_platform_credential_name }}.pem
     dest: ~/.ssh/{{ env_vars.appd_platform_credential_name }}.pem
@@ -115,7 +115,7 @@
   become: yes
   become_user: "{{ env_vars.appd_platform_user_name }}"
 
-- name: test ssh password-less access to all hosts for user '{{ env_vars.appd_platform_user_name }}'
+- name: test ssh password-less access to all hosts for user '{{ env_vars.appd_platform_user_name }}' from all hosts
   shell:
     chdir: "~"
     cmd: "ssh -oNumberOfPasswordPrompts=0 {{ hostvars[item]['ansible_facts']['fqdn'] }} 'echo success'"

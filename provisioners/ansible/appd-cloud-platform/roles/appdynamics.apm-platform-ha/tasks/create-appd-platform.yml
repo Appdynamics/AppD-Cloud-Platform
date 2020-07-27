@@ -1,0 +1,21 @@
+---
+# create appdynamics platform and add user credentials. --------------------------------------------
+- name: create appd platform and add user credentials for '{{ env_vars.appd_platform_credential_name }}'
+  shell:
+    chdir: "{{ env_vars.kickstart_home }}/provisioners/scripts/centos"
+    cmd: "./create_centos7_appdynamics_platform.sh"
+    creates: "appd-platform.created"
+  environment: "{{ env_vars }}"
+  register: platform_create
+  become: yes
+  become_user: "{{ env_vars.appd_platform_user_name }}"
+
+- name: touch the 'appd-platform.created' file
+  file:
+    path: "{{ env_vars.kickstart_home }}/provisioners/scripts/centos/appd-platform.created"
+    state: touch
+    mode: "0644"
+
+- name: print platform create results
+  debug:
+    var: platform_create.stdout_lines

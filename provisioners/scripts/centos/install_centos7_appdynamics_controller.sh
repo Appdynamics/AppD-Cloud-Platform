@@ -135,11 +135,7 @@ fi
 appd_platform_folder="${appd_home}/${appd_platform_home}"
 appd_product_folder="${appd_home}/${appd_platform_home}/${appd_platform_product_home}"
 
-# start the appdynamics enterprise console. --------------------------------------------------------
-cd ${appd_platform_folder}/platform-admin/bin
-${appd_platform_folder}/platform-admin/bin/platform-admin.sh start-platform-admin
-
-# verify installation.
+# verify appdynamics enterprise console installation. ----------------------------------------------
 cd ${appd_platform_folder}/platform-admin/bin
 ${appd_platform_folder}/platform-admin/bin/platform-admin.sh show-platform-admin-version
 
@@ -150,22 +146,6 @@ ${appd_platform_folder}/platform-admin/bin/platform-admin.sh \
     --user-name "${appd_platform_admin_username}" \
     --password "${appd_platform_admin_password}"
 set -x  # turn command display back ON.
-
-# create an appdynamics platform. ------------------------------------------------------------------
-${appd_platform_folder}/platform-admin/bin/platform-admin.sh \
-  create-platform \
-    --name "${appd_platform_name}" \
-    --description "${appd_platform_description}" \
-    --installation-dir "${appd_product_folder}"
-#export APPD_CURRENT_PLATFORM="${appd_platform_name}"
-
-# add the platform credentials. --------------------------------------------------------------------
-${appd_platform_folder}/platform-admin/bin/platform-admin.sh \
-  add-credential \
-    --credential-name "${appd_platform_credential_name}" \
-    --type "${appd_platform_credential_type}" \
-    --user-name "${appd_platform_user_name}" \
-    --ssh-key-file "/home/${appd_platform_user_name}/.ssh/${appd_platform_credential_name}.pem"
 
 # add primary and secondary hosts to platform. -----------------------------------------------------
 ${appd_platform_folder}/platform-admin/bin/platform-admin.sh \
@@ -198,3 +178,10 @@ curl --silent http://${appd_controller_primary_host}:8090/controller/rest/server
 # verify overall platform installation. ------------------------------------------------------------
 ${appd_platform_folder}/platform-admin/bin/platform-admin.sh list-supported-services
 ${appd_platform_folder}/platform-admin/bin/platform-admin.sh show-service-status --service controller
+
+# shutdown the appdynamics platform components. ----------------------------------------------------
+# stop the appdynamics controller.
+#${appd_platform_folder}/platform-admin/bin/platform-admin.sh stop-controller-appserver
+
+# stop the appdynamics controller database.
+#${appd_platform_folder}/platform-admin/bin/platform-admin.sh stop-controller-db
