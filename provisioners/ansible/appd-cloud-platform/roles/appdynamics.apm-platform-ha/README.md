@@ -26,6 +26,7 @@ add the APM Platform HA role:
 - name: install appdynamics apm platform ha
   hosts: all
   gather_facts: yes
+  any_errors_fatal: yes
   environment:
     appd_username: "{{ lookup('env', 'appd_username') }}"
     appd_password: "{{ lookup('env', 'appd_password') }}"
