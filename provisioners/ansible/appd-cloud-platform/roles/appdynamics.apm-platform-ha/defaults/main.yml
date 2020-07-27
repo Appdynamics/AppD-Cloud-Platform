@@ -38,6 +38,10 @@ env_vars:
   appd_controller_aurora_min_cpus: "aurora_controller_min_cpus = 2"
 
   # appd events service install parameters.
+  appd_events_service_host1: "{{ ansible_env.appd_events_service_host1 | default('events-service-node-01', true) }}"
+  appd_events_service_host2: "{{ ansible_env.appd_events_service_host2 | default('events-service-node-02', true) }}"
+  appd_events_service_host3: "{{ ansible_env.appd_events_service_host3 | default('events-service-node-03', true) }}"
+
   appd_events_service_reduced_profile: "{{ ansible_env.appd_events_service_reduced_profile | default(true, true) }}"
   appd_events_service_min_cpus: "eventsServiceMinCpus = 2"
   appd_events_service_min_data_space_in_mb: "eventsServiceMinDataSpaceInMb = 65536"
