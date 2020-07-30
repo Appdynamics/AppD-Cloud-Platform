@@ -155,9 +155,9 @@ __AppD-Cloud-Platform VM__ - The following utilities and application performance
 -	jq 1.6 (command-line JSON processor)
 -	MySQL Shell 8.0.21
 -	Python 2.7.5
-	-	Pip 20.1.1
+	-	Pip 20.2
 -	Python 3.6.8
-	-	Pip 20.1.1
+	-	Pip 20.2
 -	VIM - Vi IMproved 8.2
 
 __CWOM-Platform VM__ - The following utilities and workload optimization management applications are pre-installed:
@@ -174,9 +174,9 @@ __CWOM-Platform VM__ - The following utilities and workload optimization managem
 -	jq 1.6 (command-line JSON processor)
 -	MySQL Shell 8.0.21
 -	Python 2.7.5
-	-	Pip 20.1.1
+	-	Pip 20.2
 -	Python 3.6.8
-	-	Pip 20.1.1
+	-	Pip 20.2
 -	VIM - Vi IMproved 8.2
 
 __LPAD VM__ - The following AWS CLI command-line tools and utilities are pre-installed:
@@ -205,8 +205,8 @@ __LPAD VM__ - The following AWS CLI command-line tools and utilities are pre-ins
 -	npm JavaScript Package Manager for Node.js 6.14.7
 -	nvm (Node Version Manager) bash script 0.35.3
 -	Python 2.7.5
-	-	Pip 20.1.1
+	-	Pip 20.2
 -	Python 3.6.8
-	-	Pip 20.1.1
--	Serverless Framework CLI 1.77.0
+	-	Pip 20.2
+-	Serverless Framework CLI 1.77.1
 -	VIM - Vi IMproved 8.2
