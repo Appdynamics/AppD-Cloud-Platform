@@ -51,9 +51,30 @@ output "public_ips" {
   description = "List of public IP addresses assigned to the instances."
   value       = flatten([toset(module.enterprise_console.public_ip), toset(module.controller.public_ip), toset(module.events_service.public_ip), toset(module.eum_server.public_ip)])
 }
+
 output "public_dns" {
   description = "List of public DNS names assigned to the instances."
   value       = flatten([toset(module.enterprise_console.public_dns), toset(module.controller.public_dns), toset(module.events_service.public_dns), toset(module.eum_server.public_dns)])
+}
+
+output "vpc_id" {
+  description = "The ID of the VPC."
+  value       = module.vpc.vpc_id
+}
+
+output "vpc_azs" {
+  description = "A list of availability zones specified as arguments to this VPC module."
+  value       = module.vpc.azs
+}
+
+output "vpc_public_subnet_ids" {
+  description = "A list of IDs of public subnets."
+  value       = tolist(module.vpc.public_subnets)
+}
+
+output "vpc_private_subnet_ids" {
+  description = "A list of IDs of private subnets."
+  value       = tolist(module.vpc.private_subnets)
 }
 
 output "vpc_security_group_ids" {

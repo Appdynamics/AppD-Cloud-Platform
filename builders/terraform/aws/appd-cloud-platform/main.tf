@@ -23,15 +23,7 @@ locals {
 }
 
 # Data Sources -------------------------------------------------------------------------------------
-# data sources to get vpc, subnet, security group and ami details.
-data "aws_vpc" "default" {
-  default = true
-}
-
-data "aws_subnet_ids" "all" {
-  vpc_id = data.aws_vpc.default.id
-}
-
+# data sources to get ami details.
 data "aws_ami" "appd_cloud_platform_ha_centos78" {
   most_recent = true
   owners      = ["self"]
@@ -43,13 +35,35 @@ data "aws_ami" "appd_cloud_platform_ha_centos78" {
 }
 
 # Modules ------------------------------------------------------------------------------------------
+module "vpc" {
+  source = "terraform-aws-modules/vpc/aws"
+  version = ">= 2.44"
+
+  name = "VPC-${var.resource_name_prefix}-${local.current_date}"
+  cidr = var.aws_vpc_cidr
+
+  azs             = var.aws_availability_zones
+  public_subnets  = var.aws_vpc_public_subnets
+  private_subnets = var.aws_vpc_private_subnets
+
+  enable_nat_gateway   = true
+  enable_vpn_gateway   = false
+  enable_dns_hostnames = true
+  enable_dns_support   = true
+
+  tags = {
+    Terraform = "true"
+    Environment = "dev"
+  }
+}
+
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
   version = ">= 3.13"
 
   name        = "SG-${var.resource_name_prefix}-${local.current_date}"
   description = "Security group for example usage with EC2 instance"
-  vpc_id      = data.aws_vpc.default.id
+  vpc_id      = module.vpc.vpc_id
   tags        = var.resource_tags
 
   ingress_cidr_blocks               = ["0.0.0.0/0"]
@@ -110,8 +124,7 @@ module "enterprise_console" {
   key_name             = "AppD-Cloud-Platform"
   tags                 = var.resource_tags
 
-  subnet_id                   = tolist(data.aws_subnet_ids.all.ids)[0]
-  // private_ips                 = ["172.31.32.5", "172.31.46.20"]
+  subnet_id                   = tolist(module.vpc.public_subnets)[0]
   vpc_security_group_ids      = [module.security_group.this_security_group_id]
   associate_public_ip_address = true
 
@@ -138,8 +151,7 @@ module "controller" {
   key_name             = "AppD-Cloud-Platform"
   tags                 = var.resource_tags
 
-  subnet_id                   = tolist(data.aws_subnet_ids.all.ids)[0]
-  // private_ips                 = ["172.31.32.5", "172.31.46.20"]
+  subnet_id                   = tolist(module.vpc.public_subnets)[0]
   vpc_security_group_ids      = [module.security_group.this_security_group_id]
   associate_public_ip_address = true
 
@@ -166,8 +178,7 @@ module "events_service" {
   key_name             = "AppD-Cloud-Platform"
   tags                 = var.resource_tags
 
-  subnet_id                   = tolist(data.aws_subnet_ids.all.ids)[0]
-  // private_ips                 = ["172.31.32.5", "172.31.46.20"]
+  subnet_id                   = tolist(module.vpc.public_subnets)[0]
   vpc_security_group_ids      = [module.security_group.this_security_group_id]
   associate_public_ip_address = true
 
@@ -184,7 +195,7 @@ module "eum_server" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = ">= 2.15"
 
- instance_count = 1
+  instance_count = 1
   use_num_suffix = false
 
   name                 = "EUM-Server-${var.resource_name_prefix}-${local.current_date}"
@@ -194,8 +205,7 @@ module "eum_server" {
   key_name             = "AppD-Cloud-Platform"
   tags                 = var.resource_tags
 
-  subnet_id                   = tolist(data.aws_subnet_ids.all.ids)[0]
-  // private_ips                 = ["172.31.32.5", "172.31.46.20"]
+  subnet_id                   = tolist(module.vpc.public_subnets)[0]
   vpc_security_group_ids      = [module.security_group.this_security_group_id]
   associate_public_ip_address = true
 
