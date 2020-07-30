@@ -190,12 +190,12 @@ export appd_controller_tenancy_mode
 #appd_java_agent_user="appduser"
 #export appd_java_agent_user
 
-# [optional] java agent release (defaults to '20.6.0.30555').
-#appd_java_agent_release="20.6.0.30555"
+# [optional] java agent release (defaults to '20.7.0.30639').
+#appd_java_agent_release="20.7.0.30639"
 #export appd_java_agent_release
 
 # [optional] java agent sha-256 checksum (defaults to published value).
-#appd_java_agent_sha256="5cd4b3ee0a4cb19cb0ae340d8ff45a06cd9530c555164b19650b66e118655a90"
+#appd_java_agent_sha256="2166eae0de1f8149a2e47b45dbe3c89ab7742a173ddb357e907e5d4074b700f5"
 #export appd_java_agent_sha256
 
 # --------------------------------------------------------------------------------------------------
@@ -212,7 +212,7 @@ export appd_controller_tenancy_mode
 #       using valid entries for your environment.
 #
 #       In either case, you will need to validate the configuration before starting the Java Agent. The
-#       configuration file can be found here: '<java_agent_home>/appagent/ver20.6.0.30555/conf/controller-info.xml'
+#       configuration file can be found here: '<java_agent_home>/appagent/ver20.7.0.30639/conf/controller-info.xml'
 
 # [optional] associate java agent with application (defaults to ''My App).
 #appd_java_agent_application_name="My App"
