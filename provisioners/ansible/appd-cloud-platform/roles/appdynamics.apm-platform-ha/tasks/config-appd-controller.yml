@@ -1,5 +1,15 @@
 ---
 # configure appdynamics ha controller platform service by appdynamics. -----------------------------
+- name: upload appd license file to controller nodes
+  copy:
+    src: ../../../shared/license/appd-controller-license.lic
+    dest: "{{ env_vars.appd_home }}/{{ env_vars.appd_platform_home }}/{{ env_vars.appd_platform_product_home }}/controller/license.lic"
+    mode: '0644'
+    owner: "{{ env_vars.appd_platform_user_name }}"
+    group: "{{ env_vars.appd_platform_user_group }}"
+  become: yes
+  become_user: "{{ env_vars.appd_platform_user_name }}"
+
 - name: create appd controller systemd service file
   template:
     src: templates/appdynamics-controller.service.j2
@@ -13,21 +23,3 @@
     enabled: yes
 #   state: started
     name: appdynamics-controller.service
-
-- name: upload appd license file to controller nodes
-  copy:
-    src: ../../../shared/license/appd-controller-license.lic
-    dest: "{{ env_vars.appd_home }}/{{ env_vars.appd_platform_home }}/{{ env_vars.appd_platform_product_home }}/controller/license.lic"
-    mode: '0644'
-    owner: "{{ env_vars.appd_platform_user_name }}"
-    group: "{{ env_vars.appd_platform_user_group }}"
-  become: yes
-  become_user: "{{ env_vars.appd_platform_user_name }}"
-
-- name: touch the 'license.lic' file
-  file:
-    path: "{{ env_vars.appd_home }}/{{ env_vars.appd_platform_home }}/{{ env_vars.appd_platform_product_home }}/controller/license.lic"
-    state: touch
-    mode: "0644"
-  become: yes
-  become_user: "{{ env_vars.appd_platform_user_name }}"

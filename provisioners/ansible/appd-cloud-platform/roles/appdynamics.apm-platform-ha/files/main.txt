@@ -1,0 +1,1 @@
+# sample file for appdynamics.apm-platform-ha

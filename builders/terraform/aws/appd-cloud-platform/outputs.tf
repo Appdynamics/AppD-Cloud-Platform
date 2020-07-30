@@ -87,6 +87,16 @@ output "root_block_device_volume_ids" {
   value       = flatten([toset(module.enterprise_console.root_block_device_volume_ids), toset(module.controller.root_block_device_volume_ids), toset(module.events_service.root_block_device_volume_ids), toset(module.eum_server.root_block_device_volume_ids)])
 }
 
+output "controller_elb_id" {
+  description = "The ID of the ELB."
+  value       = module.controller_elb.this_elb_id
+}
+
+output "controller_elb_dns_name" {
+  description = "The DNS name of the ELB."
+  value       = module.controller_elb.this_elb_dns_name
+}
+
 output "tags" {
   description = "List of tags."
   value       = module.enterprise_console.tags

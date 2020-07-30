@@ -1,0 +1,24 @@
+---
+# update platform configurations by appdynamics. ---------------------------------------------------
+- name: configure appd controller external load balancer url
+  shell:
+    chdir: "{{ env_vars.kickstart_home }}/provisioners/scripts/common"
+    cmd: "./update_appdynamics_platform_configurations.sh"
+    creates: "appd-platform-configurations.updated"
+# environment: "{{ env_vars }}"
+  environment:
+    - "{{ env_vars }}"
+    - appd_controller_external_url: "{{ lookup('file', '../files/controller_elb_dns_name.txt') }}"
+  register: platform_configurations_update
+  become: yes
+  become_user: "{{ env_vars.appd_platform_user_name }}"
+
+- name: touch the 'appd-platform-configurations.updated' file
+  file:
+    path: "{{ env_vars.kickstart_home }}/provisioners/scripts/common/appd-platform-configurations.updated"
+    state: touch
+    mode: "0644"
+
+- name: print platform configurations update results
+  debug:
+    var: platform_configurations_update.stdout_lines
