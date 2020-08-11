@@ -111,7 +111,7 @@ set -x  # turn command display back ON.
 
 # set appdynamics java agent installation variables. -----------------------------------------------
 appd_java_agent_folder="${appd_java_agent_home}-${appd_java_agent_release}"
-appd_java_agent_binary="AppServerAgent-${appd_java_agent_release}.zip"
+appd_java_agent_binary="AppServerAgent-1.8-${appd_java_agent_release}.zip"
 
 # create appdynamics java agent parent folder. -----------------------------------------------------
 mkdir -p ${appd_home}/${appd_java_agent_folder}
@@ -142,7 +142,7 @@ oauth_token=$(awk -F '"' '{print $10}' ${oauth_token_filename})
 
 # download the appdynamics java agent binary.
 rm -f ${appd_java_agent_binary}
-curl --silent --location --remote-name --header "Authorization: Bearer ${oauth_token}" https://download.appdynamics.com/download/prox/download-file/sun-jvm/${appd_java_agent_release}/${appd_java_agent_binary}
+curl --silent --location --remote-name --header "Authorization: Bearer ${oauth_token}" https://download.appdynamics.com/download/prox/download-file/java-jdk8/${appd_java_agent_release}/${appd_java_agent_binary}
 chmod 644 ${appd_java_agent_binary}
 
 rm -f ${post_data_filename}
