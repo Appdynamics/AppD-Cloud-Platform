@@ -79,7 +79,7 @@ output "vpc_private_subnet_ids" {
 
 output "vpc_security_group_ids" {
   description = "List of VPC security group ids assigned to the instances."
-  value       = flatten([toset(module.enterprise_console.vpc_security_group_ids), toset(module.controller.vpc_security_group_ids), toset(module.events_service.vpc_security_group_ids), toset(module.eum_server.vpc_security_group_ids)])
+  value       = toset(flatten([toset(module.enterprise_console.vpc_security_group_ids), toset(module.controller.vpc_security_group_ids), toset(module.events_service.vpc_security_group_ids), toset(module.eum_server.vpc_security_group_ids)]))
 }
 
 output "root_block_device_volume_ids" {
