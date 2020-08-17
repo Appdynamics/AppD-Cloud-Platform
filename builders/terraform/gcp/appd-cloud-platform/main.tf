@@ -1,11 +1,11 @@
 # Terraform ----------------------------------------------------------------------------------------
 terraform {
-  required_version = ">= 0.12.29"
+  required_version = ">= 0.13.0"
 }
 
 # Providers ----------------------------------------------------------------------------------------
 provider "google" {
-  version = ">= 3.33"
+  version = ">= 3.34"
 
   project = var.gcp_project_id
   region  = var.gcp_region
