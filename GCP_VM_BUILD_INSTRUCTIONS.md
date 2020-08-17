@@ -12,29 +12,29 @@ Before building the AppD Cloud Platform VM images for AWS, it is recommended tha
 
 Here is a list of the recommended open source software to be installed on the host macOS machine:
 
--	Amazon AWS CLI 2.0.38 (command-line interface)
+-	Amazon AWS CLI 2.0.40 (command-line interface)
 
 Perform the following steps to install the needed software:
 
-1.	Install [AWS CLI 2.0.38](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-mac.html).  
+1.	Install [AWS CLI 2.0.40](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-mac.html).  
     `$ brew install awscli@2`  
 
 2.	Validate installed command-line tools:
 
     ```
     $ aws --version
-    aws-cli/2.0.38 Python/3.8.5 Darwin/19.6.0 source/x86_64
+    aws-cli/2.0.40 Python/3.8.5 Darwin/19.6.0 source/x86_64
     ```
 
 ## AWS-Specific Installation Instructions - Windows 64-Bit
 
 Here is a list of the recommended open source software to be installed on the host Windows machine:
 
--	Amazon AWS CLI 2.0.38 (command-line interface)
+-	Amazon AWS CLI 2.0.40 (command-line interface)
 
 Perform the following steps to install the needed software:
 
-1.	Install [AWS CLI 2.0.38](https://awscli.amazonaws.com/AWSCLIV2.msi) for Windows 64-bit.  
+1.	Install [AWS CLI 2.0.40](https://awscli.amazonaws.com/AWSCLIV2.msi) for Windows 64-bit.  
     Run the downloaded MSI installer and follow the on-screen instructions.  
 
     **NOTE:** For Windows users, the MSI installation package offers a familiar and convenient way to install the AWS CLI without installing any other prerequisites. However, when updates are released, you must repeat the installation process to get the latest version of the AWS CLI. If you prefer more frequent updates, consider using `pip` as described in the AWS CLI [install guide](https://docs.aws.amazon.com/cli/latest/userguide/install-windows.html).
@@ -43,7 +43,7 @@ Perform the following steps to install the needed software:
 
     ```
     $ aws --version
-    aws-cli/2.0.38 Python/3.7.7 Windows/10 botocore/2.0.0dev42
+    aws-cli/2.0.40 Python/3.7.7 Windows/10 botocore/2.0.0dev44
     ```
 
 ## Prepare for the Build
@@ -141,11 +141,11 @@ To prepare for the build, perform the following steps:
 
 __AppD-Cloud-Platform VM__ - The following utilities and application performance management applications are pre-installed:
 
--	Amazon AWS CLI 2.0.38 (command-line interface)
+-	Amazon AWS CLI 2.0.40 (command-line interface)
 -	Amazon AWS EC2 Instance Metadata Query Tool (command-line interface)
 -	Ansible 2.9.12
--	AppDynamics Enterprise Console 20.7.3 Build 22924
-	-	AppDynamics Controller 20.7.3 Build 2930
+-	AppDynamics Enterprise Console 20.7.4 Build 22931
+	-	AppDynamics Controller 20.7.4 Build 2948
 	-	AppDynamics Events Service 4.5.2.0 Build 20640
 -	Docker 19.03.12 CE
 	-	Docker Bash Completion
@@ -162,7 +162,7 @@ __AppD-Cloud-Platform VM__ - The following utilities and application performance
 
 __CWOM-Platform VM__ - The following utilities and workload optimization management applications are pre-installed:
 
--	Amazon AWS CLI 2.0.38 (command-line interface)
+-	Amazon AWS CLI 2.0.40 (command-line interface)
 -	Amazon AWS EC2 Instance Metadata Query Tool (command-line interface)
 -	Ansible 2.9.12
 -	Cisco Workload Optimization Manager (CWOM) 2.3.20
@@ -181,7 +181,7 @@ __CWOM-Platform VM__ - The following utilities and workload optimization managem
 
 __LPAD VM__ - The following AWS CLI command-line tools and utilities are pre-installed:
 
--	Amazon AWS CLI 2.0.38 (command-line interface)
+-	Amazon AWS CLI 2.0.40 (command-line interface)
 -	Amazon AWS EC2 Instance Metadata Query Tool (command-line interface)
 -	Amazon AWS EKS CLI [eksctl] 0.25.0 (command-line interface)
 -	Amazon AWS IAM Authenticator 1.17.7 for AWS EKS CLI and kubectl.
@@ -196,7 +196,7 @@ __LPAD VM__ - The following AWS CLI command-line tools and utilities are pre-ins
 	-	Git Bash Completion
 	-	Git-Flow 1.12.3 (AVH Edition)
 	-	Git-Flow Bash Completion
--	Helm CLI 3.2.4 (Package Manager for Kubernetes)
+-	Helm CLI 3.3.0 (Package Manager for Kubernetes)
 -	Java SE JDK 8 Update 265 (Amazon Corretto 8)
 -	Java SE JDK 11.0.8 (Amazon Corretto 11)
 -	Java SE JDK 14.0.2 (Oracle)
