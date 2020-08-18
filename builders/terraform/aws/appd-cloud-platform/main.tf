@@ -5,7 +5,7 @@ terraform {
 
 # Providers ----------------------------------------------------------------------------------------
 provider "aws" {
-  version = "~> 2.70"
+  version = ">= 3.2"
   region  = var.aws_region
 }
 
@@ -37,7 +37,7 @@ data "aws_ami" "appd_cloud_platform_ha_centos78" {
 # Modules ------------------------------------------------------------------------------------------
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
-  version = ">= 2.44"
+  version = ">= 2.48"
 
   name = "VPC-${var.resource_name_prefix}-${local.current_date}"
   cidr = var.aws_vpc_cidr
@@ -59,7 +59,7 @@ module "vpc" {
 
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = ">= 3.13"
+  version = ">= 3.15"
 
   name        = "SG-${var.resource_name_prefix}-${local.current_date}"
   description = "Security group for example usage with EC2 instance"
@@ -115,9 +115,10 @@ module "enterprise_console" {
   version = ">= 2.15"
 
   instance_count = 1
+  num_suffix_format = "-%02d"
   use_num_suffix = false
 
-  name                 = "Enterprise-Console-${var.resource_name_prefix}-${local.current_date}"
+  name                 = "Enterprise-Console-${var.resource_name_prefix}-${local.current_date}-Node"
   ami                  = data.aws_ami.appd_cloud_platform_ha_centos78.id
   instance_type        = var.aws_ec2_instance_type
   iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile.id
@@ -142,9 +143,10 @@ module "controller" {
   version = ">= 2.15"
 
   instance_count = 2
+  num_suffix_format = "-%02d"
   use_num_suffix = true
 
-  name                 = "Controller-${var.resource_name_prefix}-${local.current_date}"
+  name                 = "Controller-${var.resource_name_prefix}-${local.current_date}-Node"
   ami                  = data.aws_ami.appd_cloud_platform_ha_centos78.id
   instance_type        = var.aws_ec2_instance_type
   iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile.id
@@ -169,9 +171,10 @@ module "events_service" {
   version = ">= 2.15"
 
   instance_count = 3
+  num_suffix_format = "-%02d"
   use_num_suffix = true
 
-  name                 = "Events-Service-${var.resource_name_prefix}-${local.current_date}"
+  name                 = "Events-Service-${var.resource_name_prefix}-${local.current_date}-Node"
   ami                  = data.aws_ami.appd_cloud_platform_ha_centos78.id
   instance_type        = var.aws_ec2_instance_type
   iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile.id
@@ -196,9 +199,10 @@ module "eum_server" {
   version = ">= 2.15"
 
   instance_count = 1
+  num_suffix_format = "-%02d"
   use_num_suffix = false
 
-  name                 = "EUM-Server-${var.resource_name_prefix}-${local.current_date}"
+  name                 = "EUM-Server-${var.resource_name_prefix}-${local.current_date}-Node"
   ami                  = data.aws_ami.appd_cloud_platform_ha_centos78.id
   instance_type        = var.aws_ec2_instance_type
   iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile.id
