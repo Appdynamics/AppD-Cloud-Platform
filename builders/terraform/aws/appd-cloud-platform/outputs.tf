@@ -88,13 +88,23 @@ output "root_block_device_volume_ids" {
 }
 
 output "controller_elb_id" {
-  description = "The ID of the ELB."
+  description = "The ID of the Controller ELB."
   value       = module.controller_elb.this_elb_id
 }
 
 output "controller_elb_dns_name" {
-  description = "The DNS name of the ELB."
-  value       = module.controller_elb.this_elb_dns_name
+  description = "The DNS name of the Controller ELB."
+  value       = lower(module.controller_elb.this_elb_dns_name)
+}
+
+output "events_service_elb_id" {
+  description = "The ID of the Events Service ELB."
+  value       = module.events_service_elb.this_elb_id
+}
+
+output "events_service_elb_dns_name" {
+  description = "The DNS name of the Events Service ELB."
+  value       = lower(module.events_service_elb.this_elb_dns_name)
 }
 
 output "tags" {

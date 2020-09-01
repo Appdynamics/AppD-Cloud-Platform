@@ -1,0 +1,22 @@
+---
+# update controller configurations by appdynamics. -------------------------------------------------
+- name: configure appd events service external load balancer url
+  shell:
+    chdir: "{{ env_vars.kickstart_home }}/provisioners/scripts/common"
+    cmd: "./config_appdynamics_events_service_load_balancer_url.sh"
+    creates: "appd-controller-configurations.updated"
+# environment: "{{ env_vars }}"
+  environment:
+    - "{{ env_vars }}"
+    - appd_events_service_load_balancer_url: "{{ lookup('file', '../files/events_service_elb_dns_name.txt') }}"
+  register: controller_configurations_update
+
+- name: touch the 'appd-controller-configurations.updated' file
+  file:
+    path: "{{ env_vars.kickstart_home }}/provisioners/scripts/common/appd-controller-configurations.updated"
+    state: touch
+    mode: "0644"
+
+- name: print controller configurations update results
+  debug:
+    var: controller_configurations_update.stdout_lines

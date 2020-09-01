@@ -5,7 +5,7 @@ terraform {
 
 # Providers ----------------------------------------------------------------------------------------
 provider "aws" {
-  version = ">= 3.2"
+  version = ">= 3.4"
   region  = var.aws_region
 }
 
@@ -59,7 +59,7 @@ module "vpc" {
 
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = ">= 3.15"
+  version = ">= 3.16"
 
   name        = "SG-${var.resource_name_prefix}-${local.current_date}"
   description = "Security group for example usage with EC2 instance"
@@ -255,6 +255,39 @@ module "controller_elb" {
   tags                = var.resource_tags
 }
 
+module "events_service_elb" {
+  source  = "terraform-aws-modules/elb/aws"
+  version = ">= 2.4"
+
+  name            = "Events-Service-ELB-${var.resource_name_prefix}-${local.current_date}"
+  subnets         = tolist(module.vpc.public_subnets)
+  security_groups = [module.security_group.this_security_group_id]
+  internal        = false
+  create_elb      = true
+
+  listener = [
+    {
+      instance_port     = "9080"
+      instance_protocol = "http"
+      lb_port           = "9080"
+      lb_protocol       = "http"
+    }
+  ]
+
+  health_check = {
+    target              = "HTTP:9080/"
+    interval            = 30
+    healthy_threshold   = 2
+    unhealthy_threshold = 2
+    timeout             = 5
+  }
+
+  # elb attachments.
+  number_of_instances = length(module.events_service.id)
+  instances           = module.events_service.id
+  tags                = var.resource_tags
+}
+
 # Resources ----------------------------------------------------------------------------------------
 resource "aws_iam_role" "ec2_access_role" {
   name               = "EC2-Access-Role-${var.resource_name_prefix}-${local.current_date}"
@@ -318,6 +351,16 @@ EOD
     command     = <<EOD
 cat <<EOF > controller_elb_dns_name.txt
 ${format("http://%s:80", lower(module.controller_elb.this_elb_dns_name))}
+EOF
+EOD
+  }
+
+  # generate ansible data file with events service elb dns name.
+  provisioner "local-exec" {
+    working_dir = "../../../../provisioners/ansible/appd-cloud-platform/roles/appdynamics.apm-platform-ha/files"
+    command     = <<EOD
+cat <<EOF > events_service_elb_dns_name.txt
+${format("http://%s:9080", lower(module.events_service_elb.this_elb_dns_name))}
 EOF
 EOD
   }

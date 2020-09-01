@@ -63,3 +63,8 @@
 - name: import update platform configurations tasks
   include_tasks: update-appd-platform-configurations.yml
   when: "'enterprise_console' in group_names"
+
+# update appdynamics controller configurations. ----------------------------------------------------
+- name: import update controller configurations tasks
+  include_tasks: update-appd-controller-configurations.yml
+  when: "'enterprise_console' in group_names"
