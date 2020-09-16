@@ -1,7 +1,7 @@
 {
   "builders": [
     {
-      "account_file": "gcp-keys/gce-devops.json",
+      "account_file": "{{user `gcp_account_file`}}",
       "disk_size": "{{user `gcp_disk_size`}}",
       "disk_type": "{{user `gcp_disk_type`}}",
       "image_description": "{{user `gcp_image_description`}}",
@@ -9,7 +9,7 @@
       "image_name": "{{user `gcp_image_name`}}-{{isotime \"2006-01-02\"}}",
       "image_labels": {
         "owner": "ed-barberis",
-        "workshop": "appdynamics-cloud-kickstart"
+        "workshop": "appdynamics-cloud-platform"
       },
       "machine_type": "{{user `gcp_machine_type`}}",
       "project_id": "{{user `gcp_project_id`}}",
@@ -130,15 +130,16 @@
     "appd_controller_admin_password": "{{env `appd_controller_admin_password`}}",
     "appd_controller_root_password": "{{env `appd_controller_root_password`}}",
     "appd_controller_mysql_password": "{{env `appd_controller_mysql_password`}}",
+    "gcp_account_file": "gcp-keys/gce-devops-cisco.json",
     "gcp_disk_size": "128",
     "gcp_disk_type": "pd-standard",
     "gcp_hostname": "apm",
     "gcp_domain": "localdomain",
-    "gcp_image_description": "AppDynamics Cloud Platform 20.8.0 on CentOS 7.8. Log-in with user 'centos' using an SSH key-pair. All 'admin' and database passwords are 'welcome1'. Compute image generated using the AppDynamics Cloud Platform Project.",
+    "gcp_image_description": "AppDynamics Cloud Platform 20.8.3 on CentOS 7.8. Log-in with user 'centos' using an SSH key-pair. All 'admin' and database passwords are 'welcome1'. Compute image generated using the AppDynamics Cloud Platform Project.",
     "gcp_image_family": "appd-cloud-platform-centos78-images",
-    "gcp_image_name": "appd-cloud-platform-2080-centos78",
+    "gcp_image_name": "appd-cloud-platform-2083-centos78",
     "gcp_machine_type": "e2-standard-4",
-    "gcp_project_id": "appd-cloud-kickstart",
+    "gcp_project_id": "gcp-appdcloudplatfo-nprd-68190",
     "gcp_username": "centos",
     "gcp_zone": "{{env `gcp_zone`}}",
     "user_docker_profile": "true",

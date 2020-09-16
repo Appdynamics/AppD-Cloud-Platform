@@ -1,7 +1,7 @@
 variable "gcp_project_id" {
   description = "GCP Project ID."
   type        = string
-  default     = "appd-cloud-kickstart"
+  default     = "gcp-appdcloudplatfo-nprd-68190"
 }
 
 variable "gcp_region" {
@@ -91,7 +91,7 @@ variable "gcp_source_image_family" {
 variable "gcp_source_image" {
   description = "The source disk image."
   type        = string
-  default     = "appd-cloud-platform-2080-ha-centos78-2020-08-31"
+  default     = "appd-cloud-platform-2083-ha-centos78-2020-09-15"
 # default     = "centos-7-v20200700"
 }
 
@@ -115,7 +115,7 @@ variable "gcp_service_account" {
     scopes = set(string)
   })
   default = {
-    email = "devops@appd-cloud-kickstart.iam.gserviceaccount.com",
+    email = "devops@gcp-appdcloudplatfo-nprd-68190.iam.gserviceaccount.com",
     scopes = ["cloud-platform"]
   }
 }
