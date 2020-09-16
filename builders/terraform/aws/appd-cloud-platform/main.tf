@@ -1,11 +1,11 @@
 # Terraform ----------------------------------------------------------------------------------------
 terraform {
-  required_version = ">= 0.13.0"
+  required_version = ">= 0.13.2"
 }
 
 # Providers ----------------------------------------------------------------------------------------
 provider "aws" {
-  version = ">= 3.4"
+  version = ">= 3.6"
   region  = var.aws_region
 }
 
@@ -37,7 +37,7 @@ data "aws_ami" "appd_cloud_platform_ha_centos78" {
 # Modules ------------------------------------------------------------------------------------------
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
-  version = ">= 2.48"
+  version = ">= 2.51"
 
   name = "VPC-${var.resource_name_prefix}-${local.current_date}"
   cidr = var.aws_vpc_cidr

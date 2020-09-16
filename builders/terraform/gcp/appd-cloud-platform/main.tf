@@ -1,11 +1,11 @@
 # Terraform ----------------------------------------------------------------------------------------
 terraform {
-  required_version = ">= 0.13.0"
+  required_version = ">= 0.13.2"
 }
 
 # Providers ----------------------------------------------------------------------------------------
 provider "google" {
-  version = ">= 3.37"
+  version = ">= 3.39"
 
   project = var.gcp_project_id
   region  = var.gcp_region
@@ -29,8 +29,7 @@ provider "null" {
 
 # Modules ------------------------------------------------------------------------------------------
 module "instance_template" {
-  source  = "terraform-google-modules/vm/google//modules/instance_template"
-  version = ">= 3.0.0"
+  source  = "./modules/instance_template"
 
   region               = var.gcp_region
   project_id           = var.gcp_project_id
