@@ -144,8 +144,8 @@ __APM-Platform VM__ - The following utilities and application performance manage
 -	Amazon AWS CLI 2.0.48 (command-line interface)
 -	Amazon AWS EC2 Instance Metadata Query Tool (command-line interface)
 -	Ansible 2.9.13
--	AppDynamics Enterprise Console 20.8.3 Build 23251
-	-	AppDynamics Controller 20.8.3 Build 3849
+-	AppDynamics Enterprise Console 20.8.4 Build 23255
+	-	AppDynamics Controller 20.8.4 Build 3855
 	-	AppDynamics Events Service 4.5.2.0 Build 20640
 -	Docker 19.03.12 CE
 	-	Docker Bash Completion
@@ -165,7 +165,7 @@ __CWOM-Platform VM__ - The following utilities and workload optimization managem
 -	Amazon AWS CLI 2.0.48 (command-line interface)
 -	Amazon AWS EC2 Instance Metadata Query Tool (command-line interface)
 -	Ansible 2.9.13
--	Cisco Workload Optimization Manager (CWOM) 2.3.20
+-	Cisco Workload Optimization Manager (CWOM) 2.3.22
 -	Docker 19.03.12 CE
 	-	Docker Bash Completion
 	-	Docker Compose 1.27.2
@@ -202,7 +202,7 @@ __LPAD VM__ - The following AWS CLI command-line tools and utilities are pre-ins
 -	Java SE JDK 14.0.2 (Oracle)
 -	Java SE JDK 15 (Oracle)
 -	jq 1.6 (command-line JSON processor)
--	Node.js JavaScript runtime v12.18.3 (Latest LTS Version)
+-	Node.js JavaScript runtime v12.18.4 (Latest LTS Version)
 -	npm JavaScript Package Manager for Node.js 6.14.8
 -	nvm (Node Version Manager) bash script 0.35.3
 -	Python 2.7.5
