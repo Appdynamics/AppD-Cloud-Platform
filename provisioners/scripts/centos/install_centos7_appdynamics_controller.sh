@@ -150,20 +150,23 @@ set -x  # turn command display back ON.
 # add primary and secondary hosts to platform. -----------------------------------------------------
 ${appd_platform_folder}/platform-admin/bin/platform-admin.sh \
   add-hosts \
-    --hosts "${appd_controller_primary_host}.${appd_platform_domain}" \
+    --hosts "${appd_controller_primary_host}" \
     --credential "${appd_platform_credential_name}"
 ${appd_platform_folder}/platform-admin/bin/platform-admin.sh \
   add-hosts \
-    --hosts "${appd_controller_secondary_host}.${appd_platform_domain}" \
+    --hosts "${appd_controller_secondary_host}" \
     --credential "${appd_platform_credential_name}"
+
+# validate platform hosts.
+${appd_platform_folder}/platform-admin/bin/platform-admin.sh list-hosts
 
 # install appdynamics controller. ------------------------------------------------------------------
 set +x  # temporarily turn command display OFF.
 ${appd_platform_folder}/platform-admin/bin/platform-admin.sh \
   install-controller \
     --platform-name "${appd_platform_name}" \
-    --host "${appd_controller_primary_host}.${appd_platform_domain}#Controller#Primary" \
-           "${appd_controller_secondary_host}.${appd_platform_domain}#Controller#Secondary" \
+    --host "${appd_controller_primary_host}#Controller#Primary" \
+           "${appd_controller_secondary_host}#Controller#Secondary" \
     --profile "${appd_controller_profile}" \
     --tenancy-mode "${appd_controller_tenancy_mode}" \
     --admin-username "${appd_controller_admin_username}" \

@@ -104,16 +104,19 @@ set -x  # turn command display back ON.
 # add events service hosts to platform. ------------------------------------------------------------
 ${appd_platform_folder}/platform-admin/bin/platform-admin.sh \
   add-hosts \
-    --hosts "${appd_events_service_host1}.${appd_platform_domain}" \
+    --hosts "${appd_events_service_host1}" \
     --credential "${appd_platform_credential_name}"
 ${appd_platform_folder}/platform-admin/bin/platform-admin.sh \
   add-hosts \
-    --hosts "${appd_events_service_host2}.${appd_platform_domain}" \
+    --hosts "${appd_events_service_host2}" \
     --credential "${appd_platform_credential_name}"
 ${appd_platform_folder}/platform-admin/bin/platform-admin.sh \
   add-hosts \
-    --hosts "${appd_events_service_host3}.${appd_platform_domain}" \
+    --hosts "${appd_events_service_host3}" \
     --credential "${appd_platform_credential_name}"
+
+# validate platform hosts.
+${appd_platform_folder}/platform-admin/bin/platform-admin.sh list-hosts
 
 # install appdynamics events service. --------------------------------------------------------------
 set +x  # temporarily turn command display OFF.
@@ -121,9 +124,9 @@ ${appd_platform_folder}/platform-admin/bin/platform-admin.sh \
   install-events-service \
     --platform-name "${appd_platform_name}" \
     --profile "${appd_events_service_profile}" \
-    --hosts "${appd_events_service_host1}.${appd_platform_domain}" \
-            "${appd_events_service_host2}.${appd_platform_domain}" \
-            "${appd_events_service_host3}.${appd_platform_domain}"
+    --hosts "${appd_events_service_host1}" \
+            "${appd_events_service_host2}" \
+            "${appd_events_service_host3}"
 set -x  # turn command display back ON.
 
 # verify installation.

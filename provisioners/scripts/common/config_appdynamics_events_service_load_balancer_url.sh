@@ -19,7 +19,8 @@
 appd_events_service_load_balancer_url="${appd_events_service_load_balancer_url:-}"
 
 # [OPTIONAL] appdynamics controller configuration parameters [w/ defaults].
-appd_controller_url="${appd_controller_url:-http://controller-node-01.localdomain:8090}"
+appd_controller_url="${appd_controller_url:-http://controller-node-01:8090}"
+#appd_controller_url="${appd_controller_url:-http://controller-node-01.localdomain:8090}"
 
 # validate environment variables. ------------------------------------------------------------------
 if [ -z "$appd_events_service_load_balancer_url" ]; then

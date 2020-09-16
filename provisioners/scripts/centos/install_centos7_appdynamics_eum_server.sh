@@ -15,7 +15,8 @@
 #---------------------------------------------------------------------------------------------------
 
 # set local installation variables. ----------------------------------------------------------------
-local_hostname="$(uname -n)"                                    # initialize hostname.
+local_hostname="$(hostname --short)"                            # initialize short hostname.
+#local_hostname="$(uname -n)"                                    # initialize hostname.
 
 # set default values for input environment variables if not set. -----------------------------------
 # [MANDATORY-PRESET] appdynamics account parameters.
@@ -25,7 +26,8 @@ appd_username="${appd_username:-}"
 appd_password="${appd_password:-}"
 set -x  # turn command display back ON.
 
-appd_controller_url="${appd_controller_url:-http://controller-node-01.localdomain:8090}"
+appd_controller_url="${appd_controller_url:-http://controller-node-01:8090}"
+#appd_controller_url="${appd_controller_url:-http://controller-node-01.localdomain:8090}"
 appd_eum_public_host="${appd_eum_public_host:-}"
 appd_eum_private_host="${appd_eum_private_host:-}"
 
