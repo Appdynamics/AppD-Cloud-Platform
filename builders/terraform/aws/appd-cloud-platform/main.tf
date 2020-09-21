@@ -1,11 +1,11 @@
 # Terraform ----------------------------------------------------------------------------------------
 terraform {
-  required_version = ">= 0.13.2"
+  required_version = ">= 0.13.3"
 }
 
 # Providers ----------------------------------------------------------------------------------------
 provider "aws" {
-  version = ">= 3.6"
+  version = ">= 3.7"
   region  = var.aws_region
 }
 
@@ -307,15 +307,15 @@ resource "aws_iam_instance_profile" "ec2_instance_profile" {
 }
 
 resource "local_file" "private_ip_file" {
-    filename = "private-ip-file.txt"
-    content  = format("%s\n", join("\n", toset(module.enterprise_console.private_ip), toset(module.controller.private_ip), toset(module.events_service.private_ip), toset(module.eum_server.private_ip)))
-    file_permission = "0644"
+  filename = "private-ip-file.txt"
+  content  = format("%s\n", join("\n", toset(module.enterprise_console.private_ip), toset(module.controller.private_ip), toset(module.events_service.private_ip), toset(module.eum_server.private_ip)))
+  file_permission = "0644"
 }
 
 resource "local_file" "public_ip_file" {
-    filename = "public-ip-file.txt"
-    content  = format("%s\n", join("\n", toset(module.enterprise_console.public_ip), toset(module.controller.public_ip), toset(module.events_service.public_ip), toset(module.eum_server.public_ip)))
-    file_permission = "0644"
+  filename = "public-ip-file.txt"
+  content  = format("%s\n", join("\n", toset(module.enterprise_console.public_ip), toset(module.controller.public_ip), toset(module.events_service.public_ip), toset(module.eum_server.public_ip)))
+  file_permission = "0644"
 }
 
 resource "null_resource" "ansible_trigger" {
@@ -374,6 +374,6 @@ EOD
   # run ansible hello world playbook when the ec2 instances are ready.
   provisioner "local-exec" {
     working_dir = "../../../../provisioners/ansible/appd-cloud-platform"
-    command = "aws --region ${var.aws_region} ec2 wait instance-status-ok --instance-ids ${join(" ", toset(module.enterprise_console.id), toset(module.controller.id), toset(module.events_service.id), toset(module.eum_server.id))} && ansible-playbook -i aws_hosts.inventory helloworld.yml"
+    command = "aws --region ${var.aws_region} ec2 wait instance-status-ok --instance-ids ${join(" ", toset(module.enterprise_console.id), toset(module.controller.id), toset(module.events_service.id), toset(module.eum_server.id))} && ansible-playbook -i aws_hosts.inventory roles/appdynamics.apm-platform-ha/tests/helloworld.yml"
   }
 }
