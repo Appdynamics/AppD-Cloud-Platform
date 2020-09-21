@@ -26,7 +26,7 @@ variable "gcp_network" {
 #  description = "The subnetwork selflink to host the compute instances in"
 #}
 
-variable "gcp_ec_nat_ip" {
+variable "gcp_enterprise_console_nat_ip" {
   description = "Public ip address for Enterprise Console instance."
   default     = null
 }
@@ -36,7 +36,7 @@ variable "gcp_controller_nat_ip" {
   default     = null
 }
 
-variable "gcp_es_nat_ip" {
+variable "gcp_events_service_nat_ip" {
   description = "Public ip address for Events Service instance."
   default     = null
 }
@@ -91,7 +91,7 @@ variable "gcp_source_image_family" {
 variable "gcp_source_image" {
   description = "The source disk image."
   type        = string
-  default     = "appd-cloud-platform-2084-ha-centos78-2020-09-16"
+  default     = "appd-cloud-platform-2084-ha-centos78-2020-09-18"
 # default     = "centos-7-v20200700"
 }
 
@@ -106,6 +106,12 @@ variable "gcp_machine_type" {
   type        = string
   default     = "e2-standard-4"
 # default     = "n1-standard-1"
+}
+
+variable "gcp_resource_name_prefix" {
+  description = "Resource name prefix."
+  type        = string
+  default     = "ha-terraform"
 }
 
 variable "gcp_service_account" {
