@@ -87,3 +87,9 @@ variable "event" {
   type        = string
   default     = "appd-cloud-platform-ha-deployment"
 }
+
+variable "labels" {
+  type        = map(string)
+  description = "Labels, provided as a map"
+  default     = {}
+}

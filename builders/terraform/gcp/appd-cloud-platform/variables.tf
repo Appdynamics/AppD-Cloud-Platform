@@ -91,7 +91,7 @@ variable "gcp_source_image_family" {
 variable "gcp_source_image" {
   description = "The source disk image."
   type        = string
-  default     = "appd-cloud-platform-2084-ha-centos78-2020-09-18"
+  default     = "appd-cloud-platform-2084-ha-centos78-2020-09-22"
 # default     = "centos-7-v20200700"
 }
 
@@ -102,7 +102,7 @@ variable "gcp_use_num_suffix" {
 }
 
 variable "gcp_machine_type" {
-  description = "Machine type to create."
+  description = "GCE machine type to create."
   type        = string
   default     = "e2-standard-4"
 # default     = "n1-standard-1"
@@ -128,4 +128,14 @@ variable "gcp_service_account" {
 
 variable "gcp_ssh_pub_key_path" {
   default     = "../../../../shared/keys/AppD-Cloud-Platform.pub"
+}
+
+variable "resource_labels" {
+  description = "Label names for GCP resources."
+  type = map
+  default = {
+    "owner"   = "appdynamics-cloud-channel-sales-team"
+    "project" = "appdynamics-cloud-platform"
+    "event"   = "appd-cloud-platform-ha-deployment"
+  }
 }
