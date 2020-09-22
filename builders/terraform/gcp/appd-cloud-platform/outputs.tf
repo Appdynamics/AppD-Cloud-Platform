@@ -1,3 +1,43 @@
+output "gcp_region" {
+  description = "GCP region."
+  value       = var.gcp_region
+}
+
+output "gcp_available_zones" {
+  description = "List of zones available in the given GCP region."
+  value       = data.google_compute_zones.available.names
+}
+
+output "gcp_enterprise_console_hostname_prefix" {
+  description = "GCP Enterprise Console hostname prefix."
+  value       = var.gcp_enterprise_console_hostname_prefix
+}
+
+output "gcp_controller_hostname_prefix" {
+  description = "GCP Controller hostname prefix."
+  value       = var.gcp_controller_hostname_prefix
+}
+
+output "gcp_events_service_hostname_prefix" {
+  description = "GCP Events Service hostname prefix."
+  value       = var.gcp_events_service_hostname_prefix
+}
+
+output "gcp_eum_server_hostname_prefix" {
+  description = "GCP EUM Server hostname prefix."
+  value       = var.gcp_eum_server_hostname_prefix
+}
+
+output "gcp_ssh_username" {
+  description = "GCP user name."
+  value       = var.gcp_ssh_username
+}
+
+output "gcp_machine_type" {
+  description = "GCE machine type to create."
+  value       = var.gcp_machine_type
+}
+
 output "gcp_enterprise_console_instances_self_links" {
   description = "List of self-links for Enterprise Console compute instance"
   value       = module.enterprise_console.instances_self_links
@@ -16,11 +56,6 @@ output "gcp_events_service_instances_self_links" {
 output "gcp_eum_server_instances_self_links" {
   description = "List of self-links for EUM Server compute instance"
   value       = module.eum_server.instances_self_links
-}
-
-output "gcp_enterprise_console_available_zones" {
-  description = "List of available zones in region"
-  value       = module.enterprise_console.available_zones
 }
 
 output "gcp_instance_template_self_link" {
@@ -123,4 +158,9 @@ output "gcp_controller_global_ip_address" {
 output "gcp_events_service_global_ip_address" {
   description = "The global IP address of the Events Service load balancer."
   value       = google_compute_global_address.events_service_global_ip.address
+}
+
+output "resource_labels" {
+  description = "List of GCP resource labels."
+  value       = var.resource_labels
 }
