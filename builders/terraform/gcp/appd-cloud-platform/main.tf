@@ -271,6 +271,71 @@ resource "google_compute_health_check" "controller_health_check" {
   }
 }
 
+# create events service load balancer. -------------------------------------------------------------
+resource "google_compute_global_address" "events_service_global_ip" {
+  name         = "events-service-global-ip-${var.gcp_resource_name_prefix}-${local.current_date}"
+  description  = "The global IP address of the Events Service load balancer."
+  address_type = "EXTERNAL"
+}
+
+resource "google_compute_global_forwarding_rule" "events_service_rule" {
+  name       = "events-service-rule-port-80-${var.gcp_resource_name_prefix}-${local.current_date}"
+  target     = google_compute_target_http_proxy.events_service_target.self_link
+  ip_address = google_compute_global_address.events_service_global_ip.address
+  port_range = "80"
+}
+
+resource "google_compute_target_http_proxy" "events_service_target" {
+  name    = "events-service-target-http-proxy-${var.gcp_resource_name_prefix}-${local.current_date}"
+  url_map = google_compute_url_map.events_service_url_map.self_link
+}
+
+resource "google_compute_url_map" "events_service_url_map" {
+  name            = "events-service-url-map-${var.gcp_resource_name_prefix}-${local.current_date}"
+  default_service = google_compute_backend_service.events_service_backend_service.self_link
+}
+
+resource "google_compute_instance_group" "events_service_group" {
+  name      = "events-service-instance-group-${var.gcp_resource_name_prefix}-${local.current_date}"
+  zone      = var.gcp_zone
+  instances = module.events_service.instances_self_links
+
+  named_port {
+    name = "events-service-http"
+    port = "9080"
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "google_compute_backend_service" "events_service_backend_service" {
+  name      = "events-service-backend-service-${var.gcp_resource_name_prefix}-${local.current_date}"
+  port_name = "events-service-http"
+  protocol  = "HTTP"
+
+  backend {
+    group = google_compute_instance_group.events_service_group.id
+  }
+
+  health_checks = [google_compute_health_check.events_service_health_check.id]
+}
+
+resource "google_compute_health_check" "events_service_health_check" {
+  name = "events-service-health-check-${var.gcp_resource_name_prefix}-${local.current_date}"
+
+  check_interval_sec  = 30
+  healthy_threshold   = 2
+  unhealthy_threshold = 2
+  timeout_sec         = 5
+
+  http_health_check {
+    request_path = "/"
+    port = 9080
+  }
+}
+
 # create ansible trigger to generate inventory and helper files. -----------------------------------
 resource "null_resource" "ansible_trigger" {
   # fire the ansible trigger when any vm instance requires re-provisioning.
@@ -305,6 +370,16 @@ EOD
     command     = <<EOD
 cat <<EOF > controller_elb_dns_name.txt
 ${format("http://%s:80", google_compute_global_address.controller_global_ip.address)}
+EOF
+EOD
+  }
+
+  # generate ansible data file with events service elb dns name.
+  provisioner "local-exec" {
+    working_dir = "../../../../provisioners/ansible/appd-cloud-platform/roles/appdynamics.apm-platform-ha/files"
+    command     = <<EOD
+cat <<EOF > events_service_elb_dns_name.txt
+${format("http://%s:80", google_compute_global_address.events_service_global_ip.address)}
 EOF
 EOD
   }

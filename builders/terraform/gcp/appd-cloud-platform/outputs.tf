@@ -119,3 +119,8 @@ output "gcp_controller_global_ip_address" {
   description = "The global IP address of the Controller load balancer."
   value       = google_compute_global_address.controller_global_ip.address
 }
+
+output "gcp_events_service_global_ip_address" {
+  description = "The global IP address of the Events Service load balancer."
+  value       = google_compute_global_address.events_service_global_ip.address
+}
