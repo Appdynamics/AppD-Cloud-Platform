@@ -22,6 +22,7 @@ output "aws_ec2_eum_server_hostname_prefix" {
   description = "AWS EC2 EUM Server hostname prefix."
   value       = var.aws_ec2_eum_server_hostname_prefix
 }
+
 output "aws_ec2_domain" {
   description = "AWS EC2 domain name."
   value       = var.aws_ec2_domain
@@ -107,7 +108,7 @@ output "events_service_elb_dns_name" {
   value       = lower(module.events_service_elb.this_elb_dns_name)
 }
 
-output "tags" {
-  description = "List of tags."
+output "resource_tags" {
+  description = "List of AWS resource tags."
   value       = module.enterprise_console.tags
 }

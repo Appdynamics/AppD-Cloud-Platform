@@ -51,10 +51,7 @@ module "vpc" {
   enable_dns_hostnames = true
   enable_dns_support   = true
 
-  tags = {
-    Terraform = "true"
-    Environment = "dev"
-  }
+  tags = var.resource_tags
 }
 
 module "security_group" {
