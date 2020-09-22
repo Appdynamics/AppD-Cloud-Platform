@@ -206,6 +206,72 @@ resource "google_compute_firewall" "allow-appd" {
 # target_tags   = ["allow-appd"]
 }
 
+# create controller load balancer. -----------------------------------------------------------------
+resource "google_compute_global_address" "controller_global_ip" {
+  name         = "controller-global-ip-${var.gcp_resource_name_prefix}-${local.current_date}"
+  description  = "The global IP address of the Controller load balancer."
+  address_type = "EXTERNAL"
+}
+
+resource "google_compute_global_forwarding_rule" "controller_rule" {
+  name       = "controller-rule-port-80-${var.gcp_resource_name_prefix}-${local.current_date}"
+  target     = google_compute_target_http_proxy.controller_target.self_link
+  ip_address = google_compute_global_address.controller_global_ip.address
+  port_range = "80"
+}
+
+resource "google_compute_target_http_proxy" "controller_target" {
+  name    = "controller-target-http-proxy-${var.gcp_resource_name_prefix}-${local.current_date}"
+  url_map = google_compute_url_map.controller_url_map.self_link
+}
+
+resource "google_compute_url_map" "controller_url_map" {
+  name            = "controller-url-map-${var.gcp_resource_name_prefix}-${local.current_date}"
+  default_service = google_compute_backend_service.controller_backend_service.self_link
+}
+
+resource "google_compute_instance_group" "controller_group" {
+  name      = "controller-instance-group-${var.gcp_resource_name_prefix}-${local.current_date}"
+  zone      = var.gcp_zone
+  instances = module.controller.instances_self_links
+
+  named_port {
+    name = "controller-http"
+    port = "8090"
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "google_compute_backend_service" "controller_backend_service" {
+  name      = "controller-backend-service-${var.gcp_resource_name_prefix}-${local.current_date}"
+  port_name = "controller-http"
+  protocol  = "HTTP"
+
+  backend {
+    group = google_compute_instance_group.controller_group.id
+  }
+
+  health_checks = [google_compute_health_check.controller_health_check.id]
+}
+
+resource "google_compute_health_check" "controller_health_check" {
+  name = "controller-health-check-${var.gcp_resource_name_prefix}-${local.current_date}"
+
+  check_interval_sec  = 30
+  healthy_threshold   = 2
+  unhealthy_threshold = 2
+  timeout_sec         = 5
+
+  http_health_check {
+    request_path = "/controller/rest/serverstatus"
+    port = 8090
+  }
+}
+
+# create ansible trigger to generate inventory and helper files. -----------------------------------
 resource "null_resource" "ansible_trigger" {
   # fire the ansible trigger when any vm instance requires re-provisioning.
   triggers = {
@@ -229,6 +295,16 @@ ${join("\n", toset(module.events_service.nat_ip))}
 
 [eum_server]
 ${join("\n", toset(module.eum_server.nat_ip))}
+EOF
+EOD
+  }
+
+  # generate ansible data file with controller elb dns name.
+  provisioner "local-exec" {
+    working_dir = "../../../../provisioners/ansible/appd-cloud-platform/roles/appdynamics.apm-platform-ha/files"
+    command     = <<EOD
+cat <<EOF > controller_elb_dns_name.txt
+${format("http://%s:80", google_compute_global_address.controller_global_ip.address)}
 EOF
 EOD
   }

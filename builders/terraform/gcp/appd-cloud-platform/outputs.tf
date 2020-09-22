@@ -114,3 +114,8 @@ output "gcp_eum_server_nat_ip" {
   description = "The external IP address assigned to the EUM Server instance."
   value       = module.eum_server.nat_ip
 }
+
+output "gcp_controller_global_ip_address" {
+  description = "The global IP address of the Controller load balancer."
+  value       = google_compute_global_address.controller_global_ip.address
+}
