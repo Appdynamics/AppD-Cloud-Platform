@@ -61,8 +61,5 @@ resource "google_compute_instance_from_template" "compute_instance" {
 
   source_instance_template = var.instance_template
 
-  labels = {
-    "owner"   = var.owner
-    "event"   = var.event
-  }
+  labels = var.labels
 }

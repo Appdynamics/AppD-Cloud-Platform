@@ -5,7 +5,7 @@ terraform {
 
 # Providers ----------------------------------------------------------------------------------------
 provider "google" {
-  version = ">= 3.39"
+  version = ">= 3.40"
 
   project = var.gcp_project_id
   region  = var.gcp_region
@@ -22,6 +22,8 @@ locals {
 }
 
 # Data Sources -------------------------------------------------------------------------------------
+data "google_compute_zones" "available" {
+}
 
 # Modules ------------------------------------------------------------------------------------------
 module "instance_template" {
@@ -37,9 +39,12 @@ module "instance_template" {
   source_image         = var.gcp_source_image
   machine_type         = var.gcp_machine_type
   disk_size_gb         = 128
-  metadata      = {
+
+  metadata = {
     ssh-keys = "${var.gcp_ssh_username}:${file(var.gcp_ssh_pub_key_path)}"
   }
+
+  labels = var.resource_labels
 }
 
 module "enterprise_console" {
@@ -54,6 +59,7 @@ module "enterprise_console" {
   subnetwork        = google_compute_subnetwork.vpc-public-subnet-01.name
   hostname          = var.gcp_enterprise_console_hostname_prefix
   instance_template = module.instance_template.self_link
+  labels            = var.resource_labels
 
   access_config = [
     {
@@ -75,6 +81,7 @@ module "controller" {
   subnetwork        = google_compute_subnetwork.vpc-public-subnet-01.name
   hostname          = var.gcp_controller_hostname_prefix
   instance_template = module.instance_template.self_link
+  labels            = var.resource_labels
 
   access_config = [
     {
@@ -96,6 +103,7 @@ module "events_service" {
   subnetwork        = google_compute_subnetwork.vpc-public-subnet-01.name
   hostname          = var.gcp_events_service_hostname_prefix
   instance_template = module.instance_template.self_link
+  labels            = var.resource_labels
 
   access_config = [
     {
@@ -117,6 +125,7 @@ module "eum_server" {
   subnetwork        = google_compute_subnetwork.vpc-public-subnet-01.name
   hostname          = var.gcp_eum_server_hostname_prefix
   instance_template = module.instance_template.self_link
+  labels            = var.resource_labels
 
   access_config = [
     {
@@ -258,7 +267,7 @@ resource "google_compute_backend_service" "controller_backend_service" {
 }
 
 resource "google_compute_health_check" "controller_health_check" {
-  name = "controller-health-check-${var.gcp_resource_name_prefix}-${local.current_date}"
+  name   = "controller-health-check-${var.gcp_resource_name_prefix}-${local.current_date}"
 
   check_interval_sec  = 30
   healthy_threshold   = 2
@@ -323,7 +332,7 @@ resource "google_compute_backend_service" "events_service_backend_service" {
 }
 
 resource "google_compute_health_check" "events_service_health_check" {
-  name = "events-service-health-check-${var.gcp_resource_name_prefix}-${local.current_date}"
+  name   = "events-service-health-check-${var.gcp_resource_name_prefix}-${local.current_date}"
 
   check_interval_sec  = 30
   healthy_threshold   = 2
