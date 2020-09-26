@@ -134,6 +134,7 @@ module "eum_server" {
     },
   ]
 }
+
 # Resources ----------------------------------------------------------------------------------------
 resource "google_compute_network" "vpc" {
   name                    = "vpc-${var.gcp_resource_name_prefix}-${local.current_date}"
