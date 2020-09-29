@@ -96,6 +96,22 @@ Perform the following steps to install the needed software:
     $ git config --global --list
     ```
 
+## Get the Code
+
+1.	Create a folder for your AppD Cloud Platform project:
+
+    ```bash
+    $ mkdir -p /<path>/projects
+    $ cd /<path>/projects
+    ```
+
+2.	Get the code from GitHub:
+
+    ```bash
+    $ git clone https://github.com/Appdynamics/AppD-Cloud-Platform.git
+    $ cd AppD-Cloud-Platform
+    ```
+
 ## Setup the Google Cloud SDK
 
 In order for Terraform to run operations on your behalf, you must configure the Google Cloud SDK (gcloud CLI).
@@ -152,21 +168,5 @@ For more information, see the [GCP quickstart guide](https://cloud.google.com/sd
 
     For reference, see [Authenticating as a service account](https://cloud.google.com/docs/authentication/production)
     in the online documentation.  
-
-## Get the Code
-
-1.	Create a folder for your AppD Cloud Platform project:
-
-    ```bash
-    $ mkdir -p /<path>/projects
-    $ cd /<path>/projects
-    ```
-
-2.	Get the code from GitHub:
-
-    ```bash
-    $ git clone https://github.com/Appdynamics/AppD-Cloud-Platform.git
-    $ cd AppD-Cloud-Platform
-    ```
 
 **NOTE:** The complete documentation is still currently a work-in-progress.
