@@ -1,6 +1,6 @@
 # Terraform ----------------------------------------------------------------------------------------
 terraform {
-  required_version = ">= 0.13.3"
+  required_version = ">= 0.13.4"
 }
 
 # Providers ----------------------------------------------------------------------------------------
@@ -18,7 +18,7 @@ provider "null" {
 
 # Locals -------------------------------------------------------------------------------------------
 locals {
-  current_date = "${formatdate("YYYY-MM-DD", timestamp())}"
+  current_date = formatdate("YYYY-MM-DD", timestamp())
 }
 
 # Data Sources -------------------------------------------------------------------------------------
@@ -27,14 +27,15 @@ data "google_compute_zones" "available" {
 
 # Modules ------------------------------------------------------------------------------------------
 module "instance_template" {
-  source  = "./modules/instance_template"
+  source  = "terraform-google-modules/vm/google//modules/instance_template"
+  version = "5.0.0"
 
   region               = var.gcp_region
   project_id           = var.gcp_project_id
   service_account      = var.gcp_service_account
   network              = google_compute_network.vpc.name
   subnetwork           = google_compute_subnetwork.vpc-public-subnet-01.name
-  source_image_project = var.gcp_project_id
+  source_image_project = var.gcp_source_image_project
   source_image_family  = var.gcp_source_image_family
   source_image         = var.gcp_source_image
   machine_type         = var.gcp_machine_type
