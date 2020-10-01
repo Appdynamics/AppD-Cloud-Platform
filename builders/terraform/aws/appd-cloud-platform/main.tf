@@ -1,6 +1,6 @@
 # Terraform ----------------------------------------------------------------------------------------
 terraform {
-  required_version = ">= 0.13.3"
+  required_version = ">= 0.13.4"
 }
 
 # Providers ----------------------------------------------------------------------------------------
@@ -19,7 +19,7 @@ provider "null" {
 
 # Locals -------------------------------------------------------------------------------------------
 locals {
-  current_date = "${formatdate("YYYY-MM-DD", timestamp())}"
+  current_date = formatdate("YYYY-MM-DD", timestamp())
 }
 
 # Data Sources -------------------------------------------------------------------------------------
@@ -37,7 +37,7 @@ data "aws_ami" "appd_cloud_platform_ha_centos78" {
 # Modules ------------------------------------------------------------------------------------------
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
-  version = ">= 2.51"
+  version = ">= 2.55"
 
   name = "VPC-${var.resource_name_prefix}-${local.current_date}"
   cidr = var.aws_vpc_cidr

@@ -35,7 +35,7 @@ The following open source software needs to be installed on the host macOS machi
 	-	Command Line Tools (CLT) for Xcode
 -	Git 2.28.0
 -	Google Cloud SDK (gcloud CLI) 311.0.0
--	Terraform 0.13.3
+-	Terraform 0.13.4
 -	Ansible 2.9.13
 
 Perform the following steps to install the needed software:
@@ -57,7 +57,7 @@ Perform the following steps to install the needed software:
 4.	Install [Google Cloud SDK (gcloud CLI) 311.0.0](https://cloud.google.com/sdk/docs/install#mac) for macOS 64-bit.  
     `$ brew cask install google-cloud-sdk`  
 
-5.	Install [Terraform 0.13.3](https://www.terraform.io/downloads.html) for macOS 64-bit.  
+5.	Install [Terraform 0.13.4](https://www.terraform.io/downloads.html) for macOS 64-bit.  
     `$ brew install hashicorp/tap/terraform`  
 
 6.	Install [Ansible 2.9.13](https://ansible.com/) for macOS 64-bit.  
@@ -81,7 +81,7 @@ Perform the following steps to install the needed software:
     ...
 
     $ terraform --version
-    Terraform v0.13.3
+    Terraform v0.13.4
 
     $ ansible --version
     ansible 2.9.13
