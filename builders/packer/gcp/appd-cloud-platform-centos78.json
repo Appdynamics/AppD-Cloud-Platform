@@ -130,7 +130,7 @@
     "appd_controller_admin_password": "{{env `appd_controller_admin_password`}}",
     "appd_controller_root_password": "{{env `appd_controller_root_password`}}",
     "appd_controller_mysql_password": "{{env `appd_controller_mysql_password`}}",
-    "gcp_account_file": "gcp-keys/gce-devops-cisco.json",
+    "gcp_account_file": "../../../shared/keys/gcp-devops.json",
     "gcp_disk_size": "128",
     "gcp_disk_type": "pd-standard",
     "gcp_hostname": "apm",

@@ -17,6 +17,7 @@ tags
 
 # ignore appdynamics license configuration files.
 /shared/**/appd-controller-license.lic
+/shared/**/gcp-devops.json
 
 # ignore terraform configuration and temporary runtime files.
 /builders/**/private-ip-file.txt
