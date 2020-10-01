@@ -14,7 +14,7 @@ To build the AppD Cloud Platform VM images, the following open source software n
 
 -	Homebrew 2.5.2
 	-	Command Line Tools (CLT) for Xcode
--	Packer 1.6.2
+-	Packer 1.6.4
 -	Git 2.28.0
 -	jq 1.6
 
@@ -28,7 +28,7 @@ Perform the following steps to install the needed software:
 2.	Install the [Homebrew 2.5.2](https://brew.sh/) package manager for macOS 64-bit. Paste the following into a macOS Terminal prompt:  
     `$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"`
 
-3.	Install [Packer 1.6.2](https://packer.io/) for macOS 64-bit.  
+3.	Install [Packer 1.6.4](https://packer.io/) for macOS 64-bit.  
     `$ brew install packer`  
 
 4.	Install [Git 2.28.0](https://git-scm.com/downloads) for macOS 64-bit.  
@@ -48,7 +48,7 @@ Perform the following steps to install the needed software:
     Your system is ready to brew.
 
     $ packer --version
-    1.6.2
+    1.6.4
 
     $ git --version
     git version 2.28.0
@@ -69,13 +69,13 @@ Perform the following steps to install the needed software:
 
 To build the AppD Cloud Platform immutable VM images, the following open source software needs to be installed on the host Windows machine:
 
--	Packer 1.6.2
+-	Packer 1.6.4
 -	Git 2.28.0 for Win64
 -	jq 1.6
 
 Perform the following steps to install the needed software:
 
-1.	Install [Packer 1.6.2](https://releases.hashicorp.com/packer/1.6.2/packer_1.6.2_windows_amd64.zip) for Windows 64-bit.  
+1.	Install [Packer 1.6.4](https://releases.hashicorp.com/packer/1.6.4/packer_1.6.4_windows_amd64.zip) for Windows 64-bit.  
     Create suggested install folder and extract contents of ZIP file to:  
     `C:\HashiCorp\Packer\bin`  
 
@@ -102,7 +102,7 @@ Perform the following steps to install the needed software:
 
     ```
     $ packer --version
-    1.6.2
+    1.6.4
 
     $ git --version
     git version 2.28.0.windows.1
