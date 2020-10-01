@@ -50,7 +50,7 @@ env_vars:
 
   # eum server install parameters
   appd_eum_public_host: "{{ inventory_hostname }}"
-  appd_eum_private_host: "eum-server-node.localdomain"
+  appd_eum_private_host: "eum-server-node"
 
   # appd cloud kickstart home folder.
   kickstart_home: "{{ ansible_env.kickstart_home | default('/opt/appd-cloud-kickstart', true) }}"
