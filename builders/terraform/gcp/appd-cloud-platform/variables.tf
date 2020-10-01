@@ -81,6 +81,13 @@ variable "gcp_ssh_username" {
   default     = "centos"
 }
 
+variable "gcp_source_image_project" {
+  description = "The source image project."
+  type        = string
+  default     = "gcp-appdcloudplatfo-nprd-68190"
+# default     = "centos-cloud"
+}
+
 variable "gcp_source_image_family" {
   description = "The source image family."
   type        = string
@@ -91,7 +98,7 @@ variable "gcp_source_image_family" {
 variable "gcp_source_image" {
   description = "The source disk image."
   type        = string
-  default     = "appd-cloud-platform-2085-ha-centos78-2020-09-25"
+  default     = "appd-cloud-platform-2085-ha-centos78-2020-09-30"
 # default     = "centos-7-v20200910"
 }
 
