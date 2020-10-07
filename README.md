@@ -14,6 +14,31 @@ installation is an extremely tedious and time-consuming challenge for IT adminis
 project is to significantly reduce the time required for these installation activities using Terraform and
 Ansible.
 
+## Build and Deployment Concepts
+
+The build and deployment activities make use of the following open source tools in sequence:
+
+### Packer
+
+A public immutable VM image for the HA platform is created using [Packer](https://packer.io/). It consists of a
+standardized installation of CentOS 7.8 along with a set of common tools (Scripts, playbooks, JDK, etc.).  
+
+This VM image is maintained by AppDynamics with new images released monthly. However, all of the artifacts
+are present in this project, so customers are free to customize and build their own VM image.
+
+### Terraform
+
+Terraform automates the deployment of the SAP Lab environments to Azure using templates. The SE can specify the number
+of VMs needed as well as the lab sequence start number, such as Lab11, Lab12, etc.
+
+-	An immutable VM image for the HA platform is created using [Packer](https://packer.io/).  
+	-	VM image is configured with CentOS 7.8 installation and common tools.
+	-	Normally maintained by the AppDynamics Cloud Team, but can be built and customized by the customer.
+-	Git 2.28.0
+-	Google Cloud SDK (gcloud CLI) 312.0.0
+-	Terraform 0.13.4
+-	Ansible 2.9.14
+
 ## Get Started
 
 To deploy the AppDynamics Cloud Platform, first step is to set-up your local environment by installing the
@@ -31,12 +56,12 @@ so on. However, Windows is not currently supported for the Ansible control node.
 
 The following open source software needs to be installed on the host macOS machine:
 
--	Homebrew 2.5.2
+-	Homebrew 2.5.3
 	-	Command Line Tools (CLT) for Xcode
 -	Git 2.28.0
--	Google Cloud SDK (gcloud CLI) 311.0.0
+-	Google Cloud SDK (gcloud CLI) 312.0.0
 -	Terraform 0.13.4
--	Ansible 2.9.13
+-	Ansible 2.9.14
 
 Perform the following steps to install the needed software:
 
@@ -48,19 +73,19 @@ Perform the following steps to install the needed software:
     or both; Homebrew supports all three configurations. Downloading Xcode may require an Apple Developer
     account on older versions of Mac OS X. Sign up for free [here](https://developer.apple.com/register/index.action).  
 
-2.	Install the [Homebrew 2.5.2](https://brew.sh/) package manager for macOS 64-bit. Paste the following into a macOS Terminal prompt:  
+2.	Install the [Homebrew 2.5.3](https://brew.sh/) package manager for macOS 64-bit. Paste the following into a macOS Terminal prompt:  
     `$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"`
 
 3.	Install [Git 2.28.0](https://git-scm.com/downloads) for macOS 64-bit.  
     `$ brew install git`  
 
-4.	Install [Google Cloud SDK (gcloud CLI) 311.0.0](https://cloud.google.com/sdk/docs/install#mac) for macOS 64-bit.  
+4.	Install [Google Cloud SDK (gcloud CLI) 312.0.0](https://cloud.google.com/sdk/docs/install#mac) for macOS 64-bit.  
     `$ brew cask install google-cloud-sdk`  
 
 5.	Install [Terraform 0.13.4](https://www.terraform.io/downloads.html) for macOS 64-bit.  
     `$ brew install hashicorp/tap/terraform`  
 
-6.	Install [Ansible 2.9.13](https://ansible.com/) for macOS 64-bit.  
+6.	Install [Ansible 2.9.14](https://ansible.com/) for macOS 64-bit.  
     `$ brew install ansible`  
 
 ## Configuration and Validation - macOS
@@ -69,7 +94,7 @@ Perform the following steps to install the needed software:
 
     ```bash
     $ brew --version
-    Homebrew 2.5.2
+    Homebrew 2.5.3
     $ brew doctor
     Your system is ready to brew.
 
@@ -77,14 +102,14 @@ Perform the following steps to install the needed software:
     git version 2.28.0
 
     $ gcloud --version
-    Google Cloud SDK 311.0.0
+    Google Cloud SDK 312.0.0
     ...
 
     $ terraform --version
     Terraform v0.13.4
 
     $ ansible --version
-    ansible 2.9.13
+    ansible 2.9.14
     ...
     ```
 
