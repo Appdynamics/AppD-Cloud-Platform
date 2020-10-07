@@ -27,7 +27,6 @@ appd_password="${appd_password:-}"
 set -x  # turn command display back ON.
 
 appd_controller_url="${appd_controller_url:-http://controller-node-01:8090}"
-#appd_controller_url="${appd_controller_url:-http://controller-node-01.localdomain:8090}"
 appd_eum_public_host="${appd_eum_public_host:-}"
 appd_eum_private_host="${appd_eum_private_host:-}"
 
@@ -35,8 +34,8 @@ appd_eum_private_host="${appd_eum_private_host:-}"
 # appd platform install parameters.
 appd_home="${appd_home:-/opt/appdynamics}"
 appd_eum_server_home="${appd_eum_server_home:-eum}"
-appd_eum_server_release="${appd_eum_server_release:-20.8.0.31691}"
-appd_eum_server_sha256="${appd_eum_server_sha256:-05e440b17fefb7a5263e428e8b2c112067ec789930545345361e1cf2d0cb6f17}"
+appd_eum_server_release="${appd_eum_server_release:-20.10.0.32035}"
+appd_eum_server_sha256="${appd_eum_server_sha256:-2fc890cba333112b2bd3d79210b547022fe46d82e51189cb2d8f72bf22d9fc5c}"
 appd_platform_user_name="${appd_platform_user_name:-centos}"
 appd_platform_user_group="${appd_platform_user_group:-centos}"
 appd_eum_server_jvm_xms="${appd_eum_server_jvm_xms:-1024}"
@@ -74,18 +73,18 @@ Usage:
 
   [OPTIONAL] appdynamics platform install parameters [w/ defaults].
     [root]# export appd_home="/opt/appdynamics"                         # [optional] appd home (defaults to '/opt/appdynamics').
-    [root]# export appd_eum_server_home="eum"                             # [optional] platform home folder (defaults to 'eum').
-    [root]# export appd_eum_server_release="20.8.0.31691"                 # [optional] platform release (defaults to '20.8.0.31691').
+    [root]# export appd_eum_server_home="eum"                           # [optional] platform home folder (defaults to 'eum').
+    [root]# export appd_eum_server_release="20.10.0.32035"              # [optional] platform release (defaults to '20.10.0.32035').
                                                                         # [optional] platform sha-256 checksum (defaults to published value).
-    [root]# export appd_eum_server_sha256="05e440b17fefb7a5263e428e8b2c112067ec789930545345361e1cf2d0cb6f17"
+    [root]# export appd_eum_server_sha256="2fc890cba333112b2bd3d79210b547022fe46d82e51189cb2d8f72bf22d9fc5c"
     [root]# export appd_platform_user_name="appd"                       # [optional] platform user name (defaults to 'appd').
     [root]# export appd_platform_user_group="appd"                      # [optional] platform group (defaults to 'appd').
-    [root]# export appd_eum_server_jvm_xms=1024"                          # [optional] platform JVM XMS (defaults to '1024').
-    [root]# export appd_eum_server_jvm_xmx=4096"                          # [optional] platform JVM XMX (defaults to '4096').
+    [root]# export appd_eum_server_jvm_xms=1024"                        # [optional] platform JVM XMS (defaults to '1024').
+    [root]# export appd_eum_server_jvm_xmx=4096"                        # [optional] platform JVM XMX (defaults to '4096').
     [root]# export appd_platform_keystore_password="welcome1"           # [optional] platform keystore password (defaults to 'welcome1').
     [root]# export appd_platform_db_password="welcome1"                 # [optional] platform database password (defaults to 'welcome1').
     [root]# export appd_platform_db_root_password="welcome1"            # [optional] platform database root password (defaults to 'welcome1').
-    [root]# export appd_platform_server_host="apm.localdomain"          # [optional] platform server hostname.
+    [root]# export appd_platform_server_host="apm"                      # [optional] platform server hostname.
     [root]# export appd_platform_server_http_port="7001"                # [optional] platform server http port (defaults to '7001').
     [root]# export appd_platform_server_https_port="7002"               # [optional] platform server https port (defaults to '7002').
 
