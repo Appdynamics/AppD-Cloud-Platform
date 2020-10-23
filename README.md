@@ -34,9 +34,9 @@ of VMs needed as well as the lab sequence start number, such as Lab11, Lab12, et
 -	An immutable VM image for the HA platform is created using [Packer](https://packer.io/).  
 	-	VM image is configured with CentOS 7.8 installation and common tools.
 	-	Normally maintained by the AppDynamics Cloud Team, but can be built and customized by the customer.
--	Git 2.28.0
+-	Git 2.29.1
 -	Google Cloud SDK (gcloud CLI) 312.0.0
--	Terraform 0.13.4
+-	Terraform 0.13.5
 -	Ansible 2.9.14
 
 ## Get Started
@@ -56,11 +56,11 @@ so on. However, Windows is not currently supported for the Ansible control node.
 
 The following open source software needs to be installed on the host macOS machine:
 
--	Homebrew 2.5.3
+-	Homebrew 2.5.6
 	-	Command Line Tools (CLT) for Xcode
--	Git 2.28.0
+-	Git 2.29.1
 -	Google Cloud SDK (gcloud CLI) 312.0.0
--	Terraform 0.13.4
+-	Terraform 0.13.5
 -	Ansible 2.9.14
 
 Perform the following steps to install the needed software:
@@ -73,16 +73,16 @@ Perform the following steps to install the needed software:
     or both; Homebrew supports all three configurations. Downloading Xcode may require an Apple Developer
     account on older versions of Mac OS X. Sign up for free [here](https://developer.apple.com/register/index.action).  
 
-2.	Install the [Homebrew 2.5.3](https://brew.sh/) package manager for macOS 64-bit. Paste the following into a macOS Terminal prompt:  
+2.	Install the [Homebrew 2.5.6](https://brew.sh/) package manager for macOS 64-bit. Paste the following into a macOS Terminal prompt:  
     `$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"`
 
-3.	Install [Git 2.28.0](https://git-scm.com/downloads) for macOS 64-bit.  
+3.	Install [Git 2.29.1](https://git-scm.com/downloads) for macOS 64-bit.  
     `$ brew install git`  
 
 4.	Install [Google Cloud SDK (gcloud CLI) 312.0.0](https://cloud.google.com/sdk/docs/install#mac) for macOS 64-bit.  
     `$ brew cask install google-cloud-sdk`  
 
-5.	Install [Terraform 0.13.4](https://www.terraform.io/downloads.html) for macOS 64-bit.  
+5.	Install [Terraform 0.13.5](https://www.terraform.io/downloads.html) for macOS 64-bit.  
     `$ brew install hashicorp/tap/terraform`  
 
 6.	Install [Ansible 2.9.14](https://ansible.com/) for macOS 64-bit.  
@@ -94,19 +94,19 @@ Perform the following steps to install the needed software:
 
     ```bash
     $ brew --version
-    Homebrew 2.5.3
+    Homebrew 2.5.6
     $ brew doctor
     Your system is ready to brew.
 
     $ git --version
-    git version 2.28.0
+    git version 2.29.1
 
     $ gcloud --version
     Google Cloud SDK 312.0.0
     ...
 
     $ terraform --version
-    Terraform v0.13.4
+    Terraform v0.13.5
 
     $ ansible --version
     ansible 2.9.14
