@@ -5,16 +5,16 @@ terraform {
 
 # Providers ----------------------------------------------------------------------------------------
 provider "aws" {
-  version = ">= 3.9"
+  version = ">= 3.12"
   region  = var.aws_region
 }
 
 provider "local" {
-  version = ">= 1.4"
+  version = ">= 2.0"
 }
 
 provider "null" {
-  version = ">= 2.1"
+  version = ">= 3.0"
 }
 
 # Locals -------------------------------------------------------------------------------------------
@@ -37,7 +37,7 @@ data "aws_ami" "appd_cloud_platform_ha_centos78" {
 # Modules ------------------------------------------------------------------------------------------
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
-  version = ">= 2.55"
+  version = ">= 2.57"
 
   name = "VPC-${var.resource_name_prefix}-${local.current_date}"
   cidr = var.aws_vpc_cidr

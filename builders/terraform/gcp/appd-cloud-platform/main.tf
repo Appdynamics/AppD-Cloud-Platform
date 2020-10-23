@@ -5,7 +5,7 @@ terraform {
 
 # Providers ----------------------------------------------------------------------------------------
 provider "google" {
-  version = ">= 3.42"
+  version = ">= 3.44"
 
   project = var.gcp_project_id
   region  = var.gcp_region
@@ -13,7 +13,7 @@ provider "google" {
 }
 
 provider "null" {
-  version = ">= 2.1"
+  version = ">= 3.0"
 }
 
 # Locals -------------------------------------------------------------------------------------------
@@ -28,7 +28,7 @@ data "google_compute_zones" "available" {
 # Modules ------------------------------------------------------------------------------------------
 module "instance_template" {
   source  = "terraform-google-modules/vm/google//modules/instance_template"
-  version = "5.0.0"
+  version = "5.1.0"
 
   region               = var.gcp_region
   project_id           = var.gcp_project_id
