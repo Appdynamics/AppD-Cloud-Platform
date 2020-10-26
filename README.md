@@ -1,9 +1,9 @@
 # AppD Cloud Platform
 
 The AppDynamics Cloud Platform is a DevOps project to help automate the deployment of an HA configuration
-of the AppDynamics Platform in the cloud. It consists of a code repository with Infrastructure as Code (IaC)
-artifacts, software provisioning modules, and a runbook with step-by-step instructions for deploying the
-platform.
+of the AppDynamics Platform in the cloud using the on-premise installer. It consists of a code repository
+with Infrastructure as Code (IaC) artifacts, software provisioning modules, and a runbook with step-by-step
+instructions for deploying the platform on AWS and GCP.
 
 It is based on the concepts of Immutable Infrastructure and Idempotent provisioning.
 
@@ -13,6 +13,12 @@ When installing the AppDynamics Platform software, the provisioning and configur
 installation is an extremely tedious and time-consuming challenge for IT administrators. The purpose of this
 project is to significantly reduce the time required for these installation activities using Terraform and
 Ansible.
+
+Here is an example of the deployment architecture when deployed to the Google Cloud Platform (GCP):
+
+| ![HA_Deployment_on_GCP](./docs/images/AppD-Cloud-Platform-HA-Deployment-on-GCP.png) |
+| :--: |
+| *AppD Cloud Platform: HA Deployment on GCP* |
 
 ## Build and Deployment Concepts
 
