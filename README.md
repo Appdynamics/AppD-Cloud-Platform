@@ -47,15 +47,13 @@ of VMs needed as well as the lab sequence start number, such as Lab11, Lab12, et
 -	Terraform 0.13.5
 -	Ansible 2.9.14
 
-| ![Terraform_Build_Flow_for_GCP](./docs/images/AppD-Cloud-Platform-Terraform-Build-Flow-for-GCP.png) |
-| :--: |
-| __Terraform Build Flow for GCP__ |
+__Terraform Build Flow for GCP__
+![Terraform_Build_Flow_for_GCP](./docs/images/AppD-Cloud-Platform-Terraform-Build-Flow-for-GCP.png)
 
 ### Ansible
 
-| ![HA_Deployment_on_GCP](./docs/images/AppD-Cloud-Platform-Ansible-Provisioning-Flow-for-GCP.png) |
-| :--: |
-| __Ansible Provisioning Flow for GCP__ |
+__Ansible Provisioning Flow for GCP__
+![HA_Deployment_on_GCP](./docs/images/AppD-Cloud-Platform-Ansible-Provisioning-Flow-for-GCP.png)
 
 ## Get Started
 
