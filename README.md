@@ -16,7 +16,9 @@ and Ansible.
 
 Here is an example of the deployment architecture when deployed to the Google Cloud Platform (GCP):
 
-![HA_Deployment_on_GCP](./docs/images/AppD-Cloud-Platform-HA-Deployment-on-GCP-02.png)
+| ![HA_Deployment_on_GCP](./docs/images/AppD-Cloud-Platform-HA-Deployment-on-GCP.png) |
+| :--: |
+| __AppD Cloud Platform: HA Deployment on GCP__ |
 
 ## Build and Deployment Concepts
 
@@ -30,7 +32,9 @@ standardized installation of CentOS 7.8 along with a set of common tools (Script
 This VM image is maintained by AppDynamics with new images released monthly. However, all of the artifacts
 are present in this project, so customers are free to customize and build their own VM image.
 
-![HA_Deployment_on_GCP](./docs/images/AppD-Cloud-Platform-Packer-Build-Flow-for-GCP.png)
+| ![Packer_Build_Flow_for_GCP](./docs/images/AppD-Cloud-Platform-Packer-Build-Flow-for-GCP.png) |
+| :--: |
+| __Packer Build Flow for GCP__ |
 
 ### Terraform
 
@@ -45,11 +49,15 @@ of VMs needed as well as the lab sequence start number, such as Lab11, Lab12, et
 -	Terraform 0.13.5
 -	Ansible 2.9.14
 
-![HA_Deployment_on_GCP](./docs/images/AppD-Cloud-Platform-Terraform-Build-Flow-for-GCP.png)
+| ![Terraform_Build_Flow_for_GCP](./docs/images/AppD-Cloud-Platform-Terraform-Build-Flow-for-GCP.png) |
+| :--: |
+| __Terraform Build Flow for GCP__ |
 
 ### Ansible
 
-![HA_Deployment_on_GCP](./docs/images/AppD-Cloud-Platform-Ansible-Provisioning-Flow-for-GCP.png)
+| ![HA_Deployment_on_GCP](./docs/images/AppD-Cloud-Platform-Ansible-Provisioning-Flow-for-GCP.png) |
+| :--: |
+| __Ansible Provisioning Flow for GCP__ |
 
 ## Get Started
 
