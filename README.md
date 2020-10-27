@@ -14,11 +14,10 @@ installation is an extremely tedious and time-consuming challenge for IT adminis
 project is to significantly reduce the time required for these installation activities using Packer, Terraform
 and Ansible.
 
-Here is an example of the deployment architecture when deployed to the Google Cloud Platform (GCP):
+Here is an example of the deployment architecture when deployed to the Google Cloud Platform (GCP):  
 
-| ![HA_Deployment_on_GCP](./docs/images/AppD-Cloud-Platform-HA-Deployment-on-GCP.png) |
-| :--: |
-| __AppD Cloud Platform: HA Deployment on GCP__ |
+__AppD Cloud Platform: HA Deployment on GCP__
+![HA_Deployment_on_GCP](./docs/images/AppD-Cloud-Platform-HA-Deployment-on-GCP.png)
 
 ## Build and Deployment Concepts
 
