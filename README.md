@@ -1,7 +1,7 @@
 # AppD Cloud Platform
 
 The AppDynamics Cloud Platform is a DevOps project to help automate the deployment of an HA configuration
-of the AppDynamics Platform in the cloud using the on-premise installer. It consists of a code repository
+of the AppDynamics Platform in the cloud using the on-premise installers. It consists of a code repository
 with Infrastructure as Code (IaC) artifacts, software provisioning modules, and a runbook with step-by-step
 instructions for deploying the platform on AWS and GCP.
 
@@ -21,7 +21,17 @@ __AppD Cloud Platform: HA Deployment on GCP__
 
 ## Build and Deployment Concepts
 
+Although there are many open source tools available to accomplish the automation goals of this project, we
+decided to standardize on __Packer__, __Terraform__, and __Ansible__. This is primarily due to their capability
+for building and deploying software platforms to multi-cloud environments, as well as having a high level of
+adoption by the developer community.  
+
+Even so, within these tools there is some level of feature overlap, so
 The build and deployment workflow makes use of the following open source tools:
+
+-	__Packer__:	Used for building an immutable VM image for the HA platform.  
+-	__Terraform__:	Used for creating and deploying the infrastructure (networks, security groups, VMs, load balancers, etc.)
+-	__Ansible__:	Used for provisioning and configuring the VM instances.
 
 ### Packer
 
@@ -30,11 +40,12 @@ from a single source configuration. Packer is lightweight, runs on every major o
 performant. A machine image (or immutable VM image) is a single static unit that contains a pre-configured
 operating system and installed software which is used to quickly create new running machines.  
 
-For this project, a public immutable VM image for the HA platform is created consisting of a standardized
+As part of this project, a public immutable VM image for the HA platform is created consisting of a standardized
 installation of CentOS 7.8 along with a set of common tools (scripts, playbooks, JDK, etc.).  
 
 This VM image is maintained by AppDynamics with new images released monthly. However, all of the artifacts
-are present in this project, so customers are free to customize and build their own VM image.  
+used to build the image are present in this project, so customers are free to customize and build their own VM
+image if desired.  
 
 __Packer Build Flow for GCP__
 ![Packer_Build_Flow_for_GCP](./docs/images/AppD-Cloud-Platform-Packer-Build-Flow-for-GCP.png)
