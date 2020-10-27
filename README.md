@@ -29,11 +29,10 @@ A public immutable VM image for the HA platform is created using [Packer](https:
 standardized installation of CentOS 7.8 along with a set of common tools (Scripts, playbooks, JDK, etc.).  
 
 This VM image is maintained by AppDynamics with new images released monthly. However, all of the artifacts
-are present in this project, so customers are free to customize and build their own VM image.
+are present in this project, so customers are free to customize and build their own VM image.  
 
-| ![Packer_Build_Flow_for_GCP](./docs/images/AppD-Cloud-Platform-Packer-Build-Flow-for-GCP.png) |
-| :--: |
-| __Packer Build Flow for GCP__ |
+__Packer Build Flow for GCP__
+![Packer_Build_Flow_for_GCP](./docs/images/AppD-Cloud-Platform-Packer-Build-Flow-for-GCP.png)
 
 ### Terraform
 
