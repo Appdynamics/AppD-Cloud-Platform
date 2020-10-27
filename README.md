@@ -21,12 +21,17 @@ __AppD Cloud Platform: HA Deployment on GCP__
 
 ## Build and Deployment Concepts
 
-The build and deployment activities make use of the following open source tools in sequence:
+The build and deployment workflow makes use of the following open source tools:
 
 ### Packer
 
-A public immutable VM image for the HA platform is created using [Packer](https://packer.io/). It consists of a
-standardized installation of CentOS 7.8 along with a set of common tools (Scripts, playbooks, JDK, etc.).  
+[Packer](https://packer.io/) is an open source tool for creating identical machine images for multiple platforms
+from a single source configuration. Packer is lightweight, runs on every major operating system, and is highly
+performant. A machine image (or immutable VM image) is a single static unit that contains a pre-configured
+operating system and installed software which is used to quickly create new running machines.  
+
+For this project, a public immutable VM image for the HA platform is created consisting of a standardized
+installation of CentOS 7.8 along with a set of common tools (scripts, playbooks, JDK, etc.).  
 
 This VM image is maintained by AppDynamics with new images released monthly. However, all of the artifacts
 are present in this project, so customers are free to customize and build their own VM image.  
@@ -35,6 +40,17 @@ __Packer Build Flow for GCP__
 ![Packer_Build_Flow_for_GCP](./docs/images/AppD-Cloud-Platform-Packer-Build-Flow-for-GCP.png)
 
 ### Terraform
+
+[Terraform](https://terraform.io/) is a tool for building, changing, and versioning infrastructure safely and
+efficiently. Terraform can manage existing and popular service providers as well as custom in-house solutions.
+
+Configuration files describe to Terraform the components needed to run a single application or your entire
+datacenter. Terraform generates an execution plan describing what it will do to reach the desired state, and
+then executes it to build the described infrastructure. As the configuration changes, Terraform is able to
+determine what changed and create incremental execution plans which can be applied.
+
+The infrastructure Terraform can manage includes low-level components such as compute instances, storage, and
+networking, as well as high-level components such as DNS entries, SaaS features, etc.
 
 Terraform automates the deployment of the SAP Lab environments to Azure using templates. The SE can specify the number
 of VMs needed as well as the lab sequence start number, such as Lab11, Lab12, etc.
