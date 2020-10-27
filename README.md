@@ -11,14 +11,12 @@ It is based on the concepts of Immutable Infrastructure and Idempotent provision
 
 When installing the AppDynamics Platform software, the provisioning and configuration of an on-premise HA
 installation is an extremely tedious and time-consuming challenge for IT administrators. The purpose of this
-project is to significantly reduce the time required for these installation activities using Terraform and
-Ansible.
+project is to significantly reduce the time required for these installation activities using Packer, Terraform
+and Ansible.
 
 Here is an example of the deployment architecture when deployed to the Google Cloud Platform (GCP):
 
-| ![HA_Deployment_on_GCP](./docs/images/AppD-Cloud-Platform-HA-Deployment-on-GCP.png) |
-| :--: |
-| *AppD Cloud Platform: HA Deployment on GCP* |
+![HA_Deployment_on_GCP](./docs/images/AppD-Cloud-Platform-HA-Deployment-on-GCP-02.png)
 
 ## Build and Deployment Concepts
 
@@ -32,6 +30,8 @@ standardized installation of CentOS 7.8 along with a set of common tools (Script
 This VM image is maintained by AppDynamics with new images released monthly. However, all of the artifacts
 are present in this project, so customers are free to customize and build their own VM image.
 
+![HA_Deployment_on_GCP](./docs/images/AppD-Cloud-Platform-Packer-Build-Flow-for-GCP.png)
+
 ### Terraform
 
 Terraform automates the deployment of the SAP Lab environments to Azure using templates. The SE can specify the number
@@ -44,6 +44,12 @@ of VMs needed as well as the lab sequence start number, such as Lab11, Lab12, et
 -	Google Cloud SDK (gcloud CLI) 312.0.0
 -	Terraform 0.13.5
 -	Ansible 2.9.14
+
+![HA_Deployment_on_GCP](./docs/images/AppD-Cloud-Platform-Terraform-Build-Flow-for-GCP.png)
+
+### Ansible
+
+![HA_Deployment_on_GCP](./docs/images/AppD-Cloud-Platform-Ansible-Provisioning-Flow-for-GCP.png)
 
 ## Get Started
 
@@ -62,7 +68,7 @@ so on. However, Windows is not currently supported for the Ansible control node.
 
 The following open source software needs to be installed on the host macOS machine:
 
--	Homebrew 2.5.6
+-	Homebrew 2.5.7
 	-	Command Line Tools (CLT) for Xcode
 -	Git 2.29.1
 -	Google Cloud SDK (gcloud CLI) 312.0.0
@@ -79,7 +85,7 @@ Perform the following steps to install the needed software:
     or both; Homebrew supports all three configurations. Downloading Xcode may require an Apple Developer
     account on older versions of Mac OS X. Sign up for free [here](https://developer.apple.com/register/index.action).  
 
-2.	Install the [Homebrew 2.5.6](https://brew.sh/) package manager for macOS 64-bit. Paste the following into a macOS Terminal prompt:  
+2.	Install the [Homebrew 2.5.7](https://brew.sh/) package manager for macOS 64-bit. Paste the following into a macOS Terminal prompt:  
     `$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"`
 
 3.	Install [Git 2.29.1](https://git-scm.com/downloads) for macOS 64-bit.  
@@ -100,7 +106,7 @@ Perform the following steps to install the needed software:
 
     ```bash
     $ brew --version
-    Homebrew 2.5.6
+    Homebrew 2.5.7
     $ brew doctor
     Your system is ready to brew.
 
