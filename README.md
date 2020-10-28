@@ -11,8 +11,8 @@ It is based on the concepts of Immutable Infrastructure and Idempotent provision
 
 When installing the AppDynamics Platform software, the provisioning and configuration of an on-premise HA
 installation is an extremely tedious and time-consuming challenge for IT administrators. The purpose of this
-project is to significantly reduce the time required for these installation activities using Packer, Terraform
-and Ansible.
+project is to significantly reduce the time required for these installation activities using __Packer__,
+__Terraform__, and __Ansible__.
 
 Here is an example of the deployment architecture when deployed to the Google Cloud Platform (GCP):  
 
@@ -21,17 +21,10 @@ __AppD Cloud Platform: HA Deployment on GCP__
 
 ## Build and Deployment Concepts
 
-Although there are many open source tools available to accomplish the automation goals of this project, we
-decided to standardize on __Packer__, __Terraform__, and __Ansible__. This is primarily due to their capability
-for building and deploying software platforms to multi-cloud environments, as well as having a high level of
-adoption by the developer community.  
-
-Even so, within these tools there is some level of feature overlap, so
-The build and deployment workflow makes use of the following open source tools:
-
--	__Packer__:	Used for building an immutable VM image for the HA platform.  
--	__Terraform__:	Used for creating and deploying the infrastructure (networks, security groups, VMs, load balancers, etc.)
--	__Ansible__:	Used for provisioning and configuring the VM instances.
+Although there are many tools available to accomplish the automation goals of this project, it was decided
+to standardize on the open source tools referenced above. This is primarily due to their capability for
+building and deploying software platforms to multi-cloud environments, as well as having a high level of
+adoption within the developer community.
 
 ### Packer
 
@@ -40,10 +33,10 @@ from a single source configuration. Packer is lightweight, runs on every major o
 performant. A machine image (or immutable VM image) is a single static unit that contains a pre-configured
 operating system and installed software which is used to quickly create new running machines.  
 
-As part of this project, a public immutable VM image for the HA platform is created consisting of a standardized
-installation of CentOS 7.8 along with a set of common tools (scripts, playbooks, JDK, etc.).  
+As part of this project, Packer is used to create a public immutable VM image for the HA platform consisting of
+a standardized installation of CentOS 7.8 along with a set of common tools (scripts, playbooks, JDK, etc.).
 
-This VM image is maintained by AppDynamics with new images released monthly. However, all of the artifacts
+This public VM image is maintained by AppDynamics with new images released monthly. However, all of the artifacts
 used to build the image are present in this project, so customers are free to customize and build their own VM
 image if desired.  
 
@@ -54,30 +47,26 @@ __Packer Build Flow for GCP__
 
 [Terraform](https://terraform.io/) is a tool for building, changing, and versioning infrastructure safely and
 efficiently. Terraform can manage existing and popular service providers as well as custom in-house solutions.
-
-Configuration files describe to Terraform the components needed to run a single application or your entire
-datacenter. Terraform generates an execution plan describing what it will do to reach the desired state, and
-then executes it to build the described infrastructure. As the configuration changes, Terraform is able to
-determine what changed and create incremental execution plans which can be applied.
-
 The infrastructure Terraform can manage includes low-level components such as compute instances, storage, and
 networking, as well as high-level components such as DNS entries, SaaS features, etc.
 
-Terraform automates the deployment of the SAP Lab environments to Azure using templates. The SE can specify the number
-of VMs needed as well as the lab sequence start number, such as Lab11, Lab12, etc.
-
--	An immutable VM image for the HA platform is created using [Packer](https://packer.io/).  
-	-	VM image is configured with CentOS 7.8 installation and common tools.
-	-	Normally maintained by the AppDynamics Cloud Team, but can be built and customized by the customer.
--	Git 2.29.1
--	Google Cloud SDK (gcloud CLI) 312.0.0
--	Terraform 0.13.5
--	Ansible 2.9.14
+In this project, Terraform automates the deployment of the HA Platform infrastructure, including VPCs, subnets,
+security groups, load balancers, and VMs.
 
 __Terraform Build Flow for GCP__
 ![Terraform_Build_Flow_for_GCP](./docs/images/AppD-Cloud-Platform-Terraform-Build-Flow-for-GCP.png)
 
 ### Ansible
+
+[Ansible](https://ansible.com/) is a simple IT automation engine that automates cloud provisioning, configuration
+management, application deployment, and intra-service orchestration. It uses no agents and no additional custom
+security infrastructure, so it's easy to deploy--and most importantly, it uses a very simple language (YAML, in
+the form of Ansible Playbooks) that allow you to describe your automation jobs in a way that approaches plain
+English.
+
+Although Ansible has the capability to deploy infrastructure, in this project a conscious decision was made to
+leave those tasks to Terraform. Ansible is used solely for prepping, installing, and configuring the HA Platform
+on the running VMs.
 
 __Ansible Provisioning Flow for GCP__
 ![HA_Deployment_on_GCP](./docs/images/AppD-Cloud-Platform-Ansible-Provisioning-Flow-for-GCP.png)
