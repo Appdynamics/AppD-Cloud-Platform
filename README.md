@@ -73,7 +73,7 @@ __Ansible Provisioning Flow for GCP__
 
 ## Get Started
 
-To deploy the AppDynamics Cloud Platform, first step is to set-up your local environment by installing the
+To deploy the AppDynamics Cloud Platform, the first step is to set-up your local environment by installing the
 needed open source software.
 
 ### Prerequisites
@@ -88,25 +88,25 @@ so on. *However, __Windows__ is NOT currently supported for the Ansible control 
 
 The following open source software needs to be installed on the host macOS machine:
 
--	Homebrew 2.5.7
--	Git 2.29.1
--	Packer 1.6.4
+-	Homebrew 2.5.8
+-	Git 2.29.2
+-	Packer 1.6.5
 -	Terraform 0.13.5
 -	Ansible 2.9.14
 
 Perform the following steps to install the needed software:
 
-1.	Install the [Homebrew 2.5.7](https://brew.sh/) package manager for macOS 64-bit. Paste the following into a macOS Terminal prompt:  
+1.	Install the [Homebrew 2.5.8](https://brew.sh/) package manager for macOS 64-bit. Paste the following into a macOS Terminal prompt:  
     ```bash
     $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     ```
 
-2.	Install [Git 2.29.1](https://git-scm.com/downloads) for macOS 64-bit.  
+2.	Install [Git 2.29.2](https://git-scm.com/downloads) for macOS 64-bit.  
     ```bash
     $ brew install git
     ```
 
-3.	Install [Packer 1.6.4](https://www.packer.io/downloads.html) for macOS 64-bit.  
+3.	Install [Packer 1.6.5](https://www.packer.io/downloads.html) for macOS 64-bit.  
     ```bash
     $ brew tap hashicorp/tap
     $ brew install hashicorp/tap/packer
@@ -129,13 +129,13 @@ Perform the following steps to install the needed software:
 
     ```bash
     $ brew --version
-    Homebrew 2.5.7
+    Homebrew 2.5.8
 
     $ git --version
-    git version 2.29.1
+    git version 2.29.2
 
     $ packer --version
-    1.6.4
+    1.6.5
 
     $ terraform --version
     Terraform v0.13.5
@@ -175,5 +175,5 @@ The AppDynamics Cloud Platform project currently supports deployment to AWS and 
 be adding support for Microsoft Azure. Click on a link below for specific cloud-provider instructions and
 Bill-of-Materials:
 
--	[AWS](./docs/AWS_DEPLOYMENT_INSTRUCTIONS.md): Deployment Instructions
--	[GCP](./docs/GCP_DEPLOYMENT_INSTRUCTIONS.md): Deployment Instructions
+-	[AWS Deployment Instructions](./docs/AWS_DEPLOYMENT_INSTRUCTIONS.md)
+-	[GCP Deployment Instructions](./docs/GCP_DEPLOYMENT_INSTRUCTIONS.md)
