@@ -5,7 +5,7 @@ terraform {
 
 # Providers ----------------------------------------------------------------------------------------
 provider "google" {
-  version = ">= 3.45"
+  version = ">= 3.46"
 
   project = var.gcp_project_id
   region  = var.gcp_region
