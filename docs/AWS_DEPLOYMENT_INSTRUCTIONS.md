@@ -143,9 +143,9 @@ __APM-Platform VM__ - The following utilities and application performance manage
 
 -	Amazon AWS CLI 2.0.61 (command-line interface)
 -	Amazon AWS EC2 Instance Metadata Query Tool (command-line interface)
--	Ansible 2.9.14
--	AppDynamics Enterprise Console 20.10.4 Build 23554
-	-	AppDynamics Controller 20.10.4 Build 2551
+-	Ansible 2.9.15
+-	AppDynamics Enterprise Console 20.10.5 Build 23565
+	-	AppDynamics Controller 20.10.5 Build 2556
 	-	AppDynamics Events Service 4.5.2.0 Build 20640
 	-	AppDynamics EUM Server 20.10.1 Build 32458
 -	Docker 19.03.13 CE
@@ -165,7 +165,7 @@ __CWOM-Platform VM__ - The following utilities and workload optimization managem
 
 -	Amazon AWS CLI 2.0.61 (command-line interface)
 -	Amazon AWS EC2 Instance Metadata Query Tool (command-line interface)
--	Ansible 2.9.14
+-	Ansible 2.9.15
 -	Cisco Workload Optimization Manager (CWOM) 2.3.24
 -	Docker 19.03.13 CE
 	-	Docker Bash Completion
@@ -187,7 +187,7 @@ __LPAD VM__ - The following AWS CLI command-line tools and utilities are pre-ins
 -	Amazon AWS EKS CLI [eksctl] 0.30.0 (command-line interface)
 -	Amazon AWS IAM Authenticator 1.18.8 for AWS EKS CLI and kubectl.
 -	Amazon AWS Kubernetes Control CLI [kubectl] 1.18.8 (command-line interface)
--	Ansible 2.9.14
+-	Ansible 2.9.15
 -	AppDynamics Node.js Serverless Tracer 20.3.178
 -	Docker 19.03.13 CE
 	-	Docker Bash Completion
@@ -200,15 +200,14 @@ __LPAD VM__ - The following AWS CLI command-line tools and utilities are pre-ins
 -	Helm CLI 3.4.0 (Package Manager for Kubernetes)
 -	Java SE JDK 8 Update 272 (Amazon Corretto 8)
 -	Java SE JDK 11.0.9 (Amazon Corretto 11)
--	Java SE JDK 14.0.2 (Oracle)
--	Java SE JDK 15 (Oracle)
+-	Java SE JDK 15.0.1 (Amazon Corretto 15)
 -	jq 1.6 (command-line JSON processor)
 -	Node.js JavaScript runtime v14.15.0 (Latest LTS Version)
--	npm JavaScript Package Manager for Node.js 7.0.7
+-	npm JavaScript Package Manager for Node.js 7.0.8
 -	nvm (Node Version Manager) bash script 0.36.0
 -	Python 2.7.5
 	-	Pip 20.2.4
 -	Python 3.6.8
 	-	Pip 20.2.4
--	Serverless Framework CLI 2.9.0
+-	Serverless Framework CLI 2.10.0
 -	VIM - Vi IMproved 8.2
