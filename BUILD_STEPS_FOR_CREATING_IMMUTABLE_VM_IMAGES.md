@@ -23,7 +23,7 @@ Currently, the VMs consist of these types:
 
 To build the AppD Cloud Platform VM images, the following open source software needs to be installed on the host macOS machine:
 
--	Homebrew 2.5.8
+-	Homebrew 2.5.11
 	-	Command Line Tools (CLT) for Xcode
 -	Packer 1.6.5
 -	Git 2.29.2
@@ -36,7 +36,7 @@ Perform the following steps to install the needed software:
 
     **NOTE:** Most Homebrew formulae require a compiler. A handful require a full Xcode installation. You can install [Xcode](https://itunes.apple.com/us/app/xcode/id497799835), the [CLT](https://developer.apple.com/downloads), or both; Homebrew supports all three configurations. Downloading Xcode may require an Apple Developer account on older versions of Mac OS X. Sign up for free [here](https://developer.apple.com/register/index.action).  
 
-2.	Install the [Homebrew 2.5.8](https://brew.sh/) package manager for macOS 64-bit. Paste the following into a macOS Terminal prompt:  
+2.	Install the [Homebrew 2.5.11](https://brew.sh/) package manager for macOS 64-bit. Paste the following into a macOS Terminal prompt:  
     `$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"`
 
 3.	Install [Packer 1.6.5](https://packer.io/) for macOS 64-bit.  
@@ -52,9 +52,9 @@ Perform the following steps to install the needed software:
 
 1.	Validate installed command-line tools:
 
-    ```
+    ```bash
     $ brew --version
-    Homebrew 2.5.8
+    Homebrew 2.5.11
     $ brew doctor
     Your system is ready to brew.
 
@@ -70,7 +70,7 @@ Perform the following steps to install the needed software:
 
 2.	Configure Git for local user:
 
-    ```
+    ```bash
     $ git config --global user.name "<your_name>"
     $ git config --global user.email "<your_email>"
     $ git config --global --list
@@ -100,7 +100,7 @@ Perform the following steps to install the needed software:
 
 1.	Set Windows Environment `PATH` to:
 
-    ```
+    ```bash
     PATH=C:\HashiCorp\Packer\bin;C:\Program Files\Git\usr\local\bin;%PATH%
     ```
 
@@ -111,7 +111,7 @@ Perform the following steps to install the needed software:
 
 4.	Validate installed command-line tools:
 
-    ```
+    ```bash
     $ packer --version
     1.6.5
 
@@ -124,7 +124,7 @@ Perform the following steps to install the needed software:
 
 5.	Configure Git for local user:
 
-    ```
+    ```bash
     $ git config --global user.name "<your_name>"
     $ git config --global user.email "<your_email>"
     $ git config --global --list
@@ -134,14 +134,14 @@ Perform the following steps to install the needed software:
 
 1.	Create a folder for your AppD Cloud Platform project:
 
-    ```
+    ```bash
     $ mkdir -p /<drive>/projects
     $ cd /<drive>/projects
     ```
 
 2.	Get the code from GitHub:
 
-    ```
+    ```bash
     $ git clone https://github.com/Appdynamics/AppD-Cloud-Platform.git
     $ cd AppD-Cloud-Platform
     ```
