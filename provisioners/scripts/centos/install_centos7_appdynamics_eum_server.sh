@@ -34,8 +34,8 @@ appd_eum_private_host="${appd_eum_private_host:-}"
 # appd platform install parameters.
 appd_home="${appd_home:-/opt/appdynamics}"
 appd_eum_server_home="${appd_eum_server_home:-eum}"
-appd_eum_server_release="${appd_eum_server_release:-20.10.1.32458}"
-appd_eum_server_sha256="${appd_eum_server_sha256:-9af730801e66b3f3d0d15a3afc8a7722fea3d1d1a4c5fa80f094f3bdc4af4551}"
+appd_eum_server_release="${appd_eum_server_release:-20.11.0.32367}"
+appd_eum_server_sha256="${appd_eum_server_sha256:-7b6b909ed94c8976a16f7ab5deaf405b6d0d65b7edd6dee280bdb8f7029c15d8}"
 appd_platform_user_name="${appd_platform_user_name:-centos}"
 appd_platform_user_group="${appd_platform_user_group:-centos}"
 appd_eum_server_jvm_xms="${appd_eum_server_jvm_xms:-1024}"
@@ -74,9 +74,9 @@ Usage:
   [OPTIONAL] appdynamics platform install parameters [w/ defaults].
     [root]# export appd_home="/opt/appdynamics"                         # [optional] appd home (defaults to '/opt/appdynamics').
     [root]# export appd_eum_server_home="eum"                           # [optional] platform home folder (defaults to 'eum').
-    [root]# export appd_eum_server_release="20.10.1.32458"              # [optional] platform release (defaults to '20.10.1.32458').
+    [root]# export appd_eum_server_release="20.11.0.32367"              # [optional] platform release (defaults to '20.11.0.32367').
                                                                         # [optional] platform sha-256 checksum (defaults to published value).
-    [root]# export appd_eum_server_sha256="9af730801e66b3f3d0d15a3afc8a7722fea3d1d1a4c5fa80f094f3bdc4af4551"
+    [root]# export appd_eum_server_sha256="7b6b909ed94c8976a16f7ab5deaf405b6d0d65b7edd6dee280bdb8f7029c15d8"
     [root]# export appd_platform_user_name="appd"                       # [optional] platform user name (defaults to 'appd').
     [root]# export appd_platform_user_group="appd"                      # [optional] platform group (defaults to 'appd').
     [root]# export appd_eum_server_jvm_xms=1024"                        # [optional] platform JVM XMS (defaults to '1024').
