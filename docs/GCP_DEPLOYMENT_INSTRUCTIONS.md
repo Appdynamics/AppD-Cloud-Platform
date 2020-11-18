@@ -1,8 +1,133 @@
 # Google Cloud Platform (GCP) Deployment Instructions
 
-Follow these instructions to build the GCP CentOS 7.8 AMI images:
+This document explains the steps needed to deploy the AppDynamics Cloud Platform HA configuration to GCP.
 
--	__AppD-Cloud-Platform-HA VM__: An APM Platform stand-alone VM with an AppDynamics Controller.
+## Before You Begin
+
+Before deploying the platform to GCP, you will need to set-up your GCP account and install the Google Cloud
+SDK (CLI) in your local environment.  
+
+Follow these instructions to build the GCP Compute Engine CentOS 7.8 image:
+
+This document explains how to set-up your GCP account and local environment in order to deploy the AppDynamics
+
+Before deploying the platform to GCP, it is recommended that you install the
+Google Cloud SDK (CLI).
+
+The AppDynamics Cloud Platform is a DevOps project to help automate the deployment of an HA configuration
+of the AppDynamics Platform in the cloud using the on-premise installers. It consists of a code repository
+with Infrastructure as Code (IaC) artifacts, software provisioning modules, and a runbook with step-by-step
+instructions for deploying the platform on Amazon AWS and the Google Cloud Platform (GCP).
+
+Before building the AppD Cloud Platform HA VM images for GCP, it is recommended that you install the
+Google Cloud SDK (CLI). This will allow you to cleanup and delete any resources created by the Packer
+builds when you are finished. It will also provide the ability to easily purge old AMI images while keeping the latest. Note that in AWS CLI version 2, the required Python 3 libraries are now embedded in the installer and no longer need to be installed separately.
+
+
+brew cask install google-cloud-sdk
+gcloud --version
+gcloud components list
+gcloud components update
+gcloud config set disable_usage_reporting true
+
+gcloud auth login
+gcloud config set project appd-cloud-kickstart
+gcloud config list
+gcloud config configurations list
+gcloud iam service-accounts create devops --display-name="DevOps Service Account" --description="DevOps service account for Packer and Terraform builds."
+gcloud iam service-accounts create devops --display-name="DevOps Service Account" --description="DevOps service account for Packer builds."
+gcloud iam service-accounts create devops --display-name="DevOps Service Account" --description="DevOps service account for Terraform builds."
+export G_PROJECT=$(gcloud info --format='value(config.project)')
+export SA_EMAIL=$(gcloud iam service-accounts list --filter="name:devops" --format='value(email)')
+gcloud projects add-iam-policy-binding --member serviceAccount:$SA_EMAIL --role roles/compute.admin $G_PROJECT
+gcloud projects add-iam-policy-binding --member serviceAccount:$SA_EMAIL --role roles/iam.serviceAccountUser $G_PROJECT
+
+gcloud auth application-default login --no-launch-browser
+gcloud iam service-accounts keys create --iam-account $SA_EMAIL ~/projects/AppD-Cloud-Platform/shared/keys/gcp-devops.json
+gcloud compute regions list
+gcloud compute zones list
+gcloud compute images add-iam-policy-binding appd-cloud-platform-2085-ha-centos78-2020-10-01 --member='allAuthenticatedUsers' --role='roles/compute.imageUser'
+gcloud services list
+gcloud compute machine-types list
+
+gcloud auth login --no-launch-browser
+gcloud config set project appd-cloud-platform
+gcloud config list
+gcloud config configurations list
+gcloud services list
+gcloud services list --available
+gcloud services list --available | grep Compute
+gcloud services list --enabled
+
+cat $HOME/.config/gcloud/application_default_credentials.json
+gcloud compute zones list --project=appd-cloud-platform
+gcloud projects list
+
+gcloud services enable cloudresourcemanager.googleapis.com
+gcloud services enable cloudbilling.googleapis.com
+gcloud services enable iam.googleapis.com
+gcloud services enable compute.googleapis.com
+gcloud services enable serviceusage.googleapis.com
+
+gcloud iam service-accounts list
+gcloud projects get-iam-policy <YOUR GCLOUD PROJECT>  --flatten="bindings[].members" --format='table(bindings.role)' --filter="bindings.members:devops
+gcloud projects get-iam-policy $G_PROJECT --flatten="bindings[].members" --format='table(bindings.role)' --filter="bindings.members:devops"
+
+gcloud iam service-accounts list
+gcloud projects get-iam-policy $G_PROJECT --flatten="bindings[].members" --format='table(bindings.role)' --filter="bindings.members:618610343693-compute"
+
+gcloud projects get-iam-policy $G_PROJECT --flatten="bindings[].members" --format='table(bindings.role)' --filter="bindings.members:devops"
+gcloud projects add-iam-policy-binding --member serviceAccount:$SA_EMAIL --role roles/editor $G_PROJECT
+gcloud projects get-iam-policy $G_PROJECT --flatten="bindings[].members" --format='table(bindings.role)' --filter="bindings.members:devops"
+gcloud projects add-iam-policy-binding --member serviceAccount:$SA_EMAIL --role roles/owner $G_PROJECT
+gcloud projects get-iam-policy $G_PROJECT --flatten="bindings[].members" --format='table(bindings.role)' --filter="bindings.members:devops"
+
+gcloud projects remove-iam-policy-binding --member serviceAccount:$SA_EMAIL --role roles/editor $G_PROJECT
+gcloud projects get-iam-policy $G_PROJECT --flatten="bindings[].members" --format='table(bindings.role)' --filter="bindings.members:devops"
+gcloud projects remove-iam-policy-binding --member serviceAccount:$SA_EMAIL --role roles/owner $G_PROJECT
+gcloud projects add-iam-policy-binding --member serviceAccount:$SA_EMAIL --role roles/editor $G_PROJECT
+gcloud projects add-iam-policy-binding --member serviceAccount:$SA_EMAIL --role roles/owner $G_PROJECT
+gcloud projects remove-iam-policy-binding --member serviceAccount:$SA_EMAIL --role roles/owner $G_PROJECT
+gcloud projects remove-iam-policy-binding --member serviceAccount:$SA_EMAIL --role roles/editor $G_PROJECT
+gcloud projects get-iam-policy $G_PROJECT --flatten="bindings[].members" --format='table(bindings.role)' --filter="bindings.members:devops"
+
+https://console.cloud.google.com/projectselector2/home/dashboard
+
+
+gcp-lpad[centos]$ terraform plan -out terraform-appd-cloud-platform.tfplan
+Refreshing Terraform state in-memory prior to plan...
+The refreshed state will be used to calculate this plan, but will not be
+persisted to local or remote state storage.
+
+
+Error: Attempted to load application default credentials since neither `credentials` nor `access_token` was set in the provider block.  No credentials loaded. To use your gcloud credentials, run 'gcloud auth application-default login'.  Original error: google: could not find default credentials. See https://developers.google.com/accounts/docs/application-default-credentials for more information.
+
+gcp-lpad[centos]$ gcloud auth application-default login
+Go to the following link in your browser:
+
+    https://accounts.google.com/o/oauth2/auth?client_id=764086051850-6qr4p6gpi6hn506pt8ejuq83di341hur.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&code_challenge=WLuu4Clqtj2FRhG3gaBq8XMA1Lj8WxODkWsZCARTKEQ&code_challenge_method=S256&access_type=offline&response_type=code&prompt=select_account
+
+
+Enter verification code: 4/1AfDhmrgXvBN2b9Vk0iNrG2DRNRfG-MXolVfo5vNQWE5EPqDo6FXCeIrWUxI
+
+Credentials saved to file: [/home/centos/.config/gcloud/application_default_credentials.json]
+
+These credentials will be used by any library that requests Application Default Credentials (ADC).
+/usr/lib64/google-cloud-sdk/lib/third_party/google/auth/_default.py:69: UserWarning: Your application has authenticated using end user credentials from Google Cloud SDK without a quota project. You might receive a "quota exceeded" or "API not enabled" error. We recommend you rerun `gcloud auth application-default login` and make sure a quota project is added. Or you can use service accounts instead. For more information about service accounts, see https://cloud.google.com/docs/authentication/
+  warnings.warn(_CLOUD_SDK_CREDENTIALS_WARNING)
+
+Quota project "test-appd-cloud-platform" was added to ADC which can be used by Google client libraries for billing and quota. Note that some services may still bill the project owning the resource.
+
+
+## Build the GCP Compute Engine Image with Packer
+
+## Deploy the Infrastructure with Terraform
+
+## Provision the AppD Cloud Platform with Ansible
+
+Follow these instructions to build the GCP Compute Engine CentOS 7.8 image:
+
+-	__AppD-Cloud-Platform-HA VM__: A stand-alone VM with an AppDynamics Cloud Platform 20.11.0 HA configuration on CentOS 7.8.
 
 Before building the AppD Cloud Platform HA VM images for GCP, it is recommended that you install the
 Google Cloud SDK (CLI). This will allow you to cleanup and delete any resources created by the Packer
@@ -12,11 +137,11 @@ builds when you are finished. It will also provide the ability to easily purge o
 
 Here is a list of the recommended open source software to be installed on the host macOS machine:
 
--	Google Cloud SDK 317.0.0 (command-line interface)
+-	Google Cloud SDK 319.0.0 (command-line interface)
 
 Perform the following steps to install the needed software:
 
-1.	Install [Google Cloud SDK 317.0.0](https://cloud.google.com/sdk/docs/install#mac) for macOS 64-bit.  
+1.	Install [Google Cloud SDK 319.0.0](https://cloud.google.com/sdk/docs/install#mac) for macOS 64-bit.  
     ```bash
     $ brew cask install google-cloud-sdk
     ```
@@ -25,10 +150,10 @@ Perform the following steps to install the needed software:
 
     ```bash
     $ gcloud --version
-    Google Cloud SDK 317.0.0
+    Google Cloud SDK 319.0.0
     bq 2.0.62
-    core 2020.10.23
-    gsutil 4.54
+    core 2020.11.13
+    gsutil 4.55
     ```
 
 ## Prepare for the Build
@@ -106,10 +231,10 @@ To prepare for the build, perform the following steps:
 __AppD-Cloud-Platform-HA VM__ - The following utilities and application performance management applications are pre-installed:
 
 -	Ansible 2.9.15
--	AppDynamics Enterprise Console 20.10.5 Build 23565
-	-	AppDynamics Controller 20.10.5 Build 2556
+-	AppDynamics Enterprise Console 20.11.0 Build 23788
+	-	AppDynamics Controller 20.11.0 Build 1948
 	-	AppDynamics Events Service 4.5.2.0 Build 20640
-	-	AppDynamics EUM Server 20.10.1 Build 32458
+	-	AppDynamics EUM Server 20.11.0 Build 32367
 -	Docker 19.03.13 CE
 	-	Docker Bash Completion
 	-	Docker Compose 1.27.4
@@ -118,8 +243,8 @@ __AppD-Cloud-Platform-HA VM__ - The following utilities and application performa
 	-	Git Bash Completion
 	-	Git-Flow 1.12.3 (AVH Edition)
 	-	Git-Flow Bash Completion
--	Google Cloud SDK 317.0.0 (command-line interface)
--	Java SE JDK 8 Update 272 (Amazon Corretto 8)
+-	Google Cloud SDK 319.0.0 (command-line interface)
+-	Java SE JDK 8 Update 275 (Amazon Corretto 8)
 -	jq 1.6 (command-line JSON processor)
 -	MySQL Shell 8.0.21
 -	Python 2.7.5

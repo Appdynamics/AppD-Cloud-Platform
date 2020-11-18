@@ -31,12 +31,12 @@ export appd_password
 #appd_platform_home="platform"
 #export appd_platform_home
 
-# [optional] platform release (defaults to '20.10.5.23565').
-#appd_platform_release="20.10.5.23565"
+# [optional] platform release (defaults to '20.11.0.23788').
+#appd_platform_release="20.11.0.23788"
 #export appd_platform_release
 
 # [optional] platform sha-256 checksum (defaults to published value).
-#appd_platform_sha256="6ef9c6280953f90c77e232ff31fec4923dd38207c7c6fa06e7ae56afed866c91"
+#appd_platform_sha256="0cb8fc1a5824cf688407062673767898264c51909e8fad4fc60750ca57f14aa1"
 #export appd_platform_sha256
 
 # [optional] platform user name (defaults to 'appduser').
