@@ -5,7 +5,7 @@ terraform {
 
 # Providers ----------------------------------------------------------------------------------------
 provider "aws" {
-  version = ">= 3.15"
+  version = ">= 3.16"
   region  = var.aws_region
 }
 
@@ -24,7 +24,7 @@ locals {
 
 # Data Sources -------------------------------------------------------------------------------------
 # data sources to get ami details.
-data "aws_ami" "appd_cloud_platform_ha_centos78" {
+data "aws_ami" "appd_cloud_platform_ha_centos79" {
   most_recent = true
   owners      = ["self"]
 
@@ -116,7 +116,7 @@ module "enterprise_console" {
   use_num_suffix = false
 
   name                 = "Enterprise-Console-${var.resource_name_prefix}-${local.current_date}-Node"
-  ami                  = data.aws_ami.appd_cloud_platform_ha_centos78.id
+  ami                  = data.aws_ami.appd_cloud_platform_ha_centos79.id
   instance_type        = var.aws_ec2_instance_type
   iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile.id
   key_name             = "AppD-Cloud-Platform"
@@ -144,7 +144,7 @@ module "controller" {
   use_num_suffix = true
 
   name                 = "Controller-${var.resource_name_prefix}-${local.current_date}-Node"
-  ami                  = data.aws_ami.appd_cloud_platform_ha_centos78.id
+  ami                  = data.aws_ami.appd_cloud_platform_ha_centos79.id
   instance_type        = var.aws_ec2_instance_type
   iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile.id
   key_name             = "AppD-Cloud-Platform"
@@ -172,7 +172,7 @@ module "events_service" {
   use_num_suffix = true
 
   name                 = "Events-Service-${var.resource_name_prefix}-${local.current_date}-Node"
-  ami                  = data.aws_ami.appd_cloud_platform_ha_centos78.id
+  ami                  = data.aws_ami.appd_cloud_platform_ha_centos79.id
   instance_type        = var.aws_ec2_instance_type
   iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile.id
   key_name             = "AppD-Cloud-Platform"
@@ -200,7 +200,7 @@ module "eum_server" {
   use_num_suffix = false
 
   name                 = "EUM-Server-${var.resource_name_prefix}-${local.current_date}-Node"
-  ami                  = data.aws_ami.appd_cloud_platform_ha_centos78.id
+  ami                  = data.aws_ami.appd_cloud_platform_ha_centos79.id
   instance_type        = var.aws_ec2_instance_type
   iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile.id
   key_name             = "AppD-Cloud-Platform"

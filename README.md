@@ -34,7 +34,7 @@ performant. A machine image (or immutable VM image) is a single static unit that
 operating system and installed software which is used to quickly create new running machines.  
 
 As part of this project, Packer is used to create a public immutable VM image for the HA platform consisting of
-a standardized installation of CentOS 7.8 along with a set of common tools (scripts, playbooks, JDK, etc.).  
+a standardized installation of CentOS 7.9 along with a set of common tools (scripts, playbooks, JDK, etc.).  
 
 This public VM image is maintained by AppDynamics with new images released monthly. However, all of the artifacts
 used to build the image are present in this project, so customers are free to customize and build their own VM

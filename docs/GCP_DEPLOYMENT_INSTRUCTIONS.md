@@ -7,7 +7,7 @@ This document explains the steps needed to deploy the AppDynamics Cloud Platform
 Before deploying the platform to GCP, you will need to set-up your GCP account and install the Google Cloud
 SDK (CLI) in your local environment.  
 
-Follow these instructions to build the GCP Compute Engine CentOS 7.8 image:
+Follow these instructions to build the GCP Compute Engine CentOS 7.9 image:
 
 This document explains how to set-up your GCP account and local environment in order to deploy the AppDynamics
 
@@ -46,7 +46,7 @@ gcloud auth application-default login --no-launch-browser
 gcloud iam service-accounts keys create --iam-account $SA_EMAIL ~/projects/AppD-Cloud-Platform/shared/keys/gcp-devops.json
 gcloud compute regions list
 gcloud compute zones list
-gcloud compute images add-iam-policy-binding appd-cloud-platform-2085-ha-centos78-2020-10-01 --member='allAuthenticatedUsers' --role='roles/compute.imageUser'
+gcloud compute images add-iam-policy-binding appd-cloud-platform-2085-ha-centos79-2020-11-19 --member='allAuthenticatedUsers' --role='roles/compute.imageUser'
 gcloud services list
 gcloud compute machine-types list
 
@@ -125,9 +125,9 @@ Quota project "test-appd-cloud-platform" was added to ADC which can be used by G
 
 ## Provision the AppD Cloud Platform with Ansible
 
-Follow these instructions to build the GCP Compute Engine CentOS 7.8 image:
+Follow these instructions to build the GCP Compute Engine CentOS 7.9 image:
 
--	__AppD-Cloud-Platform-HA VM__: A stand-alone VM with an AppDynamics Cloud Platform 20.11.0 HA configuration on CentOS 7.8.
+-	__AppD-Cloud-Platform-HA VM__: A stand-alone VM with an AppDynamics Cloud Platform 20.11.0 HA configuration on CentOS 7.9.
 
 Before building the AppD Cloud Platform HA VM images for GCP, it is recommended that you install the
 Google Cloud SDK (CLI). This will allow you to cleanup and delete any resources created by the Packer
@@ -214,19 +214,19 @@ To prepare for the build, perform the following steps:
 
 ## Build the GCP Compute Image with Packer
 
-1.	Build the __AppD-Cloud-Platform-HA VM__ CentOS 7.8 AMI image:
+1.	Build the __AppD-Cloud-Platform-HA VM__ CentOS 7.9 AMI image:
 
     This will take several minutes to run.
 
     ```bash
     $ cd ~/projects/AppD-Cloud-Platform/builders/packer/gcp
-    $ packer build appd-cloud-platform-ha-centos78.json
+    $ packer build appd-cloud-platform-ha-centos79.json
     ```
 
     If the build fails, check to ensure the accuracy of all variables edited above--including items such as
     spaces between access keys and the ending parentheses.
 
-### GCP CentOS 7.8 Bill-of-Materials
+### GCP CentOS 7.9 Bill-of-Materials
 
 __AppD-Cloud-Platform-HA VM__ - The following utilities and application performance management applications are pre-installed:
 
@@ -274,7 +274,7 @@ __AppD-Cloud-Platform-HA VM__ - The following utilities and application performa
     gcp_source_image_project = "<your-gcp-project-name-here>"
 
     # the source disk image name.
-    gcp_source_image = "appd-cloud-platform-20104-ha-centos78-2020-11-02"
+    gcp_source_image = "appd-cloud-platform-20110-ha-centos79-2020-11-19"
     ...
     ```
 

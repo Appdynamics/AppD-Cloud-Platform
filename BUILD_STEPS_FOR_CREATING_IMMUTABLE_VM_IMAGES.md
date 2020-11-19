@@ -150,4 +150,4 @@ Perform the following steps to install the needed software:
 
 The AppDynamics Cloud Platform project currently supports immutable VM image builds for GCP. In the future, we will be adding support for Amazon AWS and Microsoft Azure. Click on a link below for platform-specific instructions and Bill-of-Materials.
 
--	[GCP CentOS 7.8 VMs](GCP_VM_BUILD_INSTRUCTIONS.md): Instructions
+-	[GCP CentOS 7.9 VMs](GCP_VM_BUILD_INSTRUCTIONS.md): Instructions
