@@ -1,20 +1,6 @@
-# Terraform ----------------------------------------------------------------------------------------
-terraform {
-  required_version = ">= 0.13.5"
-}
-
 # Providers ----------------------------------------------------------------------------------------
 provider "aws" {
-  version = ">= 3.16"
   region  = var.aws_region
-}
-
-provider "local" {
-  version = ">= 2.0"
-}
-
-provider "null" {
-  version = ">= 3.0"
 }
 
 # Locals -------------------------------------------------------------------------------------------
@@ -37,7 +23,7 @@ data "aws_ami" "appd_cloud_platform_ha_centos79" {
 # Modules ------------------------------------------------------------------------------------------
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
-  version = ">= 2.62"
+  version = ">= 2.64"
 
   name = "VPC-${var.resource_name_prefix}-${local.current_date}"
   cidr = var.aws_vpc_cidr
@@ -56,7 +42,7 @@ module "vpc" {
 
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = ">= 3.16"
+  version = ">= 3.17"
 
   name        = "SG-${var.resource_name_prefix}-${local.current_date}"
   description = "Security group for example usage with EC2 instance"
