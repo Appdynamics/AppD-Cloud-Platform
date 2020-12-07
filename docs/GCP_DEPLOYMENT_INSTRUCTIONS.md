@@ -231,11 +231,11 @@ To prepare for the build, perform the following steps:
 __AppD-Cloud-Platform-HA VM__ - The following utilities and application performance management applications are pre-installed:
 
 -	Ansible 2.9.15
--	AppDynamics Enterprise Console 20.11.0 Build 23788
-	-	AppDynamics Controller 20.11.0 Build 1948
+-	AppDynamics Enterprise Console 20.11.2 Build 23819
+	-	AppDynamics Controller 20.11.2 Build 1969
 	-	AppDynamics Events Service 4.5.2.0 Build 20640
 	-	AppDynamics EUM Server 20.11.0 Build 32367
--	Docker 19.03.13 CE
+-	Docker 19.03.14 CE
 	-	Docker Bash Completion
 	-	Docker Compose 1.27.4
 	-	Docker Compose Bash Completion
@@ -248,9 +248,9 @@ __AppD-Cloud-Platform-HA VM__ - The following utilities and application performa
 -	jq 1.6 (command-line JSON processor)
 -	MySQL Shell 8.0.21
 -	Python 2.7.5
-	-	Pip 20.2.4
+	-	Pip 20.3.1
 -	Python 3.6.8
-	-	Pip 20.2.4
+	-	Pip 20.3.1
 -	VIM - Vi IMproved 8.2
 
 ## Deploy the Infrastructure with Terraform
