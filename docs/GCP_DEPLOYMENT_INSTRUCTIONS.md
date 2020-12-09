@@ -231,8 +231,8 @@ To prepare for the build, perform the following steps:
 __AppD-Cloud-Platform-HA VM__ - The following utilities and application performance management applications are pre-installed:
 
 -	Ansible 2.9.15
--	AppDynamics Enterprise Console 20.11.2 Build 23819
-	-	AppDynamics Controller 20.11.2 Build 1969
+-	AppDynamics Enterprise Console 20.11.3 Build 23827
+	-	AppDynamics Controller 20.11.3 Build 1977
 	-	AppDynamics Events Service 4.5.2.0 Build 20640
 	-	AppDynamics EUM Server 20.11.0 Build 32367
 -	Docker 19.03.14 CE
