@@ -98,7 +98,7 @@ variable "gcp_source_image_family" {
 variable "gcp_source_image" {
   description = "The source disk image."
   type        = string
-  default     = "appd-cloud-platform-20113-ha-centos79-2020-12-10"
+  default     = "appd-cloud-platform-20113-ha-centos79-2020-12-15"
 # default     = "centos-7-v20200910"
 }
 
