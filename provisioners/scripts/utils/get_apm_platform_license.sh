@@ -12,8 +12,8 @@
 #
 # For project administrators, the license is maintained via an AWS S3 bucket. Here are two
 # sample AWS CLI commands to upload or delete the license file:
-#   aws s3 cp license-apm-any-language-expires-2020-12-18.lic s3://appd-cloud-kickstart-tools/apm-platform/
-#   aws s3 rm s3://appd-cloud-kickstart-tools/apm-platform/license-apm-any-language-expires-2020-12-18.lic
+#   aws s3 cp license-apm-any-language-on-prem-eum-expires-2021-04-13.lic s3://appd-cloud-kickstart-tools/apm-platform/
+#   aws s3 rm s3://appd-cloud-kickstart-tools/apm-platform/license-apm-any-language-on-prem-eum-expires-2021-04-13.lic
 #
 # NOTE: Script should be run with 'root' privilege.
 #---------------------------------------------------------------------------------------------------
@@ -22,12 +22,12 @@
 # [OPTIONAL] appdynamics platform license parameters [w/ defaults].
 appd_home="${appd_home:-/opt/appdynamics}"
 appd_platform_home="${appd_platform_home:-platform}"
-appd_license_expiration="${appd_license_expiration:-2020-12-18}"
+appd_license_expiration="${appd_license_expiration:-2021-04-13}"
 appd_license_install="${appd_license_install:-false}"
 
 # download the apm platform license. ---------------------------------------------------------------
 appd_s3_bucket_folder="appd-cloud-kickstart-tools/apm-platform"
-appd_apm_license_file="license-apm-any-language-expires-${appd_license_expiration}.lic"
+appd_apm_license_file="license-apm-any-language-on-prem-eum-expires-${appd_license_expiration}.lic"
 
 rm -f ${appd_apm_license_file}
 aws s3 cp  s3://${appd_s3_bucket_folder}/${appd_apm_license_file} .
