@@ -37,12 +37,12 @@ tar -zxvf vim-files.tar.gz --no-same-owner --no-overwrite-dir
 rm -f vim-files.tar.gz
 
 # configure the vim profile. -----------------------------------------------------------------------
+# set current date for temporary filename.
+curdate=$(date +"%Y-%m-%d.%H-%M-%S")
+
 # rename the vimrc folder if it exists.
 vimrc_home="/root/.vim"
 if [ -d "$vimrc_home" ]; then
-  # set current date for temporary filename.
-  curdate=$(date +"%Y-%m-%d.%H-%M-%S")
-
   # rename the folder using the current date.
   mv ${vimrc_home} /root/vim.${curdate}.orig
 fi
@@ -53,22 +53,28 @@ export TERM
 PATH=/usr/local/bin:$PATH
 export PATH
 
-# download useful vim configuration based on developer pair stations at pivotal labs.
-git clone https://github.com/pivotal/vim-config.git ~/.vim
-~/.vim/bin/install
-
 # create vimrc local to override default vim configuration.
 vimrc_local="/root/.vimrc.local"
+if [ -f "$vimrc_local" ]; then
+  # rename the folder using the current date.
+  mv ${vimrc_local} /root/vimrc_local.${curdate}.orig
+fi
+
 cat <<EOF > ${vimrc_local}
 " Override default Vim resource configuration.
 colorscheme triplejelly                 " Set colorscheme to 'triplejelly'. Default is 'Tomorrow-Night'.
 set nofoldenable                        " Turn-off folding of code files. To toggle on/off: use 'zi'.
 let g:vim_json_syntax_conceal = 0       " Turn-off concealing of double quotes in 'vim-json' plugin.
+let g:snipMate = {'snippet_version': 1} " Use the new version of the SnipMate parser.
 
 " Autoclose 'NERDTree' plugin if it's the only open window left.
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 EOF
 chown ${user_name}:${user_group} ${vimrc_local}
+
+# download useful vim configuration based on developer pair stations at pivotal labs.
+git clone https://github.com/pivotal-legacy/vim-config.git ~/.vim
+~/.vim/bin/install
 
 # initialize the vim plugin manager by opening vim to display the color scheme.
 vim -c colorscheme -c quitall
