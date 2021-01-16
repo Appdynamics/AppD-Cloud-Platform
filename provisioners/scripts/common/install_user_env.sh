@@ -113,6 +113,19 @@ if [ -f "$vimrc_local" ]; then
   mv ${vimrc_local} ${user_home}/vimrc_local.${curdate}.orig
 fi
 
+# create temporary vimrc local to fix issue during install with snipmate parser.
+cat <<EOF > ${vimrc_local}
+" Temporary override of default Vim resource configuration.
+let g:snipMate = {'snippet_version': 1} " Use the new version of the SnipMate parser.
+EOF
+chown ${user_name}:${user_group} ${vimrc_local}
+
+# download and install useful vim configuration based on developer pair stations at pivotal labs.
+runuser -c "git clone https://github.com/pivotal-legacy/vim-config.git ~/.vim" - ${user_name}
+runuser -c "TERM=xterm-256color ~/.vim/bin/install" - ${user_name}
+
+# create final vimrc local file.
+rm -f ${vimrc_local}
 cat <<EOF > ${vimrc_local}
 " Override default Vim resource configuration.
 colorscheme triplejelly                 " Set colorscheme to 'triplejelly'. Default is 'Tomorrow-Night'.
@@ -124,10 +137,6 @@ let g:snipMate = {'snippet_version': 1} " Use the new version of the SnipMate pa
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 EOF
 chown ${user_name}:${user_group} ${vimrc_local}
-
-# download useful vim configuration based on developer pair stations at pivotal labs.
-runuser -c "git clone https://github.com/pivotal-legacy/vim-config.git ~/.vim" - ${user_name}
-runuser -c "TERM=xterm-256color ~/.vim/bin/install" - ${user_name}
 
 # initialize the vim plugin manager by opening vim to display the color scheme.
 runuser -c "TERM=xterm-256color vim -c colorscheme -c quitall" - ${user_name}
