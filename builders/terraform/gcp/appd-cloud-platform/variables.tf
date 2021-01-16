@@ -22,6 +22,12 @@ variable "gcp_network" {
   default     = "default"
 }
 
+resource "gcp_firewall_source_range" {
+  description = "The source range for inbound ssh traffic"
+  type        = string
+  default     = "0.0.0.0/0"
+}
+
 #variable "gcp_subnetwork" {
 #  description = "The subnetwork selflink to host the compute instances in"
 #}
