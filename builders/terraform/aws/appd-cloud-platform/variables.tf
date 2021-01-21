@@ -24,6 +24,12 @@ variable "aws_vpc_private_subnets" {
   default = ["10.0.3.0/24", "10.0.4.0/24"]
 }
 
+variable "aws_ssh_ingress_cidr_blocks" {
+  description = "The computed ingress CIDR blocks for inbound ssh traffic"
+  type        = string
+  default     = "0.0.0.0/0,10.0.1.0/24,10.0.2.0/24,10.0.3.0/24,10.0.4.0/24"
+}
+
 variable "aws_ec2_enterprise_console_hostname_prefix" {
   description = "AWS EC2 Enterprise Console hostname prefix."
   type        = string

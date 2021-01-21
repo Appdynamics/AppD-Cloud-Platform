@@ -153,7 +153,7 @@ resource "google_compute_firewall" "allow-icmp" {
     protocol = "icmp"
   }
 
-  source_ranges = ["${var.gcp_firewall_source_range}"]
+  source_ranges = var.gcp_firewall_source_range
 # target_tags   = ["allow-icmp"]
 }
 
@@ -188,7 +188,7 @@ resource "google_compute_firewall" "allow-ssh" {
     ports = ["22"]
   }
 
-  source_ranges = ["${var.gcp_firewall_source_range}"]
+  source_ranges = var.gcp_firewall_source_range
 # target_tags   = ["allow-ssh"]
 }
 
@@ -330,8 +330,8 @@ resource "google_compute_health_check" "events_service_health_check" {
   timeout_sec         = 5
 
   http_health_check {
-    request_path = "/"
-    port = 9080
+    request_path = "/healthcheck?pretty=true"
+    port = 9081
   }
 }
 

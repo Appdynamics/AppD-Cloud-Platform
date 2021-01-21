@@ -22,10 +22,10 @@ variable "gcp_network" {
   default     = "default"
 }
 
-resource "gcp_firewall_source_range" {
+variable "gcp_firewall_source_range" {
   description = "The source range for inbound ssh traffic"
-  type        = string
-  default     = "0.0.0.0/0"
+  type        = list
+  default     = ["0.0.0.0/0"]
 }
 
 #variable "gcp_subnetwork" {
@@ -104,7 +104,7 @@ variable "gcp_source_image_family" {
 variable "gcp_source_image" {
   description = "The source disk image."
   type        = string
-  default     = "appd-cloud-platform-20115-ha-centos79-2021-01-15"
+  default     = "appd-cloud-platform-20115-ha-centos79-2021-01-21"
 # default     = "centos-7-v20200910"
 }
 

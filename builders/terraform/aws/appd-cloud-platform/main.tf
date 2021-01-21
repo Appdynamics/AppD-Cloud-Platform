@@ -50,10 +50,17 @@ module "security_group" {
   tags        = var.resource_tags
 
   ingress_cidr_blocks               = ["0.0.0.0/0"]
-  ingress_rules                     = ["http-80-tcp", "http-8080-tcp", "https-443-tcp", "mysql-tcp", "ssh-tcp"]
+  ingress_rules                     = ["http-80-tcp", "http-8080-tcp", "https-443-tcp", "mysql-tcp"]
   egress_rules                      = ["all-all"]
   ingress_with_self                 = [{rule = "all-all"}]
   computed_ingress_with_cidr_blocks = [
+    {
+      from_port   = 22
+      to_port     = 22
+      protocol    = "tcp"
+      description = "SSH port"
+      cidr_blocks = var.aws_ssh_ingress_cidr_blocks
+    },
     {
       from_port   = 9191
       to_port     = 9191
@@ -90,7 +97,7 @@ module "security_group" {
       cidr_blocks = "0.0.0.0/0"
     }
   ]
-  number_of_computed_ingress_with_cidr_blocks = 5
+  number_of_computed_ingress_with_cidr_blocks = 6
 }
 
 module "enterprise_console" {
@@ -252,13 +259,13 @@ module "events_service_elb" {
     {
       instance_port     = "9080"
       instance_protocol = "http"
-      lb_port           = "9080"
+      lb_port           = "80"
       lb_protocol       = "http"
     }
   ]
 
   health_check = {
-    target              = "HTTP:9080/"
+    target              = "HTTP:9081/healthcheck?pretty=true"
     interval            = 30
     healthy_threshold   = 2
     unhealthy_threshold = 2
@@ -285,7 +292,7 @@ resource "aws_iam_role_policy" "ec2_access_policy" {
 }
 
 resource "aws_iam_instance_profile" "ec2_instance_profile" {
-  name = "EC2-Instance-Profile-${var.resource_name_prefix}-${local.current_date}"
+# name = "EC2-Instance-Profile-${var.resource_name_prefix}-${local.current_date}"
   role = aws_iam_role.ec2_access_role.name
 }
 
@@ -343,7 +350,7 @@ EOD
     working_dir = "../../../../provisioners/ansible/appd-cloud-platform/roles/appdynamics.apm-platform-ha/files"
     command     = <<EOD
 cat <<EOF > events_service_elb_dns_name.txt
-${format("http://%s:9080", lower(module.events_service_elb.this_elb_dns_name))}
+${format("http://%s:80", lower(module.events_service_elb.this_elb_dns_name))}
 EOF
 EOD
   }
