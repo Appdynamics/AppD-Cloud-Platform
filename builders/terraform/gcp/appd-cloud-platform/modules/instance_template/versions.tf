@@ -15,9 +15,9 @@
  */
 
 terraform {
-  required_version = ">=0.14.5"
+  required_version = ">=0.14.6"
   required_providers {
-    google = ">= 3.54, <4.0"
+    google = ">= 3.55, <4.0"
   }
   provider_meta "google" {
     module_name = "blueprints/terraform/terraform-google-vm:instance_template/v6.0.0"
