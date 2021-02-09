@@ -127,7 +127,7 @@ Quota project "test-appd-cloud-platform" was added to ADC which can be used by G
 
 Follow these instructions to build the GCP Compute Engine CentOS 7.9 image:
 
--	__AppD-Cloud-Platform-HA VM__: A stand-alone VM with an AppDynamics Cloud Platform 20.11.7 HA configuration on CentOS 7.9.
+-	__AppD-Cloud-Platform-HA VM__: A stand-alone VM with an AppDynamics Cloud Platform 20.11.8 HA configuration on CentOS 7.9.
 
 Before building the AppD Cloud Platform HA VM images for GCP, it is recommended that you install the
 Google Cloud SDK (CLI). This will allow you to cleanup and delete any resources created by the Packer
@@ -137,11 +137,11 @@ builds when you are finished. It will also provide the ability to easily purge o
 
 Here is a list of the recommended open source software to be installed on the host macOS machine:
 
--	Google Cloud SDK 325.0.0 (command-line interface)
+-	Google Cloud SDK 327.0.0 (command-line interface)
 
 Perform the following steps to install the needed software:
 
-1.	Install [Google Cloud SDK 325.0.0](https://cloud.google.com/sdk/docs/install#mac) for macOS 64-bit.  
+1.	Install [Google Cloud SDK 327.0.0](https://cloud.google.com/sdk/docs/install#mac) for macOS 64-bit.  
     ```bash
     $ brew cask install google-cloud-sdk
     ```
@@ -150,9 +150,9 @@ Perform the following steps to install the needed software:
 
     ```bash
     $ gcloud --version
-    Google Cloud SDK 325.0.0
+    Google Cloud SDK 327.0.0
     bq 2.0.64
-    core 2021.01.22
+    core 2021.02.05
     gsutil 4.58
     ```
 
@@ -231,19 +231,19 @@ To prepare for the build, perform the following steps:
 __AppD-Cloud-Platform-HA VM__ - The following utilities and application performance management applications are pre-installed:
 
 -	Ansible 2.9.17
--	AppDynamics Enterprise Console 20.11.7 Build 23894
-	-	AppDynamics Controller 20.11.7 Build 2000
+-	AppDynamics Enterprise Console 20.11.8 Build 23902
+	-	AppDynamics Controller 20.11.8 Build 2006
 	-	AppDynamics Events Service 4.5.2.0 Build 20640
 	-	AppDynamics EUM Server 20.11.0 Build 32367
--	Docker 20.10.2 CE
+-	Docker 20.10.3 CE
 	-	Docker Bash Completion
 	-	Docker Compose 1.28.2
 	-	Docker Compose Bash Completion
--	Git 2.30.0
+-	Git 2.30.1
 	-	Git Bash Completion
 	-	Git-Flow 1.12.3 (AVH Edition)
 	-	Git-Flow Bash Completion
--	Google Cloud SDK 325.0.0 (command-line interface)
+-	Google Cloud SDK 327.0.0 (command-line interface)
 -	Java SE JDK 8 Update 282 (Amazon Corretto 8)
 -	jq 1.6 (command-line JSON processor)
 -	MySQL Shell 8.0.23
@@ -274,7 +274,7 @@ __AppD-Cloud-Platform-HA VM__ - The following utilities and application performa
     gcp_source_image_project = "<your-gcp-project-name-here>"
 
     # the source disk image name.
-    gcp_source_image = "appd-cloud-platform-20117-ha-centos79-2021-01-29"
+    gcp_source_image = "appd-cloud-platform-20118-ha-centos79-2021-02-06"
     ...
     ```
 
