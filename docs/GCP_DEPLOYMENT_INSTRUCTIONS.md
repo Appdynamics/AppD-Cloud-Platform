@@ -137,11 +137,11 @@ builds when you are finished. It will also provide the ability to easily purge o
 
 Here is a list of the recommended open source software to be installed on the host macOS machine:
 
--	Google Cloud SDK 327.0.0 (command-line interface)
+-	Google Cloud SDK 328.0.0 (command-line interface)
 
 Perform the following steps to install the needed software:
 
-1.	Install [Google Cloud SDK 327.0.0](https://cloud.google.com/sdk/docs/install#mac) for macOS 64-bit.  
+1.	Install [Google Cloud SDK 328.0.0](https://cloud.google.com/sdk/docs/install#mac) for macOS 64-bit.  
     ```bash
     $ brew cask install google-cloud-sdk
     ```
@@ -150,10 +150,10 @@ Perform the following steps to install the needed software:
 
     ```bash
     $ gcloud --version
-    Google Cloud SDK 327.0.0
-    bq 2.0.64
-    core 2021.02.05
-    gsutil 4.58
+    Google Cloud SDK 328.0.0
+    bq 2.0.65
+    core 2021.02.12
+    gsutil 4.59
     ```
 
 ## Prepare for the Build
@@ -243,7 +243,7 @@ __AppD-Cloud-Platform-HA VM__ - The following utilities and application performa
 	-	Git Bash Completion
 	-	Git-Flow 1.12.3 (AVH Edition)
 	-	Git-Flow Bash Completion
--	Google Cloud SDK 327.0.0 (command-line interface)
+-	Google Cloud SDK 328.0.0 (command-line interface)
 -	Java SE JDK 8 Update 282 (Amazon Corretto 8)
 -	jq 1.6 (command-line JSON processor)
 -	MySQL Shell 8.0.23
