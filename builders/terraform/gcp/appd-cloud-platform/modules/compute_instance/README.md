@@ -38,6 +38,7 @@ See the [simple](https://github.com/terraform-google-modules/terraform-google-vm
 | Name | Description |
 |------|-------------|
 | available\_zones | List of available zones in region |
+| instances\_details | List of all details for compute instances |
 | instances\_self\_links | List of self-links for compute instances |
 | id | an identifier for the resource with format: `projects/{{project}}/zones/{{zone}}/instances/{{name}}` |
 | instance\_id | The server-assigned unique identifier of this instance |
