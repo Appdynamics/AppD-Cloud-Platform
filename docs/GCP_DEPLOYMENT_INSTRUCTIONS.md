@@ -69,6 +69,25 @@ gcloud services enable iam.googleapis.com
 gcloud services enable compute.googleapis.com
 gcloud services enable serviceusage.googleapis.com
 
+gcloud services enable oauth2.googleapis.com
+gcloud services enable gkeconnect.googleapis.com
+gcloud services enable gkehub.googleapis.com
+gcloud services enable container.googleapis.com
+gcloud services enable servicenetworking.googleapis.com
+
+# https://www.padok.fr/en/blog/kubernetes-google-cloud-terraform-cluster
+gcloud services enable compute.googleapis.com
+gcloud services enable servicenetworking.googleapis.com
+gcloud services enable cloudresourcemanager.googleapis.com
+gcloud services enable container.googleapis.com
+
+# associated roles
+gcloud projects add-iam-policy-binding $G_PROJECT --member serviceAccount:serviceAccount:$SA_EMAIL --role roles/container.admin
+gcloud projects add-iam-policy-binding $G_PROJECT --member serviceAccount:serviceAccount:$SA_EMAIL --role roles/compute.admin
+gcloud projects add-iam-policy-binding $G_PROJECT --member serviceAccount:serviceAccount:$SA_EMAIL --role roles/iam.serviceAccountUser
+gcloud projects add-iam-policy-binding $G_PROJECT --member serviceAccount:serviceAccount:$SA_EMAIL --role roles/resourcemanager.projectIamAdmin
+
+
 gcloud iam service-accounts list
 gcloud projects get-iam-policy <YOUR GCLOUD PROJECT>  --flatten="bindings[].members" --format='table(bindings.role)' --filter="bindings.members:devops
 gcloud projects get-iam-policy $G_PROJECT --flatten="bindings[].members" --format='table(bindings.role)' --filter="bindings.members:devops"
@@ -127,7 +146,7 @@ Quota project "test-appd-cloud-platform" was added to ADC which can be used by G
 
 Follow these instructions to build the GCP Compute Engine CentOS 7.9 image:
 
--	__AppD-Cloud-Platform-HA VM__: A stand-alone VM with an AppDynamics Cloud Platform 20.11.8 HA configuration on CentOS 7.9.
+-	__AppD-Cloud-Platform-HA VM__: A stand-alone VM with an AppDynamics Cloud Platform 21.2.3 HA configuration on CentOS 7.9.
 
 Before building the AppD Cloud Platform HA VM images for GCP, it is recommended that you install the
 Google Cloud SDK (CLI). This will allow you to cleanup and delete any resources created by the Packer
@@ -137,11 +156,11 @@ builds when you are finished. It will also provide the ability to easily purge o
 
 Here is a list of the recommended open source software to be installed on the host macOS machine:
 
--	Google Cloud SDK 328.0.0 (command-line interface)
+-	Google Cloud SDK 331.0.0 (command-line interface)
 
 Perform the following steps to install the needed software:
 
-1.	Install [Google Cloud SDK 328.0.0](https://cloud.google.com/sdk/docs/install#mac) for macOS 64-bit.  
+1.	Install [Google Cloud SDK 331.0.0](https://cloud.google.com/sdk/docs/install#mac) for macOS 64-bit.  
     ```bash
     $ brew cask install google-cloud-sdk
     ```
@@ -150,9 +169,9 @@ Perform the following steps to install the needed software:
 
     ```bash
     $ gcloud --version
-    Google Cloud SDK 328.0.0
+    Google Cloud SDK 331.0.0
     bq 2.0.65
-    core 2021.02.12
+    core 2021.03.05
     gsutil 4.59
     ```
 
@@ -230,20 +249,20 @@ To prepare for the build, perform the following steps:
 
 __AppD-Cloud-Platform-HA VM__ - The following utilities and application performance management applications are pre-installed:
 
--	Ansible 2.9.17
--	AppDynamics Enterprise Console 20.11.8 Build 23902
-	-	AppDynamics Controller 20.11.8 Build 2006
-	-	AppDynamics Events Service 4.5.2.0 Build 20640
+-	Ansible 2.9.19
+-	AppDynamics Enterprise Console 21.2.3 Build 24315
+	-	AppDynamics Controller 21.2.3 Build 1179
+	-	AppDynamics Events Service 4.5.2.0 Build 20651
 	-	AppDynamics EUM Server 20.11.0 Build 32367
--	Docker 20.10.3 CE
+-	Docker 20.10.5 CE
 	-	Docker Bash Completion
-	-	Docker Compose 1.28.3
+	-	Docker Compose 1.28.5
 	-	Docker Compose Bash Completion
--	Git 2.30.1
+-	Git 2.31.0
 	-	Git Bash Completion
 	-	Git-Flow 1.12.3 (AVH Edition)
 	-	Git-Flow Bash Completion
--	Google Cloud SDK 328.0.0 (command-line interface)
+-	Google Cloud SDK 331.0.0 (command-line interface)
 -	Java SE JDK 8 Update 282 (Amazon Corretto 8)
 -	jq 1.6 (command-line JSON processor)
 -	MySQL Shell 8.0.23
@@ -263,7 +282,7 @@ __AppD-Cloud-Platform-HA VM__ - The following utilities and application performa
     | Variable                        | Description                                                                                                                                                                                                                                                                                               |
     |---------------------------------|------------------------------------------------------------|
     | `gcp_source_image_project`      | The source image project.
-    | `gcp_source_image`              | The source disk image name.
+    | `gcp_source_image_family`       | The source image family.
 
     ```bash
     $ cd ~/projects/AppD-Cloud-Platform/builders/terraform/gcp/appd-cloud-platform
@@ -273,8 +292,8 @@ __AppD-Cloud-Platform-HA VM__ - The following utilities and application performa
     # the source image project.
     gcp_source_image_project = "<your-gcp-project-name-here>"
 
-    # the source disk image name.
-    gcp_source_image = "appd-cloud-platform-20118-ha-centos79-2021-02-06"
+    # the source image family.
+    gcp_source_image_family = "appd-cloud-platform-ha-centos79-images"
     ...
     ```
 
