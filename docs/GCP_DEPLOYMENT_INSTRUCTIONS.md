@@ -256,7 +256,7 @@ __AppD-Cloud-Platform-HA VM__ - The following utilities and application performa
 	-	AppDynamics EUM Server 20.11.0 Build 32367
 -	Docker 20.10.5 CE
 	-	Docker Bash Completion
-	-	Docker Compose 1.28.5
+	-	Docker Compose 1.28.6
 	-	Docker Compose Bash Completion
 -	Git 2.31.0
 	-	Git Bash Completion
