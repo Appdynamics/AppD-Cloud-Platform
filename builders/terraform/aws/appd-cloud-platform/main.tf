@@ -23,7 +23,7 @@ data "aws_ami" "appd_cloud_platform_ha_centos79" {
 # Modules ------------------------------------------------------------------------------------------
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
-  version = ">= 2.78"
+  version = ">= 3.0"
 
   name = "VPC-${var.resource_name_prefix}-${local.current_date}"
   cidr = var.aws_vpc_cidr
@@ -42,7 +42,7 @@ module "vpc" {
 
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = ">= 3.18"
+  version = ">= 4.0"
 
   name        = "SG-${var.resource_name_prefix}-${local.current_date}"
   description = "Security group for example usage with EC2 instance"
@@ -214,7 +214,7 @@ module "eum_server" {
 
 module "controller_elb" {
   source  = "terraform-aws-modules/elb/aws"
-  version = ">= 2.5"
+  version = ">= 3.0"
 
   name            = "Controller-ELB-${var.resource_name_prefix}-${local.current_date}"
   subnets         = tolist(module.vpc.public_subnets)
@@ -247,7 +247,7 @@ module "controller_elb" {
 
 module "events_service_elb" {
   source  = "terraform-aws-modules/elb/aws"
-  version = ">= 2.5"
+  version = ">= 3.0"
 
   name            = "Events-Service-ELB-${var.resource_name_prefix}-${local.current_date}"
   subnets         = tolist(module.vpc.public_subnets)
