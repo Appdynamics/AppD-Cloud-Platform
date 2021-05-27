@@ -156,11 +156,11 @@ builds when you are finished. It will also provide the ability to easily purge o
 
 Here is a list of the recommended open source software to be installed on the host macOS machine:
 
--	Google Cloud SDK 341.0.0 (command-line interface)
+-	Google Cloud SDK 342.0.0 (command-line interface)
 
 Perform the following steps to install the needed software:
 
-1.	Install [Google Cloud SDK 341.0.0](https://cloud.google.com/sdk/docs/install#mac) for macOS 64-bit.  
+1.	Install [Google Cloud SDK 342.0.0](https://cloud.google.com/sdk/docs/install#mac) for macOS 64-bit.  
     ```bash
     $ brew cask install google-cloud-sdk
     ```
@@ -169,7 +169,7 @@ Perform the following steps to install the needed software:
 
     ```bash
     $ gcloud --version
-    Google Cloud SDK 341.0.0
+    Google Cloud SDK 342.0.0
     ...
     ```
 
@@ -247,7 +247,7 @@ To prepare for the build, perform the following steps:
 
 __AppD-Cloud-Platform-HA VM__ - The following utilities and application performance management applications are pre-installed:
 
--	Ansible 2.9.21
+-	Ansible 2.9.22
 -	AppDynamics Enterprise Console 21.4.3 Build 24599
 	-	AppDynamics Controller 21.4.3 Build 1283
 	-	AppDynamics Events Service 4.5.2 Build 20651
@@ -260,15 +260,16 @@ __AppD-Cloud-Platform-HA VM__ - The following utilities and application performa
 	-	Git Bash Completion
 	-	Git-Flow 1.12.3 (AVH Edition)
 	-	Git-Flow Bash Completion
--	Google Cloud SDK 341.0.0 (command-line interface)
+-	Google Cloud SDK 342.0.0 (command-line interface)
 -	Java SE JDK 8 Update 292 (Amazon Corretto 8)
 -	jq 1.6 (command-line JSON processor)
 -	MySQL Shell 8.0.24
 -	Python 2.7.5
-	-	Pip 21.1.1
+	-	Pip 21.1.2
 -	Python 3.6.8
-	-	Pip 21.1.1
+	-	Pip 21.1.2
 -	VIM - Vi IMproved 8.2
+-	yq 4.9.3 (command-line YAML processor)
 
 ## Deploy the Infrastructure with Terraform
 
