@@ -6,7 +6,7 @@
 # are instrumented with AppDynamics EUM agents.
 #
 # For more details, please visit:
-#   https://docs.appdynamics.com/display/PRO45/EUM+Server+Deployment
+#   https://docs.appdynamics.com/latest/en/application-performance-monitoring-platform/eum-server-deployment
 #
 # NOTE: All inputs are defined by external environment variables.
 #       Optional variables have reasonable defaults, but you may override as needed.

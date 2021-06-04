@@ -6,7 +6,7 @@
 # The Enterprise Console supports up to 20 platforms at a time by default.
 # 
 # For more details, please visit:
-#   https://docs.appdynamics.com/display/LATEST/Administer+the+Enterprise+Console
+#   https://docs.appdynamics.com/latest/en/application-performance-monitoring-platform/enterprise-console/administer-the-enterprise-console
 #
 # NOTE: All inputs are defined by external environment variables.
 #       Optional variables have reasonable defaults, but you may override as needed.

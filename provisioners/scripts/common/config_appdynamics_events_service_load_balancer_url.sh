@@ -7,8 +7,8 @@
 # but recommended, since it minimizes the work of scaling up to an Events Service cluster later.
 #
 # For more details, please visit:
-#   https://docs.appdynamics.com/display/LATEST/Events+Service+Deployment
-#   https://docs.appdynamics.com/display/LATEST/Load+Balance+Events+Service+Traffic
+#   https://docs.appdynamics.com/latest/en/application-performance-monitoring-platform/events-service-deployment
+#   https://docs.appdynamics.com/latest/en/application-performance-monitoring-platform/events-service-deployment/load-balance-events-service-traffic
 #
 # NOTE: All inputs are defined by external environment variables.
 #       Optional variables have reasonable defaults, but you may override as needed.

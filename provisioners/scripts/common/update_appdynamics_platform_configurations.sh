@@ -12,7 +12,7 @@
 # and SSL Certificate Management.
 #
 # For more details, please visit:
-#   https://docs.appdynamics.com/display/LATEST/Update+Platform+Configurations
+#   https://docs.appdynamics.com/latest/en/application-performance-monitoring-platform/enterprise-console/administer-the-enterprise-console/update-platform-configurations
 #
 # NOTE: All inputs are defined by external environment variables.
 #       Optional variables have reasonable defaults, but you may override as needed.

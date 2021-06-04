@@ -7,7 +7,7 @@
 # to view, understand, and analyze that data.
 #
 # For more details, please visit:
-#   https://docs.appdynamics.com/display/LATEST/Getting+Started
+#   https://docs.appdynamics.com/latest/en/appdynamics-essentials/getting-started
 #
 # NOTE: All inputs are defined by external environment variables.
 #       Optional variables have reasonable defaults, but you may override as needed.

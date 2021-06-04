@@ -7,7 +7,7 @@
 # high-volume, performance-intensive, and horizontally scalable storage for analytics data.
 #
 # For more details, please visit:
-#   https://docs.appdynamics.com/display/LATEST/Events+Service+Deployment
+#   https://docs.appdynamics.com/latest/en/application-performance-monitoring-platform/events-service-deployment
 #
 # NOTE: All inputs are defined by external environment variables.
 #       Optional variables have reasonable defaults, but you may override as needed.
