@@ -156,11 +156,11 @@ builds when you are finished. It will also provide the ability to easily purge o
 
 Here is a list of the recommended open source software to be installed on the host macOS machine:
 
--	Google Cloud SDK 343.0.0 (command-line interface)
+-	Google Cloud SDK 344.0.0 (command-line interface)
 
 Perform the following steps to install the needed software:
 
-1.	Install [Google Cloud SDK 343.0.0](https://cloud.google.com/sdk/docs/install#mac) for macOS 64-bit.  
+1.	Install [Google Cloud SDK 344.0.0](https://cloud.google.com/sdk/docs/install#mac) for macOS 64-bit.  
     ```bash
     $ brew cask install google-cloud-sdk
     ```
@@ -169,7 +169,7 @@ Perform the following steps to install the needed software:
 
     ```bash
     $ gcloud --version
-    Google Cloud SDK 343.0.0
+    Google Cloud SDK 344.0.0
     ...
     ```
 
@@ -195,12 +195,9 @@ To prepare for the build, perform the following steps:
 
     The following environment variables are the most common to be overridden. They are grouped by sections in the file, so you will have to search to locate the exact line. For example, the AWS-related variables are at the end of the file.
 
-    The first 4 are mandatory and the others are optional, but helpful. If you are building the AMI images in the `us-east-1` region (N. Virginia), the region-related variables can be left alone.
+    The first two are mandatory and the others are optional, but helpful. If you are building the AMI images in the `us-east-1` region (N. Virginia), the region-related variables can be left alone.
 
     ```bash
-    appd_username="<Your_AppDynamics_Download_Site_Email>"
-    appd_password="<Your_AppDynamics_Download_Site_Password>"
-
     AWS_ACCESS_KEY_ID="<Your_AWS_ACCESS_KEY_ID>"
     AWS_SECRET_ACCESS_KEY="<Your_AWS_SECRET_ACCESS_KEY>"
 
@@ -260,7 +257,7 @@ __AppD-Cloud-Platform-HA VM__ - The following utilities and application performa
 	-	Git Bash Completion
 	-	Git-Flow 1.12.3 (AVH Edition)
 	-	Git-Flow Bash Completion
--	Google Cloud SDK 343.0.0 (command-line interface)
+-	Google Cloud SDK 344.0.0 (command-line interface)
 -	Java SE JDK 8 Update 292 (Amazon Corretto 8)
 -	jq 1.6 (command-line JSON processor)
 -	MySQL Shell 8.0.24
@@ -269,7 +266,7 @@ __AppD-Cloud-Platform-HA VM__ - The following utilities and application performa
 -	Python 3.6.8
 	-	Pip 21.1.2
 -	VIM - Vi IMproved 8.2
--	yq 4.9.3 (command-line YAML processor)
+-	yq 4.9.4 (command-line YAML processor)
 
 ## Deploy the Infrastructure with Terraform
 

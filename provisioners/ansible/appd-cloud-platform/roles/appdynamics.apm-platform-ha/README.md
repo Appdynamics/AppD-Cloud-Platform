@@ -28,12 +28,11 @@ add the APM Platform HA role:
   gather_facts: yes
   any_errors_fatal: yes
   environment:
-    appd_username: "{{ lookup('env', 'appd_username') }}"
-    appd_password: "{{ lookup('env', 'appd_password') }}"
+    appd_platform_user_name: "{{ lookup('env', 'appd_platform_user_name') | default('appduser', true) }}"
+    appd_platform_user_group: "{{ lookup('env', 'appd_platform_user_group') | default('appduser', true) }}"
 
   roles:
     - role: appdynamics.apm-platform-ha
-      when: (ansible_env.appd_username|length > 0) and (ansible_env.appd_password|length > 0)
 ```
 
 #### Role variables
@@ -41,8 +40,6 @@ add the APM Platform HA role:
 | Variable                                   | Description                                                                                                                                                                                                                                                                                               |
 |--------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `appd_home`                                | AppD home directory (defaults to '/opt/appdynamics').
-| `appd_username`                            | AppD account user name for downloading binaries.
-| `appd_password`                            | AppD account user password.
 | `appd_platform_user_name`                  | Platform installation user name (defaults to 'appduser').
 | `appd_platform_user_group`                 | Platform installation group (defaults to 'appduser').
 
