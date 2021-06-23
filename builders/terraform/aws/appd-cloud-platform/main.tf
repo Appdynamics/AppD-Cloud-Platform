@@ -23,7 +23,7 @@ data "aws_ami" "appd_cloud_platform_ha_centos79" {
 # Modules ------------------------------------------------------------------------------------------
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
-  version = ">= 3.0"
+  version = ">= 3.1"
 
   name = "VPC-${var.resource_name_prefix}-${local.current_date}"
   cidr = var.aws_vpc_cidr
@@ -66,7 +66,7 @@ module "security_group" {
       to_port     = 9191
       protocol    = "tcp"
       description = "AppDynamics Enterprise Console HTTP port"
-      cidr_blocks = "0.0.0.0/0"
+      cidr_blocks = var.aws_ssh_ingress_cidr_blocks
     },
     {
       from_port   = 8090
@@ -116,7 +116,7 @@ module "enterprise_console" {
   tags                 = var.resource_tags
 
   subnet_id                   = tolist(module.vpc.public_subnets)[0]
-  vpc_security_group_ids      = [module.security_group.this_security_group_id]
+  vpc_security_group_ids      = [module.security_group.security_group_id]
   associate_public_ip_address = true
 
   user_data_base64 = base64encode(templatefile("${path.module}/templates/user-data-sh.tmpl", {
@@ -144,7 +144,7 @@ module "controller" {
   tags                 = var.resource_tags
 
   subnet_id                   = tolist(module.vpc.public_subnets)[0]
-  vpc_security_group_ids      = [module.security_group.this_security_group_id]
+  vpc_security_group_ids      = [module.security_group.security_group_id]
   associate_public_ip_address = true
 
   user_data_base64 = base64encode(templatefile("${path.module}/templates/user-data-sh.tmpl", {
@@ -172,7 +172,7 @@ module "events_service" {
   tags                 = var.resource_tags
 
   subnet_id                   = tolist(module.vpc.public_subnets)[0]
-  vpc_security_group_ids      = [module.security_group.this_security_group_id]
+  vpc_security_group_ids      = [module.security_group.security_group_id]
   associate_public_ip_address = true
 
   user_data_base64 = base64encode(templatefile("${path.module}/templates/user-data-sh.tmpl", {
@@ -200,7 +200,7 @@ module "eum_server" {
   tags                 = var.resource_tags
 
   subnet_id                   = tolist(module.vpc.public_subnets)[0]
-  vpc_security_group_ids      = [module.security_group.this_security_group_id]
+  vpc_security_group_ids      = [module.security_group.security_group_id]
   associate_public_ip_address = true
 
   user_data_base64 = base64encode(templatefile("${path.module}/templates/user-data-sh.tmpl", {
@@ -218,7 +218,7 @@ module "controller_elb" {
 
   name            = "Controller-ELB-${var.resource_name_prefix}-${local.current_date}"
   subnets         = tolist(module.vpc.public_subnets)
-  security_groups = [module.security_group.this_security_group_id]
+  security_groups = [module.security_group.security_group_id]
   internal        = false
   create_elb      = true
 
@@ -251,7 +251,7 @@ module "events_service_elb" {
 
   name            = "Events-Service-ELB-${var.resource_name_prefix}-${local.current_date}"
   subnets         = tolist(module.vpc.public_subnets)
-  security_groups = [module.security_group.this_security_group_id]
+  security_groups = [module.security_group.security_group_id]
   internal        = false
   create_elb      = true
 
@@ -340,7 +340,7 @@ EOD
     working_dir = "../../../../provisioners/ansible/appd-cloud-platform/roles/appdynamics.apm-platform-ha/files"
     command     = <<EOD
 cat <<EOF > controller_elb_dns_name.txt
-${format("http://%s:80", lower(module.controller_elb.this_elb_dns_name))}
+${format("http://%s:80", lower(module.controller_elb.elb_dns_name))}
 EOF
 EOD
   }
@@ -350,7 +350,7 @@ EOD
     working_dir = "../../../../provisioners/ansible/appd-cloud-platform/roles/appdynamics.apm-platform-ha/files"
     command     = <<EOD
 cat <<EOF > events_service_elb_dns_name.txt
-${format("http://%s:80", lower(module.events_service_elb.this_elb_dns_name))}
+${format("http://%s:80", lower(module.events_service_elb.elb_dns_name))}
 EOF
 EOD
   }
