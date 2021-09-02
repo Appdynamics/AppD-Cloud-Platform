@@ -75,8 +75,7 @@ variable "aws_ec2_source_ami_filter" {
 variable "aws_ec2_instance_type" {
   description = "AWS EC2 instance type."
   type        = string
-  default     = "r5a.large"
-# default     = "t2.nano"
+  default     = "m5a.xlarge"
 }
 
 variable "resource_name_prefix" {

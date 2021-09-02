@@ -111,7 +111,6 @@ variable "gcp_machine_type" {
   description = "GCE machine type to create."
   type        = string
   default     = "e2-standard-4"
-# default     = "n1-standard-1"
 }
 
 variable "gcp_resource_name_prefix" {
