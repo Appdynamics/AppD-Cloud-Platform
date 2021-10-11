@@ -262,9 +262,9 @@ __AppD-Cloud-Platform-HA VM__ - The following utilities and application performa
 -	jq 1.6 (command-line JSON processor)
 -	MySQL Shell 8.0.26
 -	Python 2.7.5
-	-	Pip 21.2.4
+	-	Pip 21.3
 -	Python 3.6.8
-	-	Pip 21.2.4
+	-	Pip 21.3
 -	VIM - Vi IMproved 8.2
 -	yq 4.13.4 (command-line YAML processor)
 

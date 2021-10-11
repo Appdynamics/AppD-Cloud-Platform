@@ -23,7 +23,7 @@ Currently, the VMs consist of these types:
 
 To build the AppD Cloud Platform VM images, the following open source software needs to be installed on the host macOS machine:
 
--	Homebrew 3.2.15
+-	Homebrew 3.2.16
 	-	Command Line Tools (CLT) for Xcode
 -	Packer 1.7.6
 -	Git 2.33.0
@@ -36,7 +36,7 @@ Perform the following steps to install the needed software:
 
     **NOTE:** Most Homebrew formulae require a compiler. A handful require a full Xcode installation. You can install [Xcode](https://itunes.apple.com/us/app/xcode/id497799835), the [CLT](https://developer.apple.com/downloads), or both; Homebrew supports all three configurations. Downloading Xcode may require an Apple Developer account on older versions of Mac OS X. Sign up for free [here](https://developer.apple.com/register/index.action).  
 
-2.	Install the [Homebrew 3.2.15](https://brew.sh/) package manager for macOS 64-bit. Paste the following into a macOS Terminal prompt:  
+2.	Install the [Homebrew 3.2.16](https://brew.sh/) package manager for macOS 64-bit. Paste the following into a macOS Terminal prompt:  
     `$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"`
 
 3.	Install [Packer 1.7.6](https://packer.io/) for macOS 64-bit.  
@@ -54,7 +54,7 @@ Perform the following steps to install the needed software:
 
     ```bash
     $ brew --version
-    Homebrew 3.2.15
+    Homebrew 3.2.16
     $ brew doctor
     Your system is ready to brew.
 
