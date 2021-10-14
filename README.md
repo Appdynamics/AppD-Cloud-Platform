@@ -89,10 +89,10 @@ so on. *However, __Windows__ is NOT currently supported for the Ansible control 
 The following open source software needs to be installed on the host macOS machine:
 
 -	Homebrew 3.2.16
--	Git 2.33.0
+-	Git 2.33.1
 -	Packer 1.7.6
--	Terraform 1.0.8
--	Ansible 4.6.0
+-	Terraform 1.0.9
+-	Ansible 4.7.0
 
 Perform the following steps to install the needed software:
 
@@ -101,7 +101,7 @@ Perform the following steps to install the needed software:
     $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     ```
 
-2.	Install [Git 2.33.0](https://git-scm.com/downloads) for macOS 64-bit.  
+2.	Install [Git 2.33.1](https://git-scm.com/downloads) for macOS 64-bit.  
     ```bash
     $ brew install git
     ```
@@ -112,13 +112,13 @@ Perform the following steps to install the needed software:
     $ brew install hashicorp/tap/packer
     ```
 
-4.	Install [Terraform 1.0.8](https://www.terraform.io/downloads.html) for macOS 64-bit.  
+4.	Install [Terraform 1.0.9](https://www.terraform.io/downloads.html) for macOS 64-bit.  
     ```bash
     $ brew tap hashicorp/tap
     $ brew install hashicorp/tap/terraform
     ```
 
-5.	Install [Ansible 4.6.0](https://ansible.com/) for macOS 64-bit.  
+5.	Install [Ansible 4.7.0](https://ansible.com/) for macOS 64-bit.  
     ```bash
     $ brew install ansible
     ```
@@ -132,16 +132,16 @@ Perform the following steps to install the needed software:
     Homebrew 3.2.16
 
     $ git --version
-    git version 2.33.0
+    git version 2.33.1
 
     $ packer --version
     1.7.6
 
     $ terraform --version
-    Terraform v1.0.8
+    Terraform v1.0.9
 
     $ ansible --version
-    ansible 4.6.0
+    ansible 4.7.0
     ...
     ```
 

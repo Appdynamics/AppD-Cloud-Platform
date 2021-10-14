@@ -244,7 +244,7 @@ To prepare for the build, perform the following steps:
 
 __AppD-Cloud-Platform-HA VM__ - The following utilities and application performance management applications are pre-installed:
 
--	Ansible 2.9.26
+-	Ansible 2.9.27
 -	AppDynamics Enterprise Console 21.4.6 Build 24635
 	-	AppDynamics Controller 21.4.6 Build 1382
 	-	AppDynamics Events Service 4.5.2 Build 20651
@@ -253,7 +253,7 @@ __AppD-Cloud-Platform-HA VM__ - The following utilities and application performa
 	-	Docker Bash Completion
 	-	Docker Compose 1.29.2
 	-	Docker Compose Bash Completion
--	Git 2.33.0
+-	Git 2.33.1
 	-	Git Bash Completion
 	-	Git-Flow 1.12.3 (AVH Edition)
 	-	Git-Flow Bash Completion
