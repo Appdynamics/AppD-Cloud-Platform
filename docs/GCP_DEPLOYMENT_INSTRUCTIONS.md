@@ -253,7 +253,7 @@ __AppD-Cloud-Platform-HA VM__ - The following utilities and application performa
 	-	Docker Bash Completion
 	-	Docker Compose 1.29.2
 	-	Docker Compose Bash Completion
--	Git 2.34.0
+-	Git 2.34.1
 	-	Git Bash Completion
 	-	Git-Flow 1.12.3 (AVH Edition)
 	-	Git-Flow Bash Completion
