@@ -102,7 +102,7 @@ module "security_group" {
 
 module "enterprise_console" {
   source  = "terraform-aws-modules/ec2-instance/aws"
-  version = ">= 3.3"
+  version = ">= 3.4"
 
   instance_count = 1
   num_suffix_format = "-%02d"
@@ -130,7 +130,7 @@ module "enterprise_console" {
 
 module "controller" {
   source  = "terraform-aws-modules/ec2-instance/aws"
-  version = ">= 3.3"
+  version = ">= 3.4"
 
   instance_count = 2
   num_suffix_format = "-%02d"
@@ -158,7 +158,7 @@ module "controller" {
 
 module "events_service" {
   source  = "terraform-aws-modules/ec2-instance/aws"
-  version = ">= 3.3"
+  version = ">= 3.4"
 
   instance_count = 3
   num_suffix_format = "-%02d"
@@ -186,7 +186,7 @@ module "events_service" {
 
 module "eum_server" {
   source  = "terraform-aws-modules/ec2-instance/aws"
-  version = ">= 3.3"
+  version = ">= 3.4"
 
   instance_count = 1
   num_suffix_format = "-%02d"
