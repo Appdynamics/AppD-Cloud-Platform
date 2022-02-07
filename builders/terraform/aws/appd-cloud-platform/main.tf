@@ -23,7 +23,7 @@ data "aws_ami" "appd_cloud_platform_ha_centos79" {
 # Modules ------------------------------------------------------------------------------------------
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
-  version = ">= 3.11"
+  version = ">= 3.12"
 
   name = "VPC-${var.resource_name_prefix}-${local.current_date}"
   cidr = var.aws_vpc_cidr
