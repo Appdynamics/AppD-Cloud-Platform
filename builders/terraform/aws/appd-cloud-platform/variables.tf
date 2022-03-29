@@ -69,7 +69,7 @@ variable "aws_ec2_user_name" {
 variable "aws_ec2_source_ami_filter" {
   description = "AWS EC2 source AMI disk image filter."
   type        = string
-  default     = "AppD-Cloud-Platform-21412-HA-CentOS79-AMI-*"
+  default     = "AppD-Cloud-Platform-21413-HA-CentOS79-AMI-*"
 }
 
 variable "aws_ec2_instance_type" {
