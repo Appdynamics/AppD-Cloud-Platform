@@ -4,6 +4,7 @@
       "type": "amazon-ebs",
       "access_key": "{{user `aws_access_key`}}",
       "secret_key": "{{user `aws_secret_key`}}",
+      "token": "{{user `aws_session_token`}}",
       "region": "{{user `aws_ami_region`}}",
       "source_ami_filter": {
         "filters": {
@@ -16,6 +17,7 @@
         "most_recent": true
       },
       "ami_description": "{{user `aws_ami_description`}}",
+      "encrypt_boot": true,
       "instance_type": "{{user `aws_ec2_instance_type`}}",
       "ssh_username": "{{user `aws_ec2_username`}}",
       "temporary_security_group_source_cidrs": "{{user `aws_ec2_temporary_source_cidrs`}}",
@@ -23,6 +25,7 @@
       "launch_block_device_mappings": [
         {
           "device_name": "/dev/sda1",
+          "encrypted": true,
           "volume_size": "{{user `aws_ec2_boot_disk_size`}}",
           "volume_type": "gp2",
           "delete_on_termination": "true"
@@ -114,6 +117,9 @@
     }
   ],
   "variables": {
+    "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
+    "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
+    "aws_session_token": "{{env `AWS_SESSION_TOKEN`}}",
     "aws_ami_name": "AppD-Cloud-Platform-21413-HA-CentOS79-AMI",
     "aws_ami_description": "AppDynamics Cloud Platform 21.4.13 HA configuration on CentOS 7.9. Log-in with user 'centos' using an SSH key-pair. All 'admin' and database passwords are 'welcome1'. AMI generated using the AppDynamics Cloud Platform Project.",
     "aws_ami_owner": "{{env `aws_ami_owner`}}",
