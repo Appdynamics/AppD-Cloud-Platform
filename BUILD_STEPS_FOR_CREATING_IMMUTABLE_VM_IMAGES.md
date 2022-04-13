@@ -23,10 +23,10 @@ Currently, the VMs consist of these types:
 
 To build the AppD Cloud Platform VM images, the following open source software needs to be installed on the host macOS machine:
 
--	Homebrew 3.4.5
+-	Homebrew 3.4.6
 	-	Command Line Tools (CLT) for Xcode
 -	Packer 1.8.0
--	Git 2.35.1
+-	Git 2.35.2
 -	jq 1.6
 
 Perform the following steps to install the needed software:
@@ -36,13 +36,13 @@ Perform the following steps to install the needed software:
 
     **NOTE:** Most Homebrew formulae require a compiler. A handful require a full Xcode installation. You can install [Xcode](https://itunes.apple.com/us/app/xcode/id497799835), the [CLT](https://developer.apple.com/downloads), or both; Homebrew supports all three configurations. Downloading Xcode may require an Apple Developer account on older versions of Mac OS X. Sign up for free [here](https://developer.apple.com/register/index.action).  
 
-2.	Install the [Homebrew 3.4.5](https://brew.sh/) package manager for macOS 64-bit. Paste the following into a macOS Terminal prompt:  
+2.	Install the [Homebrew 3.4.6](https://brew.sh/) package manager for macOS 64-bit. Paste the following into a macOS Terminal prompt:  
     `$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"`
 
 3.	Install [Packer 1.8.0](https://packer.io/) for macOS 64-bit.  
     `$ brew install packer`  
 
-4.	Install [Git 2.35.1](https://git-scm.com/downloads) for macOS 64-bit.  
+4.	Install [Git 2.35.2](https://git-scm.com/downloads) for macOS 64-bit.  
     `$ brew install git`  
 
 5.	Install [jq 1.6](https://stedolan.github.io/jq/) for macOS 64-bit.  
@@ -54,7 +54,7 @@ Perform the following steps to install the needed software:
 
     ```bash
     $ brew --version
-    Homebrew 3.4.5
+    Homebrew 3.4.6
     $ brew doctor
     Your system is ready to brew.
 
@@ -62,7 +62,7 @@ Perform the following steps to install the needed software:
     1.8.0
 
     $ git --version
-    git version 2.35.1
+    git version 2.35.2
 
     $ jq --version
     jq-1.6
@@ -81,7 +81,7 @@ Perform the following steps to install the needed software:
 To build the AppD Cloud Platform immutable VM images, the following open source software needs to be installed on the host Windows machine:
 
 -	Packer 1.8.0
--	Git 2.35.1 for Win64
+-	Git 2.35.2 for Win64
 -	jq 1.6
 
 Perform the following steps to install the needed software:
@@ -90,7 +90,7 @@ Perform the following steps to install the needed software:
     Create suggested install folder and extract contents of ZIP file to:  
     `C:\HashiCorp\Packer\bin`  
 
-2.	Install [Git 2.35.1](https://github.com/git-for-windows/git/releases/download/v2.35.1.windows.1/Git-2.35.1-64-bit.exe) for Windows 64-bit.
+2.	Install [Git 2.35.2](https://github.com/git-for-windows/git/releases/download/v2.35.2.windows.1/Git-2.35.2-64-bit.exe) for Windows 64-bit.
 
 3.	Install [jq 1.6](https://github.com/stedolan/jq/releases/download/jq-1.6/jq-win64.exe) for Windows 64-bit.  
     Create suggested install folder and rename binary to:  
@@ -116,7 +116,7 @@ Perform the following steps to install the needed software:
     1.8.0
 
     $ git --version
-    git version 2.35.1.windows.1
+    git version 2.35.2.windows.1
 
     $ jq --version
     jq-1.6
