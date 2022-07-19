@@ -146,7 +146,7 @@ Quota project "test-appd-cloud-platform" was added to ADC which can be used by G
 
 Follow these instructions to build the GCP Compute Engine CentOS 7.9 image:
 
--	__AppD-Cloud-Platform-HA VM__: A stand-alone VM with an AppDynamics Cloud Platform 21.4.15 HA configuration on CentOS 7.9.
+-	__AppD-Cloud-Platform-HA VM__: A stand-alone VM with an AppDynamics Cloud Platform 21.4.16 HA configuration on CentOS 7.9.
 
 Before building the AppD Cloud Platform HA VM images for GCP, it is recommended that you install the
 Google Cloud SDK (CLI). This will allow you to cleanup and delete any resources created by the Packer
@@ -245,8 +245,8 @@ To prepare for the build, perform the following steps:
 __AppD-Cloud-Platform-HA VM__ - The following utilities and application performance management applications are pre-installed:
 
 -	Ansible 2.9.27
--	AppDynamics Enterprise Console 21.4.15 Build 24750
-	-	AppDynamics Controller 21.4.15 Build 1558
+-	AppDynamics Enterprise Console 21.4.16 Build 24764
+	-	AppDynamics Controller 21.4.16 Build 1589
 	-	AppDynamics Events Service 4.5.2 Build 20651
 	-	AppDynamics EUM Server 21.4.4 Build 34564
 -	Docker 20.10.17 CE
@@ -266,7 +266,7 @@ __AppD-Cloud-Platform-HA VM__ - The following utilities and application performa
 -	Python 3.6.8
 	-	Pip 22.1.2
 -	VIM - Vi IMproved 9.0
--	yq 4.25.3 (command-line YAML processor)
+-	yq 4.26.1 (command-line YAML processor)
 
 ## Deploy the Infrastructure with Terraform
 
