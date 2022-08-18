@@ -42,7 +42,7 @@ module "vpc" {
 
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = ">= 4.10"
+  version = ">= 4.11"
 
   name        = "SG-${var.resource_name_prefix}-${local.current_date}"
   description = "Security group for example usage with EC2 instance"
@@ -115,6 +115,11 @@ module "enterprise_console" {
   key_name             = "AppD-Cloud-Platform"
   tags                 = var.resource_tags
 
+  capacity_reservation_specification = {
+    capacity_reservation_preference = "none"
+#   capacity_reservation_preference = "open"
+  }
+
   subnet_id                   = tolist(module.vpc.public_subnets)[0]
   vpc_security_group_ids      = [module.security_group.security_group_id]
   associate_public_ip_address = true
@@ -142,6 +147,11 @@ module "controller" {
   iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile.id
   key_name             = "AppD-Cloud-Platform"
   tags                 = var.resource_tags
+
+  capacity_reservation_specification = {
+    capacity_reservation_preference = "none"
+#   capacity_reservation_preference = "open"
+  }
 
   subnet_id                   = tolist(module.vpc.public_subnets)[0]
   vpc_security_group_ids      = [module.security_group.security_group_id]
@@ -171,6 +181,11 @@ module "events_service" {
   key_name             = "AppD-Cloud-Platform"
   tags                 = var.resource_tags
 
+  capacity_reservation_specification = {
+    capacity_reservation_preference = "none"
+#   capacity_reservation_preference = "open"
+  }
+
   subnet_id                   = tolist(module.vpc.public_subnets)[0]
   vpc_security_group_ids      = [module.security_group.security_group_id]
   associate_public_ip_address = true
@@ -198,6 +213,11 @@ module "eum_server" {
   iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile.id
   key_name             = "AppD-Cloud-Platform"
   tags                 = var.resource_tags
+
+  capacity_reservation_specification = {
+    capacity_reservation_preference = "none"
+#   capacity_reservation_preference = "open"
+  }
 
   subnet_id                   = tolist(module.vpc.public_subnets)[0]
   vpc_security_group_ids      = [module.security_group.security_group_id]
