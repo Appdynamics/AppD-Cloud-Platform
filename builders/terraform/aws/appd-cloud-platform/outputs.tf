@@ -1,3 +1,4 @@
+# Outputs ------------------------------------------------------------------------------------------
 output "aws_region" {
   description = "AWS region."
   value       = var.aws_region
@@ -40,22 +41,23 @@ output "aws_ec2_instance_type" {
 
 output "ids" {
   description = "List of IDs of instances."
-  value       = flatten([toset(module.enterprise_console.id), toset(module.controller.id), toset(module.events_service.id), toset(module.eum_server.id)])
+  value       = flatten([module.enterprise_console.id, toset(flatten([for vm in module.controller : vm.id])), toset(flatten([for vm in module.events_service : vm.id])), module.eum_server.id])
 }
 
 output "private_ips" {
   description = "List of private IP addresses assigned to the instances."
-  value       = flatten([toset(module.enterprise_console.private_ip), toset(module.controller.private_ip), toset(module.events_service.private_ip), toset(module.eum_server.private_ip)])
+  value       = flatten([module.enterprise_console.private_ip, toset(flatten([for vm in module.controller : vm.private_ip])), toset(flatten([for vm in module.events_service : vm.private_ip])), module.eum_server.private_ip])
 }
 
 output "public_ips" {
   description = "List of public IP addresses assigned to the instances."
-  value       = flatten([toset(module.enterprise_console.public_ip), toset(module.controller.public_ip), toset(module.events_service.public_ip), toset(module.eum_server.public_ip)])
+  value       = flatten([module.enterprise_console.public_ip, toset(flatten([for vm in module.controller : vm.public_ip])), toset(flatten([for vm in module.events_service : vm.public_ip])), module.eum_server.public_ip])
 }
 
 output "public_dns" {
   description = "List of public DNS names assigned to the instances."
-  value       = flatten([toset(module.enterprise_console.public_dns), toset(module.controller.public_dns), toset(module.events_service.public_dns), toset(module.eum_server.public_dns)])
+  value       = flatten([module.enterprise_console.public_dns, toset(flatten([for vm in module.controller : vm.public_dns])), toset(flatten([for vm in module.events_service : vm.public_dns])), module.eum_server.public_dns])
+# value       = flatten([toset(module.enterprise_console.public_dns), toset(flatten([for vm in module.controller : vm.public_dns])), toset(flatten([for vm in module.events_service : vm.public_dns])), toset(module.eum_server.public_dns)])
 }
 
 output "vpc_id" {
@@ -76,16 +78,6 @@ output "vpc_public_subnet_ids" {
 output "vpc_private_subnet_ids" {
   description = "A list of IDs of private subnets."
   value       = tolist(module.vpc.private_subnets)
-}
-
-output "vpc_security_group_ids" {
-  description = "List of VPC security group ids assigned to the instances."
-  value       = toset(flatten([toset(module.enterprise_console.vpc_security_group_ids), toset(module.controller.vpc_security_group_ids), toset(module.events_service.vpc_security_group_ids), toset(module.eum_server.vpc_security_group_ids)]))
-}
-
-output "root_block_device_volume_ids" {
-  description = "List of volume IDs of root block devices of instances."
-  value       = flatten([toset(module.enterprise_console.root_block_device_volume_ids), toset(module.controller.root_block_device_volume_ids), toset(module.events_service.root_block_device_volume_ids), toset(module.eum_server.root_block_device_volume_ids)])
 }
 
 output "controller_elb_id" {
@@ -110,5 +102,5 @@ output "events_service_elb_dns_name" {
 
 output "resource_tags" {
   description = "List of AWS resource tags."
-  value       = module.enterprise_console.tags
+  value       = module.enterprise_console.tags_all
 }

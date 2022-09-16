@@ -1,34 +1,47 @@
 # Providers ----------------------------------------------------------------------------------------
 provider "aws" {
-  region  = var.aws_region
+  region = var.aws_region
 }
 
 # Locals -------------------------------------------------------------------------------------------
 locals {
+  # format current date for convenience.
   current_date = formatdate("YYYY-MM-DD", timestamp())
+
+  # create range of formatted controller node numbers.
+  controller_for_each = toset([ for i in range(1, var.controller_node_count + 1) : format("%02d", i) ])
+
+  # create range of formatted events service node numbers.
+  events_service_for_each = toset([ for i in range(1, var.events_service_node_count + 1) : format("%02d", i) ])
+
+  # create vm ssh ingress cidr block list without duplicates.
+  vm_ssh_ingress_cidr_blocks = join(",", distinct(tolist([var.aws_ssh_ingress_cidr_blocks, var.cisco_ssh_ingress_cidr_blocks])))
 }
 
 # Data Sources -------------------------------------------------------------------------------------
+data "aws_availability_zones" "available" {
+}
+
 # data sources to get ami details.
 data "aws_ami" "appd_cloud_platform_ha_centos79" {
   most_recent = true
   owners      = ["self"]
 
   filter {
-    name = "name"
+    name   = "name"
     values = [var.aws_ec2_source_ami_filter]
   }
 }
 
 # Modules ------------------------------------------------------------------------------------------
 module "vpc" {
-  source = "terraform-aws-modules/vpc/aws"
+  source  = "terraform-aws-modules/vpc/aws"
   version = ">= 3.14"
 
   name = "VPC-${var.resource_name_prefix}-${local.current_date}"
-  cidr = var.aws_vpc_cidr
+  cidr = var.aws_vpc_cidr_block
 
-  azs             = var.aws_availability_zones
+  azs             = data.aws_availability_zones.available.names
   public_subnets  = var.aws_vpc_public_subnets
   private_subnets = var.aws_vpc_private_subnets
 
@@ -59,14 +72,14 @@ module "security_group" {
       to_port     = 22
       protocol    = "tcp"
       description = "SSH port"
-      cidr_blocks = var.aws_ssh_ingress_cidr_blocks
+      cidr_blocks = local.vm_ssh_ingress_cidr_blocks
     },
     {
       from_port   = 9191
       to_port     = 9191
       protocol    = "tcp"
       description = "AppDynamics Enterprise Console HTTP port"
-      cidr_blocks = var.aws_ssh_ingress_cidr_blocks
+      cidr_blocks = local.vm_ssh_ingress_cidr_blocks
     },
     {
       from_port   = 8090
@@ -104,15 +117,11 @@ module "enterprise_console" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = ">= 4.1"
 
-  instance_count = 1
-  num_suffix_format = "-%02d"
-  use_num_suffix = false
-
   name                 = "Enterprise-Console-${var.resource_name_prefix}-${local.current_date}-Node"
   ami                  = data.aws_ami.appd_cloud_platform_ha_centos79.id
   instance_type        = var.aws_ec2_instance_type
   iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile.id
-  key_name             = "AppD-Cloud-Platform"
+  key_name             = var.aws_ec2_ssh_pub_key_name
   tags                 = var.resource_tags
 
   capacity_reservation_specification = {
@@ -137,15 +146,13 @@ module "controller" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = ">= 4.1"
 
-  instance_count = 2
-  num_suffix_format = "-%02d"
-  use_num_suffix = true
+  for_each = local.controller_for_each
 
-  name                 = "Controller-${var.resource_name_prefix}-${local.current_date}-Node"
+  name                 = "Controller-${var.resource_name_prefix}-${local.current_date}-Node-${each.key}"
   ami                  = data.aws_ami.appd_cloud_platform_ha_centos79.id
   instance_type        = var.aws_ec2_instance_type
   iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile.id
-  key_name             = "AppD-Cloud-Platform"
+  key_name             = var.aws_ec2_ssh_pub_key_name
   tags                 = var.resource_tags
 
   capacity_reservation_specification = {
@@ -170,15 +177,13 @@ module "events_service" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = ">= 4.1"
 
-  instance_count = 3
-  num_suffix_format = "-%02d"
-  use_num_suffix = true
+  for_each = local.events_service_for_each
 
-  name                 = "Events-Service-${var.resource_name_prefix}-${local.current_date}-Node"
+  name                 = "Events-Service-${var.resource_name_prefix}-${local.current_date}-Node-${each.key}"
   ami                  = data.aws_ami.appd_cloud_platform_ha_centos79.id
   instance_type        = var.aws_ec2_instance_type
   iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile.id
-  key_name             = "AppD-Cloud-Platform"
+  key_name             = var.aws_ec2_ssh_pub_key_name
   tags                 = var.resource_tags
 
   capacity_reservation_specification = {
@@ -203,15 +208,11 @@ module "eum_server" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = ">= 4.1"
 
-  instance_count = 1
-  num_suffix_format = "-%02d"
-  use_num_suffix = false
-
   name                 = "EUM-Server-${var.resource_name_prefix}-${local.current_date}-Node"
   ami                  = data.aws_ami.appd_cloud_platform_ha_centos79.id
   instance_type        = var.aws_ec2_instance_type
   iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile.id
-  key_name             = "AppD-Cloud-Platform"
+  key_name             = var.aws_ec2_ssh_pub_key_name
   tags                 = var.resource_tags
 
   capacity_reservation_specification = {
@@ -260,8 +261,9 @@ module "controller_elb" {
   }
 
   # elb attachments.
-  number_of_instances = length(module.controller.id)
-  instances           = module.controller.id
+  number_of_instances = var.controller_node_count
+# number_of_instances = length(toset(flatten([for vm in module.controller : vm.id])))
+  instances           = toset(flatten([for vm in module.controller : vm.id]))
   tags                = var.resource_tags
 }
 
@@ -293,8 +295,9 @@ module "events_service_elb" {
   }
 
   # elb attachments.
-  number_of_instances = length(module.events_service.id)
-  instances           = module.events_service.id
+  number_of_instances = var.events_service_node_count
+# number_of_instances = length(toset(flatten([for vm in module.events_service : vm.id])))
+  instances           = toset(flatten([for vm in module.events_service : vm.id]))
   tags                = var.resource_tags
 }
 
@@ -317,21 +320,21 @@ resource "aws_iam_instance_profile" "ec2_instance_profile" {
 }
 
 resource "local_file" "private_ip_file" {
-  filename = "private-ip-file.txt"
-  content  = format("%s\n", join("\n", toset(module.enterprise_console.private_ip), toset(module.controller.private_ip), toset(module.events_service.private_ip), toset(module.eum_server.private_ip)))
+  filename        = "private-ip-file.txt"
+  content         = format("%s\n", join("\n", toset([module.enterprise_console.private_ip]), toset(flatten([for vm in module.controller : vm.private_ip])), toset(flatten([for vm in module.events_service : vm.private_ip])), toset([module.eum_server.private_ip])))
   file_permission = "0644"
 }
 
 resource "local_file" "public_ip_file" {
-  filename = "public-ip-file.txt"
-  content  = format("%s\n", join("\n", toset(module.enterprise_console.public_ip), toset(module.controller.public_ip), toset(module.events_service.public_ip), toset(module.eum_server.public_ip)))
+  filename        = "public-ip-file.txt"
+  content         = format("%s\n", join("\n", toset([module.enterprise_console.public_ip]), toset(flatten([for vm in module.controller : vm.public_ip])), toset(flatten([for vm in module.events_service : vm.public_ip])), toset([module.eum_server.public_ip])))
   file_permission = "0644"
 }
 
 resource "null_resource" "ansible_trigger" {
   # fire the ansible trigger when any ec2 instance requires re-provisioning.
   triggers = {
-    ec2_instance_ids = join(",", concat(module.enterprise_console.id, module.controller.id, module.events_service.id, module.eum_server.id))
+    ec2_instance_ids = join(",", concat([module.enterprise_console.id], flatten([for vm in module.controller : vm.id]), flatten([for vm in module.events_service : vm.id]), [module.eum_server.id]))
   }
 
   # execute the following 'local-exec' provisioners each time the trigger is invoked.
@@ -341,16 +344,16 @@ resource "null_resource" "ansible_trigger" {
     command     = <<EOD
 cat <<EOF > aws_hosts.inventory
 [enterprise_console]
-${join("\n", toset(module.enterprise_console.public_dns))}
+${join("\n", toset([module.enterprise_console.public_dns]))}
 
 [controller]
-${join("\n", toset(module.controller.public_dns))}
+${join("\n", toset(flatten([for vm in module.controller : vm.public_dns])))}
 
 [events_service]
-${join("\n", toset(module.events_service.public_dns))}
+${join("\n", toset(flatten([for vm in module.events_service : vm.public_dns])))}
 
 [eum_server]
-${join("\n", toset(module.eum_server.public_dns))}
+${join("\n", toset([module.eum_server.public_dns]))}
 EOF
 EOD
   }
@@ -378,12 +381,12 @@ EOD
   # delete the ansible public keys folder.
   provisioner "local-exec" {
     working_dir = "../../../../provisioners/ansible/appd-cloud-platform"
-    command = "rm -Rf public-keys*"
+    command     = "rm -Rf public-keys*"
   }
 
   # run ansible hello world playbook when the ec2 instances are ready.
   provisioner "local-exec" {
     working_dir = "../../../../provisioners/ansible/appd-cloud-platform"
-    command = "aws --region ${var.aws_region} ec2 wait instance-status-ok --instance-ids ${join(" ", toset(module.enterprise_console.id), toset(module.controller.id), toset(module.events_service.id), toset(module.eum_server.id))} && ansible-playbook -i aws_hosts.inventory roles/appdynamics.apm-platform-ha/tests/helloworld.yml"
+    command     = "aws --region ${var.aws_region} ec2 wait instance-status-ok --instance-ids ${join(" ", toset([module.enterprise_console.id]), toset(flatten([for vm in module.controller : vm.id])), toset(flatten([for vm in module.events_service : vm.id])), toset([module.eum_server.id]))} && ansible-playbook -i aws_hosts.inventory roles/appdynamics.apm-platform-ha/tests/helloworld.yml"
   }
 }
