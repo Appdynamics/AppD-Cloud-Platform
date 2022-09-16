@@ -16,7 +16,7 @@ data "google_compute_zones" "available" {
 
 # Modules ------------------------------------------------------------------------------------------
 module "instance_template" {
-  source  = "./modules/instance_template"
+  source = "./modules/instance_template"
 
   region               = var.gcp_region
   project_id           = var.gcp_project_id
@@ -36,7 +36,7 @@ module "instance_template" {
 }
 
 module "enterprise_console" {
-  source  = "./modules/compute_instance"
+  source = "./modules/compute_instance"
 
   num_instances  = 1
   use_num_suffix = false
@@ -58,7 +58,7 @@ module "enterprise_console" {
 }
 
 module "controller" {
-  source  = "./modules/compute_instance"
+  source = "./modules/compute_instance"
 
   num_instances  = 2
   use_num_suffix = true
@@ -80,7 +80,7 @@ module "controller" {
 }
 
 module "events_service" {
-  source  = "./modules/compute_instance"
+  source = "./modules/compute_instance"
 
   num_instances  = 3
   use_num_suffix = true
@@ -102,7 +102,7 @@ module "events_service" {
 }
 
 module "eum_server" {
-  source  = "./modules/compute_instance"
+  source = "./modules/compute_instance"
 
   num_instances  = 1
   use_num_suffix = false
@@ -184,7 +184,7 @@ resource "google_compute_firewall" "allow-ssh" {
 
   allow {
     protocol = "tcp"
-    ports = ["22"]
+    ports    = ["22"]
   }
 
   source_ranges = var.gcp_firewall_source_range
@@ -197,7 +197,7 @@ resource "google_compute_firewall" "allow-appd" {
 
   allow {
     protocol = "tcp"
-    ports = ["80", "443", "3306", "7001-7002", "8080", "8090", "8181", "9080-9081", "9191"]
+    ports    = ["80", "443", "3306", "7001-7002", "8080", "8090", "8181", "9080-9081", "9191"]
   }
 
   source_ranges = ["0.0.0.0/0"]
@@ -256,7 +256,7 @@ resource "google_compute_backend_service" "controller_backend_service" {
 }
 
 resource "google_compute_health_check" "controller_health_check" {
-  name   = "controller-health-check-${var.gcp_resource_name_prefix}-${local.current_date}"
+  name = "controller-health-check-${var.gcp_resource_name_prefix}-${local.current_date}"
 
   check_interval_sec  = 30
   healthy_threshold   = 2
@@ -265,7 +265,7 @@ resource "google_compute_health_check" "controller_health_check" {
 
   http_health_check {
     request_path = "/controller/rest/serverstatus"
-    port = 8090
+    port         = 8090
   }
 }
 
@@ -321,7 +321,7 @@ resource "google_compute_backend_service" "events_service_backend_service" {
 }
 
 resource "google_compute_health_check" "events_service_health_check" {
-  name   = "events-service-health-check-${var.gcp_resource_name_prefix}-${local.current_date}"
+  name = "events-service-health-check-${var.gcp_resource_name_prefix}-${local.current_date}"
 
   check_interval_sec  = 30
   healthy_threshold   = 2
@@ -330,7 +330,7 @@ resource "google_compute_health_check" "events_service_health_check" {
 
   http_health_check {
     request_path = "/healthcheck?pretty=true"
-    port = 9081
+    port         = 9081
   }
 }
 
@@ -345,7 +345,7 @@ resource "null_resource" "ansible_trigger" {
   # generate the ansible gcp hosts inventory.
   provisioner "local-exec" {
     working_dir = "../../../../provisioners/ansible/appd-cloud-platform"
-    command = <<EOD
+    command     = <<EOD
 cat <<EOF > gcp_hosts.inventory
 [enterprise_console]
 ${join("\n", toset(module.enterprise_console.nat_ip))}
@@ -385,6 +385,6 @@ EOD
   # delete the ansible public keys folder.
   provisioner "local-exec" {
     working_dir = "../../../../provisioners/ansible/appd-cloud-platform"
-    command = "rm -Rf public-keys*"
+    command     = "rm -Rf public-keys*"
   }
 }

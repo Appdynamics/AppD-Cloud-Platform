@@ -1,3 +1,4 @@
+# Outputs ------------------------------------------------------------------------------------------
 output "gcp_region" {
   description = "GCP region."
   value       = var.gcp_region
@@ -39,34 +40,37 @@ output "gcp_machine_type" {
 }
 
 output "gcp_enterprise_console_instances_self_links" {
-  description = "List of self-links for Enterprise Console compute instance"
+  description = "List of self-links for Enterprise Console compute instance."
   value       = module.enterprise_console.instances_self_links
 }
 
 output "gcp_controller_instances_self_links" {
-  description = "List of self-links for Controller compute instances"
+  description = "List of self-links for Controller compute instances."
   value       = module.controller.instances_self_links
 }
 
 output "gcp_events_service_instances_self_links" {
-  description = "List of self-links for Events Service compute instances"
+  description = "List of self-links for Events Service compute instances."
   value       = module.events_service.instances_self_links
 }
 
 output "gcp_eum_server_instances_self_links" {
-  description = "List of self-links for EUM Server compute instance"
+  description = "List of self-links for EUM Server compute instance."
   value       = module.eum_server.instances_self_links
 }
 
 output "gcp_instance_template_self_link" {
+  description = "List of self-links for instance template."
   value       = module.instance_template.self_link
 }
 
 output "gcp_instance_template_name" {
+  description = "Instance template name."
   value       = module.instance_template.name
 }
 
 output "gcp_instance_template_tags" {
+  description = "Instance template tags."
   value       = module.instance_template.tags
 }
 

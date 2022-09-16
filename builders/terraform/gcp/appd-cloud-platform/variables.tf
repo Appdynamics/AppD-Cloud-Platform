@@ -1,3 +1,4 @@
+# Variables ----------------------------------------------------------------------------------------
 variable "gcp_project_id" {
   description = "GCP Project ID."
   type        = string
@@ -28,32 +29,9 @@ variable "gcp_firewall_source_range" {
   default     = ["0.0.0.0/0"]
 }
 
-#variable "gcp_subnetwork" {
-#  description = "The subnetwork selflink to host the compute instances in"
-#}
-
-variable "gcp_enterprise_console_nat_ip" {
-  description = "Public ip address for Enterprise Console instance."
-  default     = null
-}
-
-variable "gcp_controller_nat_ip" {
-  description = "Public ip address for Controller instance."
-  default     = null
-}
-
-variable "gcp_events_service_nat_ip" {
-  description = "Public ip address for Events Service instance."
-  default     = null
-}
-
-variable "gcp_eum_server_nat_ip" {
-  description = "Public ip address for EUM Server instance."
-  default     = null
-}
-
 variable "gcp_network_tier" {
   description = "Network network_tier"
+  type        = string
   default     = "STANDARD"
 }
 
@@ -116,23 +94,23 @@ variable "gcp_machine_type" {
 variable "gcp_resource_name_prefix" {
   description = "Resource name prefix."
   type        = string
-  default     = "ha-terraform"
+  default     = "ha"
 }
 
 variable "gcp_service_account" {
   description = "Service account to attach to the instance. See https://www.terraform.io/docs/providers/google/r/compute_instance_template.html#service_account."
-  type = object({
+  type        = object({
     email  = string,
     scopes = set(string)
   })
-  default = {
-    email = "devops@gcp-appdcloudplatfo-nprd-68190.iam.gserviceaccount.com",
+  default     = {
+    email  = "devops@gcp-appdcloudplatfo-nprd-68190.iam.gserviceaccount.com",
     scopes = ["cloud-platform"]
   }
 }
 
 variable "gcp_ssh_pub_key_path" {
-  default     = "../../../../shared/keys/AppD-Cloud-Platform.pub"
+  default = "../../../../shared/keys/AppD-Cloud-Platform.pub"
 }
 
 variable "resource_labels" {
