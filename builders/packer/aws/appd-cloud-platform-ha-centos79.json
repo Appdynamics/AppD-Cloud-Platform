@@ -9,10 +9,10 @@
       "source_ami_filter": {
         "filters": {
           "virtualization-type": "hvm",
-          "name": "CentOS 7.9.2009 x86_64",
+          "name": "CentOS-7-2111*",
           "root-device-type": "ebs"
         },
-        "owners": ["125523088429"],
+        "owners": ["aws-marketplace"],
         "most_recent": true
       },
       "ami_description": "{{user `aws_ami_description`}}",
