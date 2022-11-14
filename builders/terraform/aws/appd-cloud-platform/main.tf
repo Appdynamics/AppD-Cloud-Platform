@@ -235,7 +235,7 @@ module "eum_server" {
 
 module "controller_elb" {
   source  = "terraform-aws-modules/elb/aws"
-  version = ">= 3.0"
+  version = ">= 4.0"
 
   name            = "Controller-ELB-${var.resource_name_prefix}-${local.current_date}"
   subnets         = tolist(module.vpc.public_subnets)
@@ -269,7 +269,7 @@ module "controller_elb" {
 
 module "events_service_elb" {
   source  = "terraform-aws-modules/elb/aws"
-  version = ">= 3.0"
+  version = ">= 4.0"
 
   name            = "Events-Service-ELB-${var.resource_name_prefix}-${local.current_date}"
   subnets         = tolist(module.vpc.public_subnets)
