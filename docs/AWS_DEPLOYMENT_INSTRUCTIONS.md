@@ -157,7 +157,7 @@ __APM-Platform VM__ - The following utilities and application performance manage
 -	Python 3.6.8
 	-	Pip 22.3.1
 -	VIM - Vi IMproved 9.0
--	yq 4.30.2 (command-line YAML processor)
+-	yq 4.30.4 (command-line YAML processor)
 
 __CWOM-Platform VM__ - The following utilities and workload optimization management applications are pre-installed:
 
@@ -177,14 +177,14 @@ __CWOM-Platform VM__ - The following utilities and workload optimization managem
 -	Python 3.6.8
 	-	Pip 22.3.1
 -	VIM - Vi IMproved 9.0
--	yq 4.30.2 (command-line YAML processor)
+-	yq 4.30.4 (command-line YAML processor)
 
 __LPAD VM__ - The following AWS CLI command-line tools and utilities are pre-installed:
 
 -	Amazon AWS CLI 2.8.12 (command-line interface)
 -	Amazon AWS EC2 Instance Metadata Query Tool (command-line interface)
 -	Amazon AWS EKS CLI [eksctl] 0.118.0 (command-line interface)
--	Amazon AWS Kubernetes Control CLI [kubectl] 1.21.2 (command-line interface)
+-	Amazon AWS Kubernetes Control CLI [kubectl] 1.21.14 (command-line interface)
 -	Ansible 2.9.27
 -	AppDynamics Node.js Serverless Tracer 21.11.348
 -	Docker 20.10.21 CE
@@ -210,4 +210,4 @@ __LPAD VM__ - The following AWS CLI command-line tools and utilities are pre-ins
 	-	Pip 22.3.1
 -	Serverless Framework CLI 3.24.1
 -	VIM - Vi IMproved 9.0
--	yq 4.30.2 (command-line YAML processor)
+-	yq 4.30.4 (command-line YAML processor)
