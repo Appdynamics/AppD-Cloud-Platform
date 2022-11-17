@@ -26,6 +26,9 @@ env_vars:
   user_docker_profile: "{{ ansible_env.user_docker_profile | default('true', true) }}"
   user_prompt_color: "{{ ansible_env.user_prompt_color | default('yellow', true) }}"
 
+  # appd enterprise console install parameters.
+  appd_enterprise_console_public_host: "{{ inventory_hostname }}"
+
   # appd controller install parameters.
   appd_controller_primary_host: "{{ ansible_env.appd_controller_primary_host | default('controller-node-01', true) }}"
   appd_controller_secondary_host: "{{ ansible_env.appd_controller_secondary_host | default('controller-node-02', true) }}"
@@ -54,5 +57,3 @@ env_vars:
 
   # appd cloud kickstart home folder.
   kickstart_home: "{{ ansible_env.kickstart_home | default('/opt/appd-cloud-kickstart', true) }}"
-
-

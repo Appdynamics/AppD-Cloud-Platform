@@ -68,3 +68,8 @@
 - name: import update controller configurations tasks
   include_tasks: update-appd-controller-configurations.yml
   when: "'enterprise_console' in group_names"
+
+# print appdynamics enterprise console url. --------------------------------------------------------
+- name: import print appd enterprise console url tasks
+  include_tasks: print-appd-enterprise-console-url.yml
+  when: "'enterprise_console' in group_names"

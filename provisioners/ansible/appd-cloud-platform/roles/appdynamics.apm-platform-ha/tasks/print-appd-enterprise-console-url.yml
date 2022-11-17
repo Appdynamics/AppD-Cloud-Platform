@@ -1,0 +1,5 @@
+---
+- name: print enterprise console url
+  debug:
+    msg: "Enterprise Console URL: http://{{ env_vars.appd_enterprise_console_public_host }}:9191/"
+  environment: "{{ env_vars }}"
