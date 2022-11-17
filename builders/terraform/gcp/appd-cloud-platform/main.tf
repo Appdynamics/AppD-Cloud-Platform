@@ -197,11 +197,24 @@ resource "google_compute_firewall" "allow-appd" {
 
   allow {
     protocol = "tcp"
-    ports    = ["80", "443", "7001-7002", "8080", "8090", "8181", "9080-9081", "9191"]
+    ports    = ["80", "443", "7001-7002", "8080", "8090", "8181", "9080-9081"]
   }
 
   source_ranges = ["0.0.0.0/0"]
 # target_tags   = ["allow-appd"]
+}
+
+resource "google_compute_firewall" "allow-appd-console" {
+  name    = "firewall-rule-allow-appd-console-${var.gcp_resource_name_prefix}-${local.current_date}"
+  network = google_compute_network.vpc.name
+
+  allow {
+    protocol = "tcp"
+    ports    = ["9191"]
+  }
+
+  source_ranges = var.gcp_firewall_source_range
+# target_tags   = ["allow-appd-console"]
 }
 
 # create controller load balancer. -----------------------------------------------------------------
