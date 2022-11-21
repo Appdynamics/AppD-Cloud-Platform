@@ -16,13 +16,48 @@ locals {
 
   # create vm ssh ingress cidr block list without duplicates.
   vm_ssh_ingress_cidr_blocks = join(",", distinct(tolist([var.aws_ssh_ingress_cidr_blocks, var.cisco_ssh_ingress_cidr_blocks])))
+
+  # define resource tagging here to ensure standardized naming conventions.
+  # node tag names for aws resources.
+  node_resource_tags = {
+    EnvironmentHome = var.resource_environment_home_tag
+    Owner           = var.resource_owner_tag
+    Event           = var.resource_event_tag
+    Project         = var.resource_project_tag
+    Date            = local.current_date
+  }
+
+  # cisco tag names for aws resources.
+  cisco_resource_tags = {
+    ResourceOwner         = var.resource_owner_email_tag
+    CiscoMailAlias        = var.resource_owner_email_tag
+    JIRAProject           = "NA"
+    DataClassification    = "Cisco Public"
+    JIRACreation          = "NA"
+    SecurityReview        = "NA"
+    Exception             = "NA"
+    Environment           = "NonProd"
+    DeploymentEnvironment = "NonProd"
+    DataTaxonomy          = "Cisco Operations Data"
+    CreatedBy             = data.aws_caller_identity.current.arn
+    IntendedPublic        = "True"
+    ContainsPII           = "False"
+    Service               = "AppDCloudPlatformHADeployment"
+    ApplicationName       = var.resource_project_tag
+    CostCenter            = var.resource_department_code_tag
+  }
+
+  # merge 'node_resource_tags' and 'cisco_resource_tags' into one set.
+  resource_tags = merge(local.node_resource_tags, local.cisco_resource_tags)
 }
 
 # Data Sources -------------------------------------------------------------------------------------
+data "aws_caller_identity" "current" {
+}
+
 data "aws_availability_zones" "available" {
 }
 
-# data sources to get ami details.
 data "aws_ami" "appd_cloud_platform_ha_centos79" {
   most_recent = true
   owners      = ["self"]
@@ -50,7 +85,7 @@ module "vpc" {
   enable_dns_hostnames = true
   enable_dns_support   = true
 
-  tags = var.resource_tags
+  tags = local.resource_tags
 }
 
 module "security_group" {
@@ -60,7 +95,7 @@ module "security_group" {
   name        = "SG-${var.resource_name_prefix}-${local.current_date}"
   description = "Security group for example usage with EC2 instance"
   vpc_id      = module.vpc.vpc_id
-  tags        = var.resource_tags
+  tags        = local.resource_tags
 
   ingress_cidr_blocks               = ["0.0.0.0/0"]
   ingress_rules                     = ["http-80-tcp", "http-8080-tcp", "https-443-tcp"]
@@ -122,7 +157,7 @@ module "enterprise_console" {
   instance_type        = var.aws_ec2_instance_type
   iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile.id
   key_name             = var.aws_ec2_ssh_pub_key_name
-  tags                 = var.resource_tags
+  tags                 = local.resource_tags
 
   capacity_reservation_specification = {
     capacity_reservation_preference = "none"
@@ -153,7 +188,7 @@ module "controller" {
   instance_type        = var.aws_ec2_instance_type
   iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile.id
   key_name             = var.aws_ec2_ssh_pub_key_name
-  tags                 = var.resource_tags
+  tags                 = local.resource_tags
 
   capacity_reservation_specification = {
     capacity_reservation_preference = "none"
@@ -184,7 +219,7 @@ module "events_service" {
   instance_type        = var.aws_ec2_instance_type
   iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile.id
   key_name             = var.aws_ec2_ssh_pub_key_name
-  tags                 = var.resource_tags
+  tags                 = local.resource_tags
 
   capacity_reservation_specification = {
     capacity_reservation_preference = "none"
@@ -213,7 +248,7 @@ module "eum_server" {
   instance_type        = var.aws_ec2_instance_type
   iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile.id
   key_name             = var.aws_ec2_ssh_pub_key_name
-  tags                 = var.resource_tags
+  tags                 = local.resource_tags
 
   capacity_reservation_specification = {
     capacity_reservation_preference = "none"
@@ -264,7 +299,7 @@ module "controller_elb" {
   number_of_instances = var.controller_node_count
 # number_of_instances = length(toset(flatten([for vm in module.controller : vm.id])))
   instances           = toset(flatten([for vm in module.controller : vm.id]))
-  tags                = var.resource_tags
+  tags                = local.resource_tags
 }
 
 module "events_service_elb" {
@@ -298,14 +333,14 @@ module "events_service_elb" {
   number_of_instances = var.events_service_node_count
 # number_of_instances = length(toset(flatten([for vm in module.events_service : vm.id])))
   instances           = toset(flatten([for vm in module.events_service : vm.id]))
-  tags                = var.resource_tags
+  tags                = local.resource_tags
 }
 
 # Resources ----------------------------------------------------------------------------------------
 resource "aws_iam_role" "ec2_access_role" {
   name               = "EC2-Access-Role-${var.resource_name_prefix}-${local.current_date}"
   assume_role_policy = file("${path.module}/policies/ec2-assume-role-policy.json")
-  tags               = var.resource_tags
+  tags               = local.resource_tags
 }
 
 resource "aws_iam_role_policy" "ec2_access_policy" {
@@ -315,7 +350,7 @@ resource "aws_iam_role_policy" "ec2_access_policy" {
 }
 
 resource "aws_iam_instance_profile" "ec2_instance_profile" {
-# name = "EC2-Instance-Profile-${var.resource_name_prefix}-${local.current_date}"
+  name = "EC2-Instance-Profile-${var.resource_name_prefix}-${local.current_date}"
   role = aws_iam_role.ec2_access_role.name
 }
 

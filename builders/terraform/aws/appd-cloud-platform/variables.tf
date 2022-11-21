@@ -107,12 +107,38 @@ variable "resource_name_prefix" {
   default     = "HA"
 }
 
-variable "resource_tags" {
-  description = "Tag names for AWS resources."
-  type        = map
-  default     = {
-    "Owner"   = "AppDynamics Cloud Channel Sales Team"
-    "Project" = "AppDynamics Cloud Platform"
-    "Event"   = "AppD Cloud Platform HA Deployment"
-  }
+variable "resource_environment_home_tag" {
+  description = "Resource environment home tag."
+  type        = string
+  default     = "AppD Cloud Platform HA Deployment"
+}
+
+variable "resource_owner_tag" {
+  description = "Resource owner tag."
+  type        = string
+  default     = "AppDynamics Cloud Channel Sales Team"
+}
+
+variable "resource_event_tag" {
+  description = "Resource event tag."
+  type        = string
+  default     = "AppD Cloud Platform HA Deployment"
+}
+
+variable "resource_project_tag" {
+  description = "Resource project tag."
+  type        = string
+  default     = "AppDynamics Cloud Platform"
+}
+
+variable "resource_owner_email_tag" {
+  description = "Resource owner email tag."
+  type        = string
+  default     = "ed.barberis@appdynamics.com"
+}
+
+variable "resource_department_code_tag" {
+  description = "Resource department code tag."
+  type        = string
+  default     = "020430800"
 }
