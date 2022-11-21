@@ -166,5 +166,5 @@ output "gcp_events_service_global_ip_address" {
 
 output "resource_labels" {
   description = "List of GCP resource labels."
-  value       = var.resource_labels
+  value       = local.resource_labels
 }

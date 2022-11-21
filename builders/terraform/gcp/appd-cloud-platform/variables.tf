@@ -24,9 +24,15 @@ variable "gcp_network" {
 }
 
 variable "gcp_firewall_source_range" {
-  description = "The source range for inbound ssh traffic"
+  description = "The source range for inbound ssh traffic external to GCP."
   type        = list
   default     = ["0.0.0.0/0"]
+}
+
+variable "cisco_firewall_source_range" {
+  description = "The source range for inbound ssh traffic from Cisco networks."
+  type        = list
+  default     = ["128.107.248.205/32", "72.163.220.53/32", "209.234.175.138/32", "173.38.208.173/32"]
 }
 
 variable "gcp_network_tier" {
@@ -97,6 +103,42 @@ variable "gcp_resource_name_prefix" {
   default     = "ha"
 }
 
+variable "resource_environment_home_label" {
+  description = "Resource environment home label."
+  type        = string
+  default     = "appd-cloud-platform-ha-deployment"
+}
+
+variable "resource_owner_label" {
+  description = "Resource owner label."
+  type        = string
+  default     = "appdynamics-cloud-channel-sales-team"
+}
+
+variable "resource_event_label" {
+  description = "Resource event label."
+  type        = string
+  default     = "appd-cloud-platform-ha-deployment"
+}
+
+variable "resource_project_label" {
+  description = "Resource project label."
+  type        = string
+  default     = "appdynamics-cloud-platform"
+}
+
+variable "resource_owner_email_label" {
+  description = "Resource owner email label."
+  type        = string
+  default     = "ebarberi-at-cisco-com"
+}
+
+variable "resource_department_code_label" {
+  description = "Resource department code label."
+  type        = string
+  default     = "020430800"
+}
+
 variable "gcp_service_account" {
   description = "Service account to attach to the instance. See https://www.terraform.io/docs/providers/google/r/compute_instance_template.html#service_account."
   type        = object({
@@ -111,14 +153,4 @@ variable "gcp_service_account" {
 
 variable "gcp_ssh_pub_key_path" {
   default = "../../../../shared/keys/AppD-Cloud-Platform.pub"
-}
-
-variable "resource_labels" {
-  description = "Label names for GCP resources."
-  type = map
-  default = {
-    "owner"   = "appdynamics-cloud-channel-sales-team"
-    "project" = "appdynamics-cloud-platform"
-    "event"   = "appd-cloud-platform-ha-deployment"
-  }
 }

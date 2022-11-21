@@ -7,7 +7,36 @@ provider "google" {
 
 # Locals -------------------------------------------------------------------------------------------
 locals {
+  # format current date for convenience.
   current_date = formatdate("YYYY-MM-DD", timestamp())
+
+  # create vm firewall source range list without duplicates.
+  vm_firewall_source_range = distinct(flatten([var.gcp_firewall_source_range, var.cisco_firewall_source_range]))
+# vm_firewall_source_range = join(",", distinct(tolist([var.gcp_firewall_source_range, var.cisco_firewall_source_range])))
+
+  # define resource labeling here to ensure standardized naming conventions.
+  # node label names for gcp resources.
+  node_resource_labels = {
+    environmenthome = var.resource_environment_home_label
+    owner           = var.resource_owner_label
+    event           = var.resource_event_label
+    project         = var.resource_project_label
+    date            = local.current_date
+  }
+
+  # cisco label names for gcp resources.
+  cisco_resource_labels = {
+    resourceowner         = var.resource_owner_email_label
+    ciscomailalias        = var.resource_owner_email_label
+    dataclassification    = "cisco-public"
+    environment           = "nonprod"
+    datataxonomy          = "cisco-operations-data"
+    applicationname       = var.resource_project_label
+    department_code       = var.resource_department_code_label
+  }
+
+  # merge 'node_resource_labels' and 'cisco_resource_labels' into one set.
+  resource_labels = merge(local.node_resource_labels, local.cisco_resource_labels)
 }
 
 # Data Sources -------------------------------------------------------------------------------------
@@ -32,7 +61,7 @@ module "instance_template" {
     ssh-keys = "${var.gcp_ssh_username}:${file(var.gcp_ssh_pub_key_path)}"
   }
 
-  labels = var.resource_labels
+  labels = local.resource_labels
 }
 
 module "enterprise_console" {
@@ -47,7 +76,7 @@ module "enterprise_console" {
   subnetwork        = google_compute_subnetwork.vpc-public-subnet-01.name
   hostname          = var.gcp_enterprise_console_hostname_prefix
   instance_template = module.instance_template.self_link
-  labels            = var.resource_labels
+  labels            = local.resource_labels
 
   access_config = [
     {
@@ -69,7 +98,7 @@ module "controller" {
   subnetwork        = google_compute_subnetwork.vpc-public-subnet-01.name
   hostname          = var.gcp_controller_hostname_prefix
   instance_template = module.instance_template.self_link
-  labels            = var.resource_labels
+  labels            = local.resource_labels
 
   access_config = [
     {
@@ -91,7 +120,7 @@ module "events_service" {
   subnetwork        = google_compute_subnetwork.vpc-public-subnet-01.name
   hostname          = var.gcp_events_service_hostname_prefix
   instance_template = module.instance_template.self_link
-  labels            = var.resource_labels
+  labels            = local.resource_labels
 
   access_config = [
     {
@@ -113,7 +142,7 @@ module "eum_server" {
   subnetwork        = google_compute_subnetwork.vpc-public-subnet-01.name
   hostname          = var.gcp_eum_server_hostname_prefix
   instance_template = module.instance_template.self_link
-  labels            = var.resource_labels
+  labels            = local.resource_labels
 
   access_config = [
     {
@@ -152,7 +181,7 @@ resource "google_compute_firewall" "allow-icmp" {
     protocol = "icmp"
   }
 
-  source_ranges = var.gcp_firewall_source_range
+  source_ranges = local.vm_firewall_source_range
 # target_tags   = ["allow-icmp"]
 }
 
@@ -187,7 +216,7 @@ resource "google_compute_firewall" "allow-ssh" {
     ports    = ["22"]
   }
 
-  source_ranges = var.gcp_firewall_source_range
+  source_ranges = local.vm_firewall_source_range
 # target_tags   = ["allow-ssh"]
 }
 
@@ -213,7 +242,7 @@ resource "google_compute_firewall" "allow-appd-console" {
     ports    = ["9191"]
   }
 
-  source_ranges = var.gcp_firewall_source_range
+  source_ranges = local.vm_firewall_source_range
 # target_tags   = ["allow-appd-console"]
 }
 
