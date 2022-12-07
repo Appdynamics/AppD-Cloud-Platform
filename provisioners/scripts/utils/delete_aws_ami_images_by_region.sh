@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #---------------------------------------------------------------------------------------------------
 # Delete the AppDynamics Cloud Platform project-specific AWS AMI's for the specified region.
 #

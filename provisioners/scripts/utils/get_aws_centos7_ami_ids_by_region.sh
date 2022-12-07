@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # get the latest aws source ami id's for centos 7 in each region. (currently supports north america and europe.)
 # NOTE: this script uses the 'jq' command-line json processor utility for formatting the output returned by the AWS CLI.
 

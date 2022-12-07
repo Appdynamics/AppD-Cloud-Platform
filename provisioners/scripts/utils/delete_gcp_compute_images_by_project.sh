@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #---------------------------------------------------------------------------------------------------
 # Delete the AppDynamics Cloud Kickstart project-specific GCP Compute images.
 #
