@@ -248,7 +248,7 @@ __AppD-Cloud-Platform-HA VM__ - The following utilities and application performa
 -	AppDynamics Enterprise Console 21.4.20 Build 24850
 	-	AppDynamics Controller 21.4.20 Build 1696
 	-	AppDynamics Events Service 4.5.2 Build 20670
-	-	AppDynamics EUM Server 21.4.5 Build 34662
+	-	AppDynamics EUM Server 21.4.6 Build 34807
 -	Docker 20.10.21 CE
 	-	Docker Bash Completion
 	-	Docker Compose 1.29.2
