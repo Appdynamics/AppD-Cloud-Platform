@@ -249,7 +249,7 @@ __AppD-Cloud-Platform-HA VM__ - The following utilities and application performa
 	-	AppDynamics Controller 21.4.20 Build 1696
 	-	AppDynamics Events Service 4.5.2 Build 20670
 	-	AppDynamics EUM Server 21.4.6 Build 34807
--	Docker 20.10.21 CE
+-	Docker 20.10.22 CE
 	-	Docker Bash Completion
 	-	Docker Compose 1.29.2
 	-	Docker Compose Bash Completion
@@ -266,7 +266,7 @@ __AppD-Cloud-Platform-HA VM__ - The following utilities and application performa
 -	Python 3.6.8
 	-	Pip 22.3.1
 -	VIM - Vi IMproved 9.0
--	yq 4.30.5 (command-line YAML processor)
+-	yq 4.30.6 (command-line YAML processor)
 
 ## Deploy the Infrastructure with Terraform
 
