@@ -260,13 +260,13 @@ __AppD-Cloud-Platform-HA VM__ - The following utilities and application performa
 -	Google Cloud SDK 413.0.0 (command-line interface)
 -	Java SE JDK 8 Update 352 (Amazon Corretto 8)
 -	jq 1.6 (command-line JSON processor)
--	MySQL Shell 8.0.31
+-	MySQL Shell 8.0.32
 -	Python 2.7.5
 	-	Pip 22.3.1
 -	Python 3.6.8
 	-	Pip 22.3.1
 -	VIM - Vi IMproved 9.0
--	yq 4.30.6 (command-line YAML processor)
+-	yq 4.30.8 (command-line YAML processor)
 
 ## Deploy the Infrastructure with Terraform
 
