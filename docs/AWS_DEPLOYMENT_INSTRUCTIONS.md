@@ -141,7 +141,7 @@ __APM-Platform VM__ - The following utilities and application performance manage
 -	Amazon AWS CLI 2.9.14 (command-line interface)
 -	Amazon AWS EC2 Instance Metadata Query Tool (command-line interface)
 -	Ansible 2.9.27
--	AppDynamics Enterprise Console 21.4.20 Build 24850
+-	AppDynamics Enterprise Console 21.4.21 Build 24882
 	-	AppDynamics Controller 21.4.20 Build 1696
 	-	AppDynamics Events Service 4.5.2 Build 20670
 	-	AppDynamics EUM Server 21.4.6 Build 34807
@@ -149,7 +149,7 @@ __APM-Platform VM__ - The following utilities and application performance manage
 	-	Docker Bash Completion
 	-	Docker Compose 1.29.2
 	-	Docker Compose Bash Completion
--	Java SE JDK 8 Update 352 (Amazon Corretto 8)
+-	Java SE JDK 8 Update 362 (Amazon Corretto 8)
 -	jq 1.6 (command-line JSON processor)
 -	MySQL Shell 8.0.32
 -	Python 2.7.5
@@ -169,7 +169,7 @@ __CWOM-Platform VM__ - The following utilities and workload optimization managem
 	-	Docker Bash Completion
 	-	Docker Compose 1.29.2
 	-	Docker Compose Bash Completion
--	Java SE JDK 8 Update 352 (Amazon Corretto 8)
+-	Java SE JDK 8 Update 362 (Amazon Corretto 8)
 -	jq 1.6 (command-line JSON processor)
 -	MySQL Shell 8.0.32
 -	Python 2.7.5
@@ -191,18 +191,18 @@ __LPAD VM__ - The following AWS CLI command-line tools and utilities are pre-ins
 	-	Docker Bash Completion
 	-	Docker Compose 1.29.2
 	-	Docker Compose Bash Completion
--	Git 2.39.0
+-	Git 2.39.1
 	-	Git Bash Completion
 	-	Git-Flow 1.12.3 (AVH Edition)
 	-	Git-Flow Bash Completion
 -	Helm CLI 3.10.3 (Package Manager for Kubernetes)
--	Java SE JDK 8 Update 352 (Amazon Corretto 8)
--	Java SE JDK 11.0.17 (Amazon Corretto 11)
--	Java SE JDK 17.0.5 (Amazon Corretto 17)
--	Java SE JDK 19.0.1 (Amazon Corretto 19)
+-	Java SE JDK 8 Update 362 (Amazon Corretto 8)
+-	Java SE JDK 11.0.18 (Amazon Corretto 11)
+-	Java SE JDK 17.0.6 (Amazon Corretto 17)
+-	Java SE JDK 19.0.2 (Amazon Corretto 19)
 -	jq 1.6 (command-line JSON processor)
 -	Node.js JavaScript runtime v16.19.0 (Latest LTS Version)
--	npm JavaScript Package Manager for Node.js 9.3.0
+-	npm JavaScript Package Manager for Node.js 9.3.1
 -	nvm (Node Version Manager) bash script 0.39.3
 -	Python 2.7.5
 	-	Pip 22.3.1
