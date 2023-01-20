@@ -145,7 +145,7 @@ __APM-Platform VM__ - The following utilities and application performance manage
 	-	AppDynamics Controller 21.4.21 Build 1740
 	-	AppDynamics Events Service 4.5.2 Build 20670
 	-	AppDynamics EUM Server 21.4.6 Build 34807
--	Docker 20.10.22 CE
+-	Docker 20.10.23 CE
 	-	Docker Bash Completion
 	-	Docker Compose 1.29.2
 	-	Docker Compose Bash Completion
@@ -165,7 +165,7 @@ __CWOM-Platform VM__ - The following utilities and workload optimization managem
 -	Amazon AWS EC2 Instance Metadata Query Tool (command-line interface)
 -	Ansible 2.9.27
 -	Cisco Workload Optimization Manager (CWOM) 2.3.28
--	Docker 20.10.22 CE
+-	Docker 20.10.23 CE
 	-	Docker Bash Completion
 	-	Docker Compose 1.29.2
 	-	Docker Compose Bash Completion
@@ -183,11 +183,11 @@ __LPAD VM__ - The following AWS CLI command-line tools and utilities are pre-ins
 
 -	Amazon AWS CLI 2.9.16 (command-line interface)
 -	Amazon AWS EC2 Instance Metadata Query Tool (command-line interface)
--	Amazon AWS EKS CLI [eksctl] 0.125.0 (command-line interface)
+-	Amazon AWS EKS CLI [eksctl] 0.126.0 (command-line interface)
 -	Amazon AWS Kubernetes Control CLI [kubectl] 1.21.14 (command-line interface)
 -	Ansible 2.9.27
 -	AppDynamics Node.js Serverless Tracer 21.11.348
--	Docker 20.10.22 CE
+-	Docker 20.10.23 CE
 	-	Docker Bash Completion
 	-	Docker Compose 1.29.2
 	-	Docker Compose Bash Completion
