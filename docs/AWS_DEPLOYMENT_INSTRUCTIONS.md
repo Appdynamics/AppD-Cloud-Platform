@@ -23,7 +23,7 @@ Perform the following steps to install the needed software:
 
     ```bash
     $ aws --version
-    aws-cli/2.9.19 Python/3.11.1 Darwin/22.2.0 source/arm64 prompt/off
+    aws-cli/2.9.19 Python/3.11.1 Darwin/22.3.0 source/arm64 prompt/off
     ```
 
 ## AWS-Specific Installation Instructions - Windows 64-Bit
@@ -143,8 +143,8 @@ __APM-Platform VM__ - The following utilities and application performance manage
 -	Ansible 2.9.27
 -	AppDynamics Enterprise Console 23.1.0 Build 5
 	-	AppDynamics Controller 23.1.0 Build 17
-	-	AppDynamics Events Service 4.5.2 Build 20670
-	-	AppDynamics EUM Server 21.4.6 Build 34807
+	-	AppDynamics Events Service 4.5.2 Build 20822
+	-	AppDynamics EUM Server 21.4.6 Build 34822
 -	Docker 20.10.23 CE
 	-	Docker Bash Completion
 	-	Docker Compose 1.29.2
@@ -153,9 +153,9 @@ __APM-Platform VM__ - The following utilities and application performance manage
 -	jq 1.6 (command-line JSON processor)
 -	MySQL Shell 8.0.32
 -	Python 2.7.5
-	-	Pip 22.3.1
+	-	Pip 23.0
 -	Python 3.6.8
-	-	Pip 22.3.1
+	-	Pip 23.0
 -	VIM - Vi IMproved 9.0
 -	yq 4.30.8 (command-line YAML processor)
 
@@ -173,9 +173,9 @@ __CWOM-Platform VM__ - The following utilities and workload optimization managem
 -	jq 1.6 (command-line JSON processor)
 -	MySQL Shell 8.0.32
 -	Python 2.7.5
-	-	Pip 22.3.1
+	-	Pip 23.0
 -	Python 3.6.8
-	-	Pip 22.3.1
+	-	Pip 23.0
 -	VIM - Vi IMproved 9.0
 -	yq 4.30.8 (command-line YAML processor)
 
@@ -205,9 +205,9 @@ __LPAD VM__ - The following AWS CLI command-line tools and utilities are pre-ins
 -	npm JavaScript Package Manager for Node.js 9.4.0
 -	nvm (Node Version Manager) bash script 0.39.3
 -	Python 2.7.5
-	-	Pip 22.3.1
+	-	Pip 23.0
 -	Python 3.6.8
-	-	Pip 22.3.1
+	-	Pip 23.0
 -	Serverless Framework CLI 3.27.0
 -	VIM - Vi IMproved 9.0
 -	yq 4.30.8 (command-line YAML processor)
