@@ -33,6 +33,8 @@ tags
 
 # ignore ansible configuration and temporary runtime files.
 ansible.cfg
+ansible.cfg.aws
+ansible.cfg.gcp
 /provisioners/**/*.inventory
 /provisioners/**/public-keys*
 /provisioners/**/files/*_elb_dns_name.txt

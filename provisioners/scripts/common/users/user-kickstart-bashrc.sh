@@ -1,4 +1,4 @@
-# @(#).bashrc       1.0 2022/09/21 SMI
+# @(#).bashrc       1.0 2023/03/07 SMI
 # bash resource configuration for kickstart users.
 
 # source global definitions.
@@ -120,5 +120,5 @@ function psgrep {
 }
 
 function netstatgrep {
-  netstat -an | grep "Active\|Proto\|$@"
+  netstat -ant | grep "Active\|Proto\|$@"
 }

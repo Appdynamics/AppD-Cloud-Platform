@@ -23,9 +23,9 @@ Currently, the VMs consist of these types:
 
 To build the AppD Cloud Platform VM images, the following open source software needs to be installed on the host macOS machine:
 
--	Homebrew 3.6.21
+-	Homebrew 4.0.5
 	-	Command Line Tools (CLT) for Xcode
--	Packer 1.8.5
+-	Packer 1.8.6
 -	Git 2.39.2
 -	jq 1.6
 
@@ -36,10 +36,10 @@ Perform the following steps to install the needed software:
 
     **NOTE:** Most Homebrew formulae require a compiler. A handful require a full Xcode installation. You can install [Xcode](https://itunes.apple.com/us/app/xcode/id497799835), the [CLT](https://developer.apple.com/downloads), or both; Homebrew supports all three configurations. Downloading Xcode may require an Apple Developer account on older versions of Mac OS X. Sign up for free [here](https://developer.apple.com/register/index.action).  
 
-2.	Install the [Homebrew 3.6.21](https://brew.sh/) package manager for macOS 64-bit. Paste the following into a macOS Terminal prompt:  
+2.	Install the [Homebrew 4.0.5](https://brew.sh/) package manager for macOS 64-bit. Paste the following into a macOS Terminal prompt:  
     `$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"`
 
-3.	Install [Packer 1.8.5](https://packer.io/) for macOS 64-bit.  
+3.	Install [Packer 1.8.6](https://packer.io/) for macOS 64-bit.  
     `$ brew install packer`  
 
 4.	Install [Git 2.39.2](https://git-scm.com/downloads) for macOS 64-bit.  
@@ -54,12 +54,12 @@ Perform the following steps to install the needed software:
 
     ```bash
     $ brew --version
-    Homebrew 3.6.21
+    Homebrew 4.0.5
     $ brew doctor
     Your system is ready to brew.
 
     $ packer --version
-    1.8.5
+    1.8.6
 
     $ git --version
     git version 2.39.2
@@ -80,13 +80,13 @@ Perform the following steps to install the needed software:
 
 To build the AppD Cloud Platform immutable VM images, the following open source software needs to be installed on the host Windows machine:
 
--	Packer 1.8.5
+-	Packer 1.8.6
 -	Git 2.39.2 for Win64
 -	jq 1.6
 
 Perform the following steps to install the needed software:
 
-1.	Install [Packer 1.8.5](https://releases.hashicorp.com/packer/1.8.5/packer_1.8.5_windows_amd64.zip) for Windows 64-bit.  
+1.	Install [Packer 1.8.6](https://releases.hashicorp.com/packer/1.8.6/packer_1.8.6_windows_amd64.zip) for Windows 64-bit.  
     Create suggested install folder and extract contents of ZIP file to:  
     `C:\HashiCorp\Packer\bin`  
 
@@ -113,7 +113,7 @@ Perform the following steps to install the needed software:
 
     ```bash
     $ packer --version
-    1.8.5
+    1.8.6
 
     $ git --version
     git version 2.39.2.windows.1
