@@ -89,7 +89,7 @@ so on. *However, __Windows__ is NOT currently supported for the Ansible control 
 The following open source software needs to be installed on the host macOS machine:
 
 -	Homebrew 4.0.6
--	Git 2.39.2
+-	Git 2.40.0
 -	Packer 1.8.6
 -	Terraform 1.4.0
 -	Ansible 7.3.0
@@ -101,7 +101,7 @@ Perform the following steps to install the needed software:
     $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     ```
 
-2.	Install [Git 2.39.2](https://git-scm.com/downloads) for macOS 64-bit.  
+2.	Install [Git 2.40.0](https://git-scm.com/downloads) for macOS 64-bit.  
     ```bash
     $ brew install git
     ```
@@ -132,7 +132,7 @@ Perform the following steps to install the needed software:
     Homebrew 4.0.6
 
     $ git --version
-    git version 2.39.2
+    git version 2.40.0
 
     $ packer --version
     1.8.6
