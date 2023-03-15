@@ -91,7 +91,7 @@ The following open source software needs to be installed on the host macOS machi
 -	Homebrew 4.0.6
 -	Git 2.40.0
 -	Packer 1.8.6
--	Terraform 1.4.0
+-	Terraform 1.4.1
 -	Ansible 7.3.0
 
 Perform the following steps to install the needed software:
@@ -112,7 +112,7 @@ Perform the following steps to install the needed software:
     $ brew install hashicorp/tap/packer
     ```
 
-4.	Install [Terraform 1.4.0](https://www.terraform.io/downloads.html) for macOS 64-bit.  
+4.	Install [Terraform 1.4.1](https://www.terraform.io/downloads.html) for macOS 64-bit.  
     ```bash
     $ brew tap hashicorp/tap
     $ brew install hashicorp/tap/terraform
@@ -138,7 +138,7 @@ Perform the following steps to install the needed software:
     1.8.6
 
     $ terraform --version
-    Terraform v1.4.0
+    Terraform v1.4.1
 
     $ ansible --version
     ansible 7.3.0
