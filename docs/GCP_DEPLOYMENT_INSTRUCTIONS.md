@@ -266,7 +266,7 @@ __AppD-Cloud-Platform-HA VM__ - The following utilities and application performa
 -	Python 3.6.8
 	-	Pip 23.0.1
 -	VIM - Vi IMproved 9.0
--	yq 4.31.2 (command-line YAML processor)
+-	yq 4.32.2 (command-line YAML processor)
 
 ## Deploy the Infrastructure with Terraform
 
