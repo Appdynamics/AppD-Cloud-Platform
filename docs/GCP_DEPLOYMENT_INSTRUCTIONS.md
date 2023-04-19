@@ -258,7 +258,7 @@ __AppD-Cloud-Platform-HA VM__ - The following utilities and application performa
 	-	Git-Flow 1.12.3 (AVH Edition)
 	-	Git-Flow Bash Completion
 -	Google Cloud SDK 427.0.0 (command-line interface)
--	Java SE JDK 8 Update 362 (Amazon Corretto 8)
+-	Java SE JDK 8 Update 372 (Amazon Corretto 8)
 -	jq 1.6 (command-line JSON processor)
 -	MySQL Shell 8.0.33
 -	Python 2.7.5
