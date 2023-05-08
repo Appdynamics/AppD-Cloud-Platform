@@ -146,7 +146,7 @@ Quota project "test-appd-cloud-platform" was added to ADC which can be used by G
 
 Follow these instructions to build the GCP Compute Engine CentOS 7.9 image:
 
--	__AppD-Cloud-Platform-HA VM__: A stand-alone VM with an AppDynamics Cloud Platform 23.1.2.22 HA configuration on CentOS 7.9.
+-	__AppD-Cloud-Platform-HA VM__: A stand-alone VM with an AppDynamics Cloud Platform 23.4.0.10041 HA configuration on CentOS 7.9.
 
 Before building the AppD Cloud Platform HA VM images for GCP, it is recommended that you install the
 Google Cloud SDK (CLI). This will allow you to cleanup and delete any resources created by the Packer
@@ -156,11 +156,11 @@ builds when you are finished. It will also provide the ability to easily purge o
 
 Here is a list of the recommended open source software to be installed on the host macOS machine:
 
--	Google Cloud SDK 428.0.0 (command-line interface)
+-	Google Cloud SDK 429.0.0 (command-line interface)
 
 Perform the following steps to install the needed software:
 
-1.	Install [Google Cloud SDK 428.0.0](https://cloud.google.com/sdk/docs/install#mac) for macOS 64-bit.  
+1.	Install [Google Cloud SDK 429.0.0](https://cloud.google.com/sdk/docs/install#mac) for macOS 64-bit.  
     ```bash
     $ brew cask install google-cloud-sdk
     ```
@@ -169,7 +169,7 @@ Perform the following steps to install the needed software:
 
     ```bash
     $ gcloud --version
-    Google Cloud SDK 428.0.0
+    Google Cloud SDK 429.0.0
     ...
     ```
 
@@ -245,11 +245,11 @@ To prepare for the build, perform the following steps:
 __AppD-Cloud-Platform-HA VM__ - The following utilities and application performance management applications are pre-installed:
 
 -	Ansible 2.9.27
--	AppDynamics Enterprise Console 23.1.2 Build 22
+-	AppDynamics Enterprise Console 23.4.0 Build 10041
 	-	AppDynamics Controller 23.1.2 Build 53
 	-	AppDynamics Events Service 4.5.2 Build 20827
 	-	AppDynamics EUM Server 21.4.6 Build 34822
--	Docker 23.0.5 CE
+-	Docker 23.0.6 CE
 	-	Docker Bash Completion
 	-	Docker Compose 1.29.2
 	-	Docker Compose Bash Completion
@@ -257,7 +257,7 @@ __AppD-Cloud-Platform-HA VM__ - The following utilities and application performa
 	-	Git Bash Completion
 	-	Git-Flow 1.12.3 (AVH Edition)
 	-	Git-Flow Bash Completion
--	Google Cloud SDK 428.0.0 (command-line interface)
+-	Google Cloud SDK 429.0.0 (command-line interface)
 -	Java SE JDK 8 Update 372 (Amazon Corretto 8)
 -	jq 1.6 (command-line JSON processor)
 -	MySQL Shell 8.0.33
