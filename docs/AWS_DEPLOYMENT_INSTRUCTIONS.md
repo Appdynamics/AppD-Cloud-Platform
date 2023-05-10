@@ -142,7 +142,7 @@ __APM-Platform VM__ - The following utilities and application performance manage
 -	Amazon AWS EC2 Instance Metadata Query Tool (command-line interface)
 -	Ansible 2.9.27
 -	AppDynamics Enterprise Console 23.4.0 Build 10041
-	-	AppDynamics Controller 23.1.2 Build 53
+	-	AppDynamics Controller 23.4.0.2 Build 10019
 	-	AppDynamics Events Service 4.5.2 Build 20827
 	-	AppDynamics EUM Server 21.4.6 Build 34822
 -	Docker 23.0.6 CE
