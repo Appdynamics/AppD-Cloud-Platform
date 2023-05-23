@@ -69,16 +69,19 @@ case $user_host_os in
   "CentOS Linux 7 (Core)")
     yum -y install glibc-static
     ;;
+
   "Amazon Linux 2023"|"Fedora 34 (Cloud Edition)")
     dnf -y install glibc-static
     ;;
+
   # in centos 8 like environments, the 'glibc-static' library is found in the 'powertools' repo.
-  "AlmaLinux 8.7 (Stone Smilodon)"|"CentOS Stream 8"|"Rocky Linux 8.7 (Green Obsidian)")
+  "AlmaLinux 8.8 (Sapphire Caracal)"|"CentOS Stream 8"|"Rocky Linux 8.8 (Green Obsidian)")
     dnf -y install dnf-plugins-core
     dnf -y install epel-release
     dnf config-manager --set-enabled powertools
     dnf -y install glibc-static
     ;;
+
   # in centos 9 like environments, the 'glibc-static' library is found in the 'crb' repo.
   "AlmaLinux 9.2 (Turquoise Kodkod)"|"CentOS Stream 9"|"Rocky Linux 9.2 (Blue Onyx)")
     dnf -y install dnf-plugins-core
@@ -86,6 +89,7 @@ case $user_host_os in
     dnf config-manager --set-enabled crb
     dnf -y install glibc-static
     ;;
+
   *)
     ;;
 esac
@@ -96,6 +100,7 @@ case $user_host_os in
   "AlmaLinux 9.2 (Turquoise Kodkod)"|"Amazon Linux 2023"|"CentOS Stream 9"|"Fedora 34 (Cloud Edition)"|"Rocky Linux 9.2 (Blue Onyx)"|"Ubuntu 20.04.6 LTS"|"Ubuntu 22.04.2 LTS"|"Ubuntu 22.10"|"Ubuntu 23.04")
     runuser -c "${kickstart_home}/provisioners/scripts/aws/c9-install-2.0.0.sh" - ${user_name}
     ;;
+
   *)
     runuser -c "${kickstart_home}/provisioners/scripts/aws/c9-install.sh" - ${user_name}
     ;;
