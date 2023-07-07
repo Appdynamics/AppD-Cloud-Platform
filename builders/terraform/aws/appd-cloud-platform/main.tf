@@ -151,7 +151,7 @@ module "security_group" {
 
 module "enterprise_console" {
   source  = "terraform-aws-modules/ec2-instance/aws"
-  version = ">= 5.1"
+  version = ">= 5.2"
 
   name                 = "Enterprise-Console-${var.resource_name_prefix}-${local.current_date}-Node"
   ami                  = data.aws_ami.appd_cloud_platform_ha_centos79.id
@@ -180,7 +180,7 @@ module "enterprise_console" {
 
 module "controller" {
   source  = "terraform-aws-modules/ec2-instance/aws"
-  version = ">= 5.1"
+  version = ">= 5.2"
 
   for_each = local.controller_for_each
 
@@ -211,7 +211,7 @@ module "controller" {
 
 module "events_service" {
   source  = "terraform-aws-modules/ec2-instance/aws"
-  version = ">= 5.1"
+  version = ">= 5.2"
 
   for_each = local.events_service_for_each
 
@@ -242,7 +242,7 @@ module "events_service" {
 
 module "eum_server" {
   source  = "terraform-aws-modules/ec2-instance/aws"
-  version = ">= 5.1"
+  version = ">= 5.2"
 
   name                 = "EUM-Server-${var.resource_name_prefix}-${local.current_date}-Node"
   ami                  = data.aws_ami.appd_cloud_platform_ha_centos79.id
