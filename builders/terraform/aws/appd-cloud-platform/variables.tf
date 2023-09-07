@@ -80,13 +80,13 @@ variable "aws_ec2_ssh_pub_key_name" {
 variable "aws_ec2_source_ami_filter" {
   description = "AWS EC2 source AMI disk image filter."
   type        = string
-  default     = "AppD-Cloud-Platform-2370-HA-CentOS79-AMI-*"
+  default     = "AppD-Cloud-Platform-2380-HA-CentOS79-AMI-*"
 }
 
 variable "aws_ec2_instance_type" {
   description = "AWS EC2 instance type."
   type        = string
-  default     = "m5a.xlarge"
+  default     = "t3a.xlarge"
 }
 
 variable "controller_node_count" {
