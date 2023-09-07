@@ -13,9 +13,9 @@ fi
 umask 022
 
 # set java home path.
-JAVA_HOME=/usr/local/java/jdk180
+#JAVA_HOME=/usr/local/java/jdk180
 #JAVA_HOME=/usr/local/java/jdk11
-#JAVA_HOME=/usr/local/java/jdk17
+JAVA_HOME=/usr/local/java/jdk17
 #JAVA_HOME=/usr/local/java/jdk20
 export JAVA_HOME
 
