@@ -88,31 +88,31 @@ so on. *However, __Windows__ is NOT currently supported for the Ansible control 
 
 The following open source software needs to be installed on the host macOS machine:
 
--	Homebrew 4.1.5
--	Git 2.41.0
--	Packer 1.9.2
--	Terraform 1.5.5
+-	Homebrew 4.1.10
+-	Git 2.42.0
+-	Packer 1.9.4
+-	Terraform 1.5.6
 -	Ansible 8.3.0
 
 Perform the following steps to install the needed software:
 
-1.	Install the [Homebrew 4.1.5](https://brew.sh/) package manager for macOS 64-bit. Paste the following into a macOS Terminal prompt:  
+1.	Install the [Homebrew 4.1.10](https://brew.sh/) package manager for macOS 64-bit. Paste the following into a macOS Terminal prompt:  
     ```bash
     $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     ```
 
-2.	Install [Git 2.41.0](https://git-scm.com/downloads) for macOS 64-bit.  
+2.	Install [Git 2.42.0](https://git-scm.com/downloads) for macOS 64-bit.  
     ```bash
     $ brew install git
     ```
 
-3.	Install [Packer 1.9.2](https://www.packer.io/downloads.html) for macOS 64-bit.  
+3.	Install [Packer 1.9.4](https://www.packer.io/downloads.html) for macOS 64-bit.  
     ```bash
     $ brew tap hashicorp/tap
     $ brew install hashicorp/tap/packer
     ```
 
-4.	Install [Terraform 1.5.5](https://www.terraform.io/downloads.html) for macOS 64-bit.  
+4.	Install [Terraform 1.5.6](https://www.terraform.io/downloads.html) for macOS 64-bit.  
     ```bash
     $ brew tap hashicorp/tap
     $ brew install hashicorp/tap/terraform
@@ -129,16 +129,16 @@ Perform the following steps to install the needed software:
 
     ```bash
     $ brew --version
-    Homebrew 4.1.5
+    Homebrew 4.1.10
 
     $ git --version
-    git version 2.41.0
+    git version 2.42.0
 
     $ packer --version
-    1.9.2
+    1.9.4
 
     $ terraform --version
-    Terraform v1.5.5
+    Terraform v1.5.6
 
     $ ansible --version
     ansible 8.3.0
