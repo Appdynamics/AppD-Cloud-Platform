@@ -144,7 +144,7 @@ __APM-Platform VM__ - The following utilities and application performance manage
 -	AppDynamics Enterprise Console 23.8.0 Build 10005
 	-	AppDynamics Controller 23.7.0.1 Build 10034
 	-	AppDynamics Events Service 4.5.2 Build 20827
-	-	AppDynamics EUM Server 21.7.0 Build 35095
+	-	AppDynamics EUM Server 23.8.0 Build 35125
 -	Docker 24.0.6 CE
 	-	Docker Bash Completion
 	-	Docker Compose 2.21.0
@@ -181,7 +181,7 @@ __LPAD VM__ - The following AWS CLI command-line tools and utilities are pre-ins
 
 -	Amazon AWS CLI 2.13.16 (command-line interface)
 -	Amazon AWS EC2 Instance Metadata Query Tool (command-line interface)
--	Amazon AWS EKS CLI [eksctl] 0.155.0 (command-line interface)
+-	Amazon AWS EKS CLI [eksctl] 0.156.0 (command-line interface)
 -	Amazon AWS Kubernetes Control CLI [kubectl] 1.24.16 (command-line interface)
 -	Ansible 2.9.27
 -	AppDynamics Node.js Serverless Tracer 21.11.348
