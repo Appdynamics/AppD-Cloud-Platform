@@ -32,7 +32,7 @@ variable "aws_ssh_ingress_cidr_blocks" {
 variable "cisco_ssh_ingress_cidr_blocks" {
   description = "The ingress CIDR blocks for inbound ssh traffic from Cisco networks."
   type        = string
-  default     = "128.107.248.205/32,72.163.220.53/32,209.234.175.138/32,173.38.208.173/32"
+  default     = "128.107.241.0/24,72.163.220.53/32,209.234.175.138/32,173.38.208.173/32"
 }
 
 variable "aws_ec2_enterprise_console_hostname_prefix" {
@@ -80,7 +80,7 @@ variable "aws_ec2_ssh_pub_key_name" {
 variable "aws_ec2_source_ami_filter" {
   description = "AWS EC2 source AMI disk image filter."
   type        = string
-  default     = "AppD-Cloud-Platform-2380-HA-CentOS79-AMI-*"
+  default     = "AppD-Cloud-Platform-23111-HA-CentOS79-AMI-*"
 }
 
 variable "aws_ec2_instance_type" {
@@ -140,5 +140,5 @@ variable "resource_owner_email_tag" {
 variable "resource_department_code_tag" {
   description = "Resource department code tag."
   type        = string
-  default     = "020430800"
+  default     = "020430801"
 }
