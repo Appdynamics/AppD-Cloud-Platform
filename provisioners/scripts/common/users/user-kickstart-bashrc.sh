@@ -1,4 +1,4 @@
-# @(#).bashrc       1.0 2023/04/12 SMI
+# @(#).bashrc       1.0 2023/12/06 SMI
 # bash resource configuration for kickstart users.
 
 # source global definitions.
@@ -16,7 +16,7 @@ umask 022
 #JAVA_HOME=/usr/local/java/jdk180
 #JAVA_HOME=/usr/local/java/jdk11
 JAVA_HOME=/usr/local/java/jdk17
-#JAVA_HOME=/usr/local/java/jdk20
+#JAVA_HOME=/usr/local/java/jdk21
 export JAVA_HOME
 
 # set ant home path.
@@ -50,6 +50,14 @@ export kickstart_home
 # set kubectl config path.
 KUBECONFIG=$HOME/.kube/config
 export KUBECONFIG
+
+# set events service environment variables.
+#INSTALL_BOOTSTRAP_MASTER_ES8=true
+#export INSTALL_BOOTSTRAP_MASTER_ES8
+#ES_JAVA_HOME=/opt/appdynamics/platform/product/events-service/processor/jre
+#export ES_JAVA_HOME
+#JAVA_HOME=/opt/appdynamics/platform/product/events-service/processor/jre
+#export JAVA_HOME
 
 # define prompt code and colors.
 reset='\[\e]0;\w\a\]'
