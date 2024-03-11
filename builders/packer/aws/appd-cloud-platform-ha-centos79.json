@@ -157,8 +157,8 @@
     "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
     "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
     "aws_session_token": "{{env `AWS_SESSION_TOKEN`}}",
-    "aws_ami_name": "AppD-Cloud-Platform-23111-HA-CentOS79-AMI",
-    "aws_ami_description": "AppDynamics Cloud Platform 23.11.1.10113 HA configuration on CentOS 7.9. Log-in with user 'centos' using an SSH key-pair. All 'admin' and database passwords are 'welcome1'. AMI generated using the AppDynamics Cloud Platform Project.",
+    "aws_ami_name": "AppD-Cloud-Platform-2420-HA-CentOS79-AMI",
+    "aws_ami_description": "AppDynamics Cloud Platform 24.2.0.10027 HA configuration on CentOS 7.9. Log-in with user 'centos' using an SSH key-pair. All 'admin' and database passwords are 'welcome1'. AMI generated using the AppDynamics Cloud Platform Project.",
     "aws_ami_owner": "{{env `aws_ami_owner`}}",
     "aws_ami_region": "{{env `aws_ami_region`}}",
     "aws_cli_user_config": "{{env `aws_cli_user_config`}}",
@@ -174,9 +174,9 @@
     "aws_user_arn": "{{env `aws_user_arn`}}",
     "aws_user_email": "{{env `aws_user_email`}}",
     "user_docker_profile": "true",
-    "docker_completion_release": "24.0.7",
+    "docker_completion_release": "25.0.4",
     "nodejs_release": "16",
-    "npm_release": "9.9.2",
+    "npm_release": "9.9.3",
     "kickstart_home": "/opt/appd-cloud-kickstart",
     "org_cost_center": "{{env `org_cost_center`}}"
   }

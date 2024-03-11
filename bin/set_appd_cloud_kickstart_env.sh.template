@@ -31,12 +31,12 @@ export kickstart_home
 #appd_platform_home="platform"
 #export appd_platform_home
 
-# [optional] platform release (defaults to '23.11.1.10113').
-#appd_platform_release="23.11.1.10113"
+# [optional] platform release (defaults to '24.2.0.10027').
+#appd_platform_release="24.2.0.10027"
 #export appd_platform_release
 
 # [optional] platform sha-256 checksum (defaults to published value).
-#appd_platform_sha256="cca88eed9d062be3e981b41eb774552b98abed3352b479f9d01516d2d5278b36"
+#appd_platform_sha256="e4fe7fd04699b95de640d178ea2d88003d84c9790a512f2c2bb4da6e03495c11"
 #export appd_platform_sha256
 
 # [optional] platform user name (defaults to 'appduser').
@@ -190,12 +190,12 @@ export appd_controller_tenancy_mode
 #appd_java_agent_user="appduser"
 #export appd_java_agent_user
 
-# [optional] java agent release (defaults to '23.12.0.35361').
-#appd_java_agent_release="23.12.0.35361"
+# [optional] java agent release (defaults to '24.2.0.35552').
+#appd_java_agent_release="24.2.0.35552"
 #export appd_java_agent_release
 
 # [optional] java agent sha-256 checksum (defaults to published value).
-#appd_java_agent_sha256="2d5d5442845e2dc7d340d9e7e59187d7a4ea00a52564d23c16f55834a46f4b88"
+#appd_java_agent_sha256="d1bb7d2801a950db67110ba3d09bf710399125453b2c8122887740b9325f2e5e"
 #export appd_java_agent_sha256
 
 # --------------------------------------------------------------------------------------------------
@@ -212,7 +212,7 @@ export appd_controller_tenancy_mode
 #       using valid entries for your environment.
 #
 #       In either case, you will need to validate the configuration before starting the Java Agent. The
-#       configuration file can be found here: '<java_agent_home>/appagent/ver23.12.0.35361/conf/controller-info.xml'
+#       configuration file can be found here: '<java_agent_home>/appagent/ver24.2.0.35552/conf/controller-info.xml'
 
 # [optional] associate java agent with application (defaults to ''My App).
 #appd_java_agent_application_name="My App"
@@ -245,12 +245,12 @@ export appd_controller_tenancy_mode
 #appd_machine_agent_user="appduser"
 #export appd_machine_agent_user
 
-# [optional] machine agent release (defaults to '23.12.0.3894').
-#appd_machine_agent_release="23.12.0.3894"
+# [optional] machine agent release (defaults to '24.2.1.4062').
+#appd_machine_agent_release="24.2.1.4062"
 #export appd_machine_agent_release
 
 # [optional] machine agent sha-256 checksum (defaults to published value).
-#appd_machine_agent_sha256="6f8c85400f8c4bbe2de97f6b4a8a8c607d8da3bf132a05f92509ff8fde9dec8e"
+#appd_machine_agent_sha256="0f0db6a9fe835277ed22fd4ff356766d3ef6ef8dcccae86ca74a055b7ec33523"
 #export appd_machine_agent_sha256
 
 # --------------------------------------------------------------------------------------------------
