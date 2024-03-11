@@ -1,4 +1,4 @@
-#!/bin/sh -eux
+#!/bin/bash -eux
 #---------------------------------------------------------------------------------------------------
 # Install kubectl CLI for Linux.
 #
@@ -21,14 +21,14 @@
 
 # set default values for input environment variables if not set. -----------------------------------
 # [OPTIONAL] kubectl install parameters [w/ defaults].
-#kubectl_release="${kubectl_release:-1.29.0}"
-#kubectl_sha256="${kubectl_sha256:-0e03ab096163f61ab610b33f37f55709d3af8e16e4dcc1eb682882ef80f96fd5}"
-kubectl_release="${kubectl_release:-1.28.5}"
-kubectl_sha256="${kubectl_sha256:-2a44c0841b794d85b7819b505da2ff3acd5950bd1bcd956863714acc80653574}"
-#kubectl_release="${kubectl_release:-1.27.9}"
-#kubectl_sha256="${kubectl_sha256:-d0caae91072297b2915dd65f6ef3055d27646dce821ec67d18da35ba9a8dc85b}"
-#kubectl_release="${kubectl_release:-1.26.12}"
-#kubectl_sha256="${kubectl_sha256:-8e6af8d68e7b9d2a1eb43255c0da793276e549a34a2b9c3c87a9c26438e7fd71}"
+kubectl_release="${kubectl_release:-1.29.2}"
+kubectl_sha256="${kubectl_sha256:-7816d067740f47f949be826ac76943167b7b3a38c4f0c18b902fffa8779a5afa}"
+#kubectl_release="${kubectl_release:-1.28.7}"
+#kubectl_sha256="${kubectl_sha256:-aff42d3167685e4d8e86fda0ad9c6ce6ec6c047bc24d608041d54717a18192ba}"
+#kubectl_release="${kubectl_release:-1.27.11}"
+#kubectl_sha256="${kubectl_sha256:-7ae327978a1edb43700070c86f5fd77215792c6b58a7ea70192647e0da848e29}"
+#kubectl_release="${kubectl_release:-1.26.14}"
+#kubectl_sha256="${kubectl_sha256:-afd9be91832a0400d8d9cc3da1cf2a395aa9f13b8ab245883869788786166ec3}"
 #kubectl_release="${kubectl_release:-1.25.16}"
 #kubectl_sha256="${kubectl_sha256:-5a9bc1d3ebfc7f6f812042d5f97b82730f2bdda47634b67bddf36ed23819ab17}"
 #kubectl_release="${kubectl_release:-1.24.17}"
@@ -68,13 +68,10 @@ PATH=/usr/local/bin:$PATH
 export PATH
 
 # verify installation.
-case $kubectl_release in
-  1.28.5|1.29.0)
-    kubectl version --client
-    ;;
-  *)
-    kubectl version --short --client
-    ;;
-esac
+if [[ "$kubectl_release" < "1.28.0" ]]; then
+  kubectl version --short --client
+else
+  kubectl version --client
+fi
 
 #export KUBECONFIG=$KUBECONFIG:$HOME/.kube/config
